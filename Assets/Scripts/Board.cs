@@ -100,11 +100,9 @@ public class Board : MonoBehaviour
                 if (holding.content[x, y] == null)
                     continue;
 
-                Dot target = holding.content[x, y];
-
-                gridMemori[calculations[x, y].x, calculations[x, y].y] = target;
-                GameObject spawn = Instantiate(target.gameObject, transform);
+                GameObject spawn = Instantiate(holding.content[x, y].gameObject, transform);
                 spawn.transform.position = pointZero + ((Vector2)calculations[x, y] * sizeOfGrid); ;
+                gridMemori[calculations[x, y].x, calculations[x, y].y] = spawn.GetComponent<Dot>();
             }
         }
 

@@ -19,10 +19,10 @@ public class DotTable : MonoBehaviour
         col = GetComponent<BoxCollider2D>();
 
         GameObject spawn = Instantiate(dotPrefab, transform);
-        spawn.transform.position += Vector3.down;
+        spawn.transform.position += Vector3.left;
         Dot dot = spawn.GetComponent<Dot>();
         dot.Setup(dotType.Red);
-        content[1, 0] = dot;
+        content[0, 1] = dot;
 
         spawn = Instantiate(dotPrefab, transform);
         dot = spawn.GetComponent<Dot>();
@@ -30,10 +30,10 @@ public class DotTable : MonoBehaviour
         content[1, 1] = dot;
 
         spawn = Instantiate(dotPrefab, transform);
-        spawn.transform.position += Vector3.up;
+        spawn.transform.position += Vector3.right;
         dot = spawn.GetComponent<Dot>();
         dot.Setup(dotType.Green);
-        content[1, 2] = dot;
+        content[2, 1] = dot;
     }
 
     private void Update()
