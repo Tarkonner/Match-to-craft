@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+    public static Board Instance { get; private set; }
+
     //Board
     [SerializeField] private Vector2Int gridSize = new Vector2Int(3, 3);
     private Vector2 pointZero;
@@ -13,7 +16,7 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject dotPrefab;
     [SerializeField] private GameObject mouseShower;
 
-    private DotTable holding;
+    public DotTable holding;
     private bool mouseOnBoard = false;
 
     //Memori
@@ -21,6 +24,8 @@ public class Board : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
+
         gridMemori = new Dot[gridSize.x, gridSize.y];
 
         sr = GetComponent<SpriteRenderer>();
@@ -36,7 +41,7 @@ public class Board : MonoBehaviour
     {
         //Boards boarder
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-         
+
         if (mouseOnBoard)
         {
             gridPosition = new Vector2(
@@ -45,11 +50,15 @@ public class Board : MonoBehaviour
 
             mouseShower.transform.position = gridPosition;
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && holding != null)
             {
+                //Place
                 bool result = PlaceDot(new Vector2Int((int)(gridPosition.x - pointZero.x), (int)(gridPosition.y - pointZero.y)));
-                if (!result)
-                    Debug.Log("not empty");
+                if (result)
+                {
+                    holding.gameObject.SetActive(false);
+                    holding = null;
+                }
             }
 
         }
@@ -59,18 +68,47 @@ public class Board : MonoBehaviour
 
     private bool PlaceDot(Vector2Int position)
     {
-        if (gridMemori[position.x, position.y] == null)
-        {
-            GameObject spawn = Instantiate(dotPrefab);
-            Dot dot = spawn.GetComponent<Dot>();
-            spawn.transform.position = pointZero + ((Vector2)position * sizeOfGrid);
-            gridMemori[position.x, position.y] = dot;
-            dot.Setup(dotType.Red);
+        Vector2Int[,] calculations = new Vector2Int[holding.content.GetLength(1), holding.content.GetLength(0)];
 
-            return true;
+        for (int x = 0; x < holding.content.GetLength(1); x++)
+        {
+            for (int y = 0; y < holding.content.GetLength(0); y++)
+            {
+                if (holding.content[x, y] == null)
+                    continue;
+
+                Vector2Int cal = position - Vector2Int.one + new Vector2Int(x, y);
+
+                //Bounderi
+                if (cal.x < 0 || cal.y < 0 || cal.x >= gridSize.x ||cal.y >= gridSize.y)
+                    return false;
+
+                //Is there already something
+                if (gridMemori[cal.x, cal.y] != null)
+                    return false;         
+                
+                //Save calculation
+                calculations[x, y] = cal;
+            }
         }
-        else
-            return false;
+
+        //Placeing dots
+        for (int x = 0; x < holding.content.GetLength(1); x++)
+        {
+            for (int y = 0; y < holding.content.GetLength(0); y++)
+            {
+                if (holding.content[x, y] == null)
+                    continue;
+
+                Dot target = holding.content[x, y];
+
+                gridMemori[calculations[x, y].x, calculations[x, y].y] = target;
+                GameObject spawn = Instantiate(target.gameObject, transform);
+                spawn.transform.position = pointZero + ((Vector2)calculations[x, y] * sizeOfGrid); ;
+            }
+        }
+
+        return true;
     }
 
     private void OnMouseEnter()

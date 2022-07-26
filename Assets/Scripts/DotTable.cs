@@ -6,17 +6,34 @@ public class DotTable : MonoBehaviour
 {
     private BoxCollider2D col;
 
-    [SerializeField] private dotType[,] content = new dotType[3, 3];
+    public Dot[,] content = new Dot[3, 3];
 
     private bool followMouse = false;
+
+    public int tableSize { get; private set; } = 3;
+
+    [SerializeField] private GameObject dotPrefab;
 
     void Awake()
     {
         col = GetComponent<BoxCollider2D>();
 
-        content[0, 1] = dotType.Blue;
-        content[1, 1] = dotType.Green;
-        content[2, 1] = dotType.Red;
+        GameObject spawn = Instantiate(dotPrefab, transform);
+        spawn.transform.position += Vector3.down;
+        Dot dot = spawn.GetComponent<Dot>();
+        dot.Setup(dotType.Red);
+        content[1, 0] = dot;
+
+        spawn = Instantiate(dotPrefab, transform);
+        dot = spawn.GetComponent<Dot>();
+        dot.Setup(dotType.Blue);
+        content[1, 1] = dot;
+
+        spawn = Instantiate(dotPrefab, transform);
+        spawn.transform.position += Vector3.up;
+        dot = spawn.GetComponent<Dot>();
+        dot.Setup(dotType.Green);
+        content[1, 2] = dot;
     }
 
     private void Update()
@@ -30,6 +47,7 @@ public class DotTable : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Board.Instance.holding = this;
         followMouse = true;
         col.enabled = false;
     }
