@@ -16,7 +16,8 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject dotPrefab;
     [SerializeField] private GameObject mouseShower;
 
-    public DotTable holding;
+    public DotTable holdingTable;
+    private GameObject holdingGameObject;
     private bool mouseOnBoard = false;
 
     //Memori
@@ -50,17 +51,17 @@ public class Board : MonoBehaviour
 
             mouseShower.transform.position = gridPosition;
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && holding != null)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && holdingGameObject != null)
             {
                 //Place
                 bool result = PlaceDot(new Vector2Int((int)(gridPosition.x - pointZero.x), (int)(gridPosition.y - pointZero.y)));
                 if (result)
                 {
-                    holding.gameObject.SetActive(false);
-                    holding = null;
+                    holdingGameObject.SetActive(false);
+                    holdingGameObject = null;
+                    holdingTable = null;
                 }
             }
-
         }
     }
 
@@ -68,13 +69,13 @@ public class Board : MonoBehaviour
 
     private bool PlaceDot(Vector2Int position)
     {
-        Vector2Int[,] calculations = new Vector2Int[holding.content.GetLength(1), holding.content.GetLength(0)];
+        Vector2Int[,] calculations = new Vector2Int[holdingTable.content.GetLength(1), holdingTable.content.GetLength(0)];
 
-        for (int x = 0; x < holding.content.GetLength(1); x++)
+        for (int x = 0; x < holdingTable.content.GetLength(1); x++)
         {
-            for (int y = 0; y < holding.content.GetLength(0); y++)
+            for (int y = 0; y < holdingTable.content.GetLength(0); y++)
             {
-                if (holding.content[x, y] == null)
+                if (holdingTable.content[x, y] == null)
                     continue;
 
                 Vector2Int cal = position - Vector2Int.one + new Vector2Int(x, y);
@@ -93,20 +94,26 @@ public class Board : MonoBehaviour
         }
 
         //Placeing dots
-        for (int x = 0; x < holding.content.GetLength(1); x++)
+        for (int x = 0; x < holdingTable.content.GetLength(1); x++)
         {
-            for (int y = 0; y < holding.content.GetLength(0); y++)
+            for (int y = 0; y < holdingTable.content.GetLength(0); y++)
             {
-                if (holding.content[x, y] == null)
+                if (holdingTable.content[x, y] == null)
                     continue;
 
-                GameObject spawn = Instantiate(holding.content[x, y].gameObject, transform);
-                spawn.transform.position = pointZero + ((Vector2)calculations[x, y] * sizeOfGrid); ;
+                GameObject spawn = Instantiate(holdingTable.content[x, y], transform);
+                spawn.transform.position = pointZero + ((Vector2)calculations[x, y] * sizeOfGrid);
                 gridMemori[calculations[x, y].x, calculations[x, y].y] = spawn.GetComponent<Dot>();
             }
         }
 
         return true;
+    }
+
+    public void TablePickup(GameObject table)
+    {
+        holdingGameObject = table;
+        holdingTable = table.GetComponent<DotTable>();
     }
 
     private void OnMouseEnter()

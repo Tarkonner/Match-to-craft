@@ -13,23 +13,23 @@ public class Dot : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    public void Setup(dotType dotsColor)
-    {
-        type = dotsColor;
+    //public void Setup(dotType dotsColor)
+    //{
+    //    type = dotsColor;
 
-        switch (dotsColor)
-        {
-            case dotType.Red:
-                sr.color = Color.red;
-                break;
-            case dotType.Blue:
-                sr.color = Color.blue;
-                break;
-            case dotType.Green:
-                sr.color = Color.green;
-                break;
-            default:
-                break;
-        }
-    }
+    //    switch (dotsColor)
+    //    {
+    //        case dotType.Red:
+    //            sr.color = Color.red;
+    //            break;
+    //        case dotType.Blue:
+    //            sr.color = Color.blue;
+    //            break;
+    //        case dotType.Green:
+    //            sr.color = Color.green;
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 }

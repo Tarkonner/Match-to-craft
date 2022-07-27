@@ -122,4 +122,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466a380cc2af6e4697a311937dd80ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 3312695413486467240, guid: 0138b58867d7ce74eb972433c4eeffd3, type: 3}
+    - {fileID: 2493390794880427163, guid: 06e13fbdd5123b34e8058269e9ae3b0c, type: 3}
+    - {fileID: 3209310184934173590, guid: 91981b87587876445b9217f99ff75fbe, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: content
+      Entry: 7
+      Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 9
+    - Name: ranks
+      Entry: 1
+      Data: 3|3
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   dotPrefab: {fileID: 6567574717997971157, guid: 477d4256e047df3478f354a76be00c96, type: 3}
