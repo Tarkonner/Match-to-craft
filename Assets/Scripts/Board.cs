@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Board : MonoBehaviour
 {
@@ -69,42 +70,28 @@ public class Board : MonoBehaviour
 
     private bool PlaceDot(Vector2Int position)
     {
-        Vector2Int[,] calculations = new Vector2Int[holdingTable.content.GetLength(1), holdingTable.content.GetLength(0)];
-
-        for (int x = 0; x < holdingTable.content.GetLength(1); x++)
+        //Check if allowed
+        foreach (GameObject item in holdingTable.content)
         {
-            for (int y = 0; y < holdingTable.content.GetLength(0); y++)
-            {
-                if (holdingTable.content[x, y] == null)
-                    continue;
+            Vector2Int gridPos = position + new Vector2Int((int)item.transform.localPosition.x, (int)item.transform.localPosition.y);
 
-                Vector2Int cal = position - Vector2Int.one + new Vector2Int(x, y);
+            //Bounderi
+            if (gridPos.x < 0 || gridPos.y < 0 || gridPos.x >= gridSize.x || gridPos.y >= gridSize.y)
+                return false;
 
-                //Bounderi
-                if (cal.x < 0 || cal.y < 0 || cal.x >= gridSize.x ||cal.y >= gridSize.y)
-                    return false;
-
-                //Is there already something
-                if (gridMemori[cal.x, cal.y] != null)
-                    return false;         
-                
-                //Save calculation
-                calculations[x, y] = cal;
-            }
+            //Is there already something
+            if (gridMemori[gridPos.x, gridPos.y] != null)
+                return false;
         }
 
-        //Placeing dots
-        for (int x = 0; x < holdingTable.content.GetLength(1); x++)
+        //Copy dots from table
+        foreach (GameObject item in holdingTable.content)
         {
-            for (int y = 0; y < holdingTable.content.GetLength(0); y++)
-            {
-                if (holdingTable.content[x, y] == null)
-                    continue;
+            Vector2Int gridPos = position + new Vector2Int((int)item.transform.localPosition.x, (int)item.transform.localPosition.y);
 
-                GameObject spawn = Instantiate(holdingTable.content[x, y], transform);
-                spawn.transform.position = pointZero + ((Vector2)calculations[x, y] * sizeOfGrid);
-                gridMemori[calculations[x, y].x, calculations[x, y].y] = spawn.GetComponent<Dot>();
-            }
+            GameObject spawn = Instantiate(item, transform);
+            spawn.transform.position = pointZero + ((Vector2)gridPos * sizeOfGrid);
+            gridMemori[gridPos.x, gridPos.y] = spawn.GetComponent<Dot>();
         }
 
         return true;
@@ -114,6 +101,12 @@ public class Board : MonoBehaviour
     {
         holdingGameObject = table;
         holdingTable = table.GetComponent<DotTable>();
+    }
+
+    public void TableDrop()
+    {
+        holdingGameObject = null;
+        holdingTable = null;
     }
 
     private void OnMouseEnter()

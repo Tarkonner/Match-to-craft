@@ -8,32 +8,54 @@ public class DotTable : SerializedMonoBehaviour
 {
     private BoxCollider2D col;
 
-    [BoxGroup("Content")]
-    [TableMatrix(HorizontalTitle = "X axis", VerticalTitle = "Y axis")]
-    public GameObject[,] content = new GameObject[3, 3];
+    [HorizontalGroup("Base")]
+    [VerticalGroup("Base/colum1")] 
+    public GameObject[] colum1 = new GameObject[3];
+    [VerticalGroup("Base/colum2")]
+    public GameObject[] colum2 = new GameObject[3];
+    [VerticalGroup("Base/colum3")]
+    public GameObject[] colum3 = new GameObject[3];
+
+    public List<GameObject> content { get; private set; } = new List<GameObject>();
 
     private bool followMouse = false;
 
     public int tableSize { get; private set; } = 3;
 
+    private Vector2 startPosition;
 
-    void Awake()
+    void Start()
     {
         col = GetComponent<BoxCollider2D>();
 
-        for (int x = 0; x < content.GetLength(0); x++)
+        for (int i = 0; i < 3; i++)
         {
-            for (int y = 0; y < content.GetLength(1); y++)
+            if (colum1[i] != null)
             {
-                if (content[x, y] == null)
-                    continue;
+                GameObject dot = Instantiate(colum1[i], transform);
+                Vector2 calPosition = new Vector2(-1, 1 - i);
+                dot.transform.localPosition = calPosition;
+                content.Add(dot);
+            }
 
-                GameObject spawn = Instantiate(content[x, y], transform);
-                Vector2 calPosition = new Vector2(x, y) - Vector2.one;
-                spawn.transform.localPosition = calPosition;
+            if (colum2[i] != null)
+            {
+                GameObject dot = Instantiate(colum2[i], transform);
+                Vector2 calPosition = new Vector2(0, 1 - i);
+                dot.transform.localPosition = calPosition;
+                content.Add(dot);
+            }
+
+            if (colum3[i] != null)
+            {
+                GameObject dot = Instantiate(colum3[i], transform);
+                Vector2 calPosition = new Vector2(1, 1- i);
+                dot.transform.localPosition = calPosition;
+                content.Add(dot);
             }
         }
     }
+
 
     private void Update()
     {
@@ -41,11 +63,23 @@ public class DotTable : SerializedMonoBehaviour
         {
             Vector2 cal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = cal;
+
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Board.Instance.TableDrop();
+                followMouse = false;
+                col.enabled = true;
+                transform.position = startPosition;
+            }
+
         }
     }
 
+
     private void OnMouseDown()
     {
+        startPosition = transform.position;
+
         Board.Instance.TablePickup(gameObject);
         followMouse = true;
         col.enabled = false;

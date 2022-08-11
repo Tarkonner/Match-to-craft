@@ -1,1 +1,1 @@
-public enum dotType { Red, Blue, Green };
+public enum dotType {Red, Blue, Green };
