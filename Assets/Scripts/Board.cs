@@ -46,16 +46,14 @@ public class Board : MonoBehaviour
 
         if (mouseOnBoard)
         {
-            gridPosition = new Vector2(
-                Mathf.Round(mousePos.x / sizeOfGrid) * sizeOfGrid,
-                Mathf.Round(mousePos.y / sizeOfGrid) * sizeOfGrid);
+            gridPosition = SnapToGrid(mousePos);
 
             mouseShower.transform.position = gridPosition;
 
             if (Input.GetKeyDown(KeyCode.Mouse0) && holdingGameObject != null)
             {
                 //Place
-                bool result = PlaceDot(new Vector2Int((int)(gridPosition.x - pointZero.x), (int)(gridPosition.y - pointZero.y)));
+                bool result = PlaceDots();
                 if (result)
                 {
                     holdingGameObject.SetActive(false);
@@ -66,14 +64,20 @@ public class Board : MonoBehaviour
         }
     }
 
+    private Vector2 SnapToGrid(Vector2 targetPosition)
+    {
+        return new Vector2(
+            Mathf.Round(targetPosition.x / sizeOfGrid) * sizeOfGrid,
+            Mathf.Round(targetPosition.y / sizeOfGrid) * sizeOfGrid);
+    }
 
-
-    private bool PlaceDot(Vector2Int position)
+    private bool PlaceDots()
     {
         //Check if allowed
         foreach (GameObject item in holdingTable.content)
         {
-            Vector2Int gridPos = position + new Vector2Int((int)item.transform.localPosition.x, (int)item.transform.localPosition.y);
+            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + 2,
+                (int)SnapToGrid(item.transform.position).y + 2);
 
             //Bounderi
             if (gridPos.x < 0 || gridPos.y < 0 || gridPos.x >= gridSize.x || gridPos.y >= gridSize.y)
@@ -84,10 +88,16 @@ public class Board : MonoBehaviour
                 return false;
         }
 
+        foreach (GameObject item in holdingTable.content)
+        {
+            item.transform.position = (Vector3)SnapToGrid(item.transform.position);
+        }
+
         //Copy dots from table
         foreach (GameObject item in holdingTable.content)
         {
-            Vector2Int gridPos = position + new Vector2Int((int)item.transform.localPosition.x, (int)item.transform.localPosition.y);
+            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + 2,
+                (int)SnapToGrid(item.transform.position).y + 2);
 
             GameObject spawn = Instantiate(item, transform);
             spawn.transform.position = pointZero + ((Vector2)gridPos * sizeOfGrid);

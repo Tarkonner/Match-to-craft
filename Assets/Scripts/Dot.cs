@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Dot : MonoBehaviour
 {
-    private SpriteRenderer sr;
-
     public dotType type;
 
-    private void Awake()
+    public Vector2 tablePosition;
+
+    public void GoToPosition(Vector3 intake)
     {
-        sr = GetComponent<SpriteRenderer>();
+        //transform.localPosition = Vector2.zero;
+
+        //foreach (var item in intake)
+        //{
+        //    if (item == this)
+        //        transform.position = Vector2.zero;
+        //}
+        transform.localPosition = intake;
     }
 }

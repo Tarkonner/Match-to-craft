@@ -48,10 +48,12 @@ public class DotTable : SerializedMonoBehaviour
                     GameObject spawn = Instantiate(pattern[x, y], transform);
                     Vector2 calPos = new Vector2(x - 1, y - 1);
                     spawn.transform.localPosition = calPos;
+                    spawn.GetComponent<Dot>().tablePosition = calPos;
                 }
             }
         }
     }
+
 
     private void Update()
     {
@@ -70,58 +72,110 @@ public class DotTable : SerializedMonoBehaviour
                 transform.position = startPosition;
             }
 
+            
+
             //Rotate table
             if(Input.GetKeyDown(KeyCode.Mouse1))
             {
-                pattern = ClockwiseRotateTable(pattern);
+                transform.eulerAngles += new Vector3(0, 0, 90);
+
+                ////for (int y = 0; y < 3; y++)
+                ////{
+                ////    for (int x = 0; x < 3; x++)
+                ////    {
+                ////        if(pattern[x, y] != null)
+                ////            Debug.Log(x + " " + y);
+                ////    }
+                ////}
+
+                //pattern = ClockwiseRotateTable(pattern);
+
+                ////for (int y = 0; y < 3; y++)
+                ////{
+                ////    for (int x = 0; x < 3; x++)
+                ////    {
+                ////        if (pattern[x, y] != null)
+                ////            Debug.Log(x + " " + y);
+                ////    }
+                ////}
 
 
-                for (int x = 0; x < pattern.GetLength(0); x++)
-                {
-                    for (int y = 0; y < pattern.GetLength(1); y++)
-                    {
-                        if (pattern[x, y] != null)
-                        {
-                            Debug.Log($"{x}, {y}");
+                //foreach (GameObject item in content)
+                //{
+                //    //item.transform.localPosition = item.GetComponent<Dot>().tablePosition;
+                //    //item.transform.localPosition += Time.deltaTime * 10 * Vector3.up;
 
-                            Debug.Log("Old: " + pattern[x, y].transform.localPosition);
-                            Vector2 calPos = new Vector2(y - 1, x - 1);
-                            pattern[x, y].transform.localPosition = calPos;
+                //    //for (int x = 0; x < 3; x++)
+                //    //{
+                //    //    for (int y = 0; y < 3; y++)
+                //    //    {
+                //    //        if(item == pattern[x, y])
+                //    //            item.GetComponent<Dot>().GoToPosition(pattern);
+                //    //    }
+                //    //}
+                //    if(item != null)
+                //    {
+                //        Dot d = item.GetComponent<Dot>();
+                //        d.GoToPosition(d.tablePosition);
+                //    }
+                        
+                    
+                //}
 
-                            Debug.Log("New: " + pattern[x, y].transform.localPosition);
-                        }
-                    }
-                }
+                ////for (int x = 0; x < pattern.GetLength(0); x++)
+                ////{
+                ////    for (int y = 0; y < pattern.GetLength(1); y++)
+                ////    {
+                ////        if (pattern[x, y] != null)
+                ////        {
+                ////            Vector2 calPos = new Vector2(y - 1, x - 1);
+                ////            pattern[x, y].GetComponent<Dot>().GoToPosition(Vector2.zero);
+                ////        }
+                ////    }
+                ////}
             }
         }
     }
 
-    private GameObject[,] ClockwiseRotateTable(GameObject[,] intake)
-    {
-        GameObject[,] result = new GameObject[intake.GetLength(0), intake.GetLength(1)];
+    //private GameObject[,] ClockwiseRotateTable(GameObject[,] intake)
+    //{
+    //    //GameObject[,] result = new GameObject[intake.GetLength(0), intake.GetLength(1)];
 
-        int j = 0;
-        int p = 0;
-        int q = 0;
-        int i = intake.GetLength(0) - 1;
+    //    //int j = 0;
+    //    //int p = 0;
+    //    //int q = 0;
+    //    //int i = intake.GetLength(0) - 1;
 
-        for (int k = 0; k < intake.GetLength(0); k++)
-        {
-            while (i >= 0)
-            {
-                result[p, q] = intake[i, j];
+    //    //for (int k = 0; k < intake.GetLength(0); k++)
+    //    //{
+    //    //    while (i >= 0)
+    //    //    {
+    //    //        result[p, q] = intake[i, j];
 
-                q++;
-                i--;
-            }
-            j++;
-            i = intake.GetLength(0) - 1;
-            q = 0;
-            p++;
+    //    //        q++;
+    //    //        i--;
+    //    //    }
+    //    //    j++;
+    //    //    i = intake.GetLength(0) - 1;
+    //    //    q = 0;
+    //    //    p++;
 
-        }
-        return result;
-    }
+    //    //}
+
+    //    ////Cal pos
+    //    //for (int x = 0; x < result.GetLength(0); x++)
+    //    //{
+    //    //    for (int y = 0; y < result.GetLength(1); y++)
+    //    //    {
+    //    //        if(result[x, y] != null)
+    //    //        {
+    //    //            result[x, y].GetComponent<Dot>().tablePosition = new Vector2(2, 2);
+    //    //        }
+    //    //    }
+    //    //}
+
+    //    return result;
+    //}
 
     private void OnMouseDown()
     {
