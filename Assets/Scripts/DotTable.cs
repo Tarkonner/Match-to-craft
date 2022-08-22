@@ -7,6 +7,9 @@ using UnityEngine;
 public class DotTable : SerializedMonoBehaviour
 {
     private BoxCollider2D col;
+    private SpriteRenderer sr;
+
+    [SerializeField] private float inventoryScale = 0.5f;
 
     [BoxGroup("Pattern")]
     [TableMatrix(HorizontalTitle = "X axis", VerticalTitle = "Y axis")]
@@ -25,6 +28,7 @@ public class DotTable : SerializedMonoBehaviour
     void Start()
     {
         col = GetComponent<BoxCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
 
         foreach (Transform t in transform)
         {
@@ -129,7 +133,12 @@ public class DotTable : SerializedMonoBehaviour
                 Board.Instance.TableDrop();
                 followMouse = false;
                 col.enabled = true;
+
+                //Back to noraml
                 transform.position = startPosition;
+                sr.enabled = true;
+                transform.localScale = new Vector2(inventoryScale, inventoryScale);
+                transform.localEulerAngles = Vector3.zero;
             }
                       
 
@@ -144,10 +153,16 @@ public class DotTable : SerializedMonoBehaviour
 
     private void OnMouseDown()
     {
+        //Save origon
         startPosition = transform.position;
 
+        //Follow mouse
         Board.Instance.TablePickup(gameObject);
         followMouse = true;
         col.enabled = false;
+        transform.localScale = Vector3.one;
+
+        //Disable background
+        sr.enabled = false;
     }
 }
