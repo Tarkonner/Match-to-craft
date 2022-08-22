@@ -17,7 +17,7 @@ public class DotTable : SerializedMonoBehaviour
 
     public List<GameObject> content { get; private set; } = new List<GameObject>();
 
-    private bool followMouse = false;
+    [HideInInspector] public bool followMouse = false;
 
     public int tableSize { get; private set; } = 3;
 
@@ -32,7 +32,8 @@ public class DotTable : SerializedMonoBehaviour
 
         foreach (Transform t in transform)
         {
-            content.Add(t.gameObject);
+            if (t.GetComponent<Dot>())
+                content.Add(t.gameObject);
         }
     }
 
@@ -55,6 +56,7 @@ public class DotTable : SerializedMonoBehaviour
                     GameObject spawn = Instantiate(pattern[x, y], transform);
                     Vector2 calPos = new Vector2(x - 1, y - 1);
                     spawn.transform.localPosition = calPos;
+                    spawn.GetComponent<Dot>().ownerTable = this;
                 }
             }
         }

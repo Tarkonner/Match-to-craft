@@ -15,7 +15,6 @@ public class Board : MonoBehaviour
 
 
     [SerializeField] private GameObject dotPrefab;
-    [SerializeField] private GameObject mouseShower;
 
     public DotTable holdingTable;
     private GameObject holdingGameObject;
@@ -48,18 +47,37 @@ public class Board : MonoBehaviour
         {
             gridPosition = SnapToGrid(mousePos);
 
-            mouseShower.transform.position = gridPosition;
-
-            if (Input.GetKeyDown(KeyCode.Mouse0) && holdingGameObject != null)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                //Place
-                bool result = PlaceDots();
-                if (result)
+                if(holdingGameObject == null)
                 {
-                    holdingGameObject.SetActive(false);
-                    holdingGameObject = null;
-                    holdingTable = null;
+                    Vector2 testPos = gridPosition + new Vector2(2, 2);
+                    if (gridMemori[(int)testPos.x, (int)testPos.y] == null)
+                        Debug.Log(testPos);
+                    else
+                        Debug.Log(gridMemori[(int)testPos.x, (int)testPos.y]);
+
+                    //Take table from board
+                    if (gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2] != null)
+                    {                        
+                        gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable.followMouse = true;
+                        TablePickup(gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable.gameObject);
+                    }
                 }
+                else
+                {
+                    //Place
+                    bool result = PlaceDots();
+                    if (result)
+                    {
+                        holdingTable.followMouse = false;
+
+                        holdingGameObject = null;
+                        holdingTable = null;
+                    }
+                }
+
+
             }
         }
     }
@@ -98,10 +116,10 @@ public class Board : MonoBehaviour
         {
             Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + 2,
                 (int)SnapToGrid(item.transform.position).y + 2);
+                       
+            gridMemori[gridPos.x, gridPos.y] = item.GetComponent<Dot>();
 
-            GameObject spawn = Instantiate(item, transform);
-            spawn.transform.position = pointZero + ((Vector2)gridPos * sizeOfGrid);
-            gridMemori[gridPos.x, gridPos.y] = spawn.GetComponent<Dot>();
+            Debug.Log(gridMemori[gridPos.x, gridPos.y]);
         }
 
         return true;
