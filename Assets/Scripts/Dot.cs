@@ -6,7 +6,7 @@ public class Dot : MonoBehaviour
 {
     public dotType type;
 
-    public Vector2 tablePosition;
+    //public Vector2 tablePosition;
 
     public void GoToPosition(Vector3 intake)
     {

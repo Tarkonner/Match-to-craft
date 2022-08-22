@@ -18,8 +18,9 @@ public class DotTable : SerializedMonoBehaviour
 
     public int tableSize { get; private set; } = 3;
 
-    private Vector2 startPosition;
+    [SerializeField] private GameObject lineLink;
 
+    private Vector2 startPosition;
 
     void Start()
     {
@@ -34,11 +35,13 @@ public class DotTable : SerializedMonoBehaviour
     [Button("Build pattorn")]
     private void BuildPattorn()
     {
+        //Destroy old
         for (int i = transform.childCount - 1; i >= 0; i--)
         {
             DestroyImmediate(transform.GetChild(i).gameObject);
         }
 
+        //Make dots
         for (int x = 0; x < pattern.GetLength(0); x++)
         {
             for (int y = 0; y < pattern.GetLength(1); y++)
@@ -48,10 +51,67 @@ public class DotTable : SerializedMonoBehaviour
                     GameObject spawn = Instantiate(pattern[x, y], transform);
                     Vector2 calPos = new Vector2(x - 1, y - 1);
                     spawn.transform.localPosition = calPos;
-                    spawn.GetComponent<Dot>().tablePosition = calPos;
                 }
             }
         }
+
+        //Make lines
+        //neighbor
+        bool haveNeighbor = false;
+        for (int x = 0; x < pattern.GetLength(0); x++)
+        {
+            for (int y = 0; y < pattern.GetLength(1) - 1; y++)
+            {
+                if (pattern[x, y] == null)
+                    continue;
+
+                //Over
+                if (pattern[x, y + 1] != null)
+                {
+                    ConnectLine(new Vector2(x, y), Vector2.up);
+                    haveNeighbor = true;
+                }
+                //Right
+                if (x < pattern.GetLength(0) - 1 && pattern[x + 1, y] != null)
+                {
+                    ConnectLine(new Vector2(x, y), Vector2.right);
+                    haveNeighbor |= true;
+                }
+            }
+        }
+        //Diagonal
+        //Lag scaleability
+        if(!haveNeighbor)
+        {
+            for (int x = 0; x < pattern.GetLength(0); x++)
+            {
+                if (pattern[x, 1] == null)
+                    continue;
+
+                //Right up
+                if (x < pattern.GetLength(0) - 1 && pattern[x + 1, 2] != null)
+                    ConnectLine(new Vector2(x, 1), new Vector2(1, 1));
+                //Right down
+                if (x < pattern.GetLength(0) - 1 && pattern[x + 1, 2] != null)
+                    ConnectLine(new Vector2(x, 1), new Vector2(1, -1));
+
+                //Left up
+                if (x > 0 && pattern[x - 1, 2] != null)
+                    ConnectLine(new Vector2(x, 1), new Vector2(-1, 1));
+                //Left down
+                if (x > 0 && pattern[x - 1, 2] != null)
+                    ConnectLine(new Vector2(x, 1), new Vector2(-1, -1));
+            }
+        }
+    }
+
+    private void ConnectLine(Vector2 spawnPosition, Vector2 direction)
+    {
+        GameObject spawn = Instantiate(lineLink, transform);
+        spawn.transform.localPosition = spawnPosition - Vector2.one;
+        LineRenderer line = spawn.GetComponent<LineRenderer>();
+        line.SetPosition(0, new Vector3(0, 0, 0));
+        line.SetPosition(1, new Vector3(direction.x, direction.y, 0));
     }
 
 
@@ -71,111 +131,16 @@ public class DotTable : SerializedMonoBehaviour
                 col.enabled = true;
                 transform.position = startPosition;
             }
-
-            
+                      
 
             //Rotate table
             if(Input.GetKeyDown(KeyCode.Mouse1))
             {
-                transform.eulerAngles += new Vector3(0, 0, 90);
-
-                ////for (int y = 0; y < 3; y++)
-                ////{
-                ////    for (int x = 0; x < 3; x++)
-                ////    {
-                ////        if(pattern[x, y] != null)
-                ////            Debug.Log(x + " " + y);
-                ////    }
-                ////}
-
-                //pattern = ClockwiseRotateTable(pattern);
-
-                ////for (int y = 0; y < 3; y++)
-                ////{
-                ////    for (int x = 0; x < 3; x++)
-                ////    {
-                ////        if (pattern[x, y] != null)
-                ////            Debug.Log(x + " " + y);
-                ////    }
-                ////}
-
-
-                //foreach (GameObject item in content)
-                //{
-                //    //item.transform.localPosition = item.GetComponent<Dot>().tablePosition;
-                //    //item.transform.localPosition += Time.deltaTime * 10 * Vector3.up;
-
-                //    //for (int x = 0; x < 3; x++)
-                //    //{
-                //    //    for (int y = 0; y < 3; y++)
-                //    //    {
-                //    //        if(item == pattern[x, y])
-                //    //            item.GetComponent<Dot>().GoToPosition(pattern);
-                //    //    }
-                //    //}
-                //    if(item != null)
-                //    {
-                //        Dot d = item.GetComponent<Dot>();
-                //        d.GoToPosition(d.tablePosition);
-                //    }
-                        
-                    
-                //}
-
-                ////for (int x = 0; x < pattern.GetLength(0); x++)
-                ////{
-                ////    for (int y = 0; y < pattern.GetLength(1); y++)
-                ////    {
-                ////        if (pattern[x, y] != null)
-                ////        {
-                ////            Vector2 calPos = new Vector2(y - 1, x - 1);
-                ////            pattern[x, y].GetComponent<Dot>().GoToPosition(Vector2.zero);
-                ////        }
-                ////    }
-                ////}
+                transform.eulerAngles -= new Vector3(0, 0, 90);
             }
         }
     }
 
-    //private GameObject[,] ClockwiseRotateTable(GameObject[,] intake)
-    //{
-    //    //GameObject[,] result = new GameObject[intake.GetLength(0), intake.GetLength(1)];
-
-    //    //int j = 0;
-    //    //int p = 0;
-    //    //int q = 0;
-    //    //int i = intake.GetLength(0) - 1;
-
-    //    //for (int k = 0; k < intake.GetLength(0); k++)
-    //    //{
-    //    //    while (i >= 0)
-    //    //    {
-    //    //        result[p, q] = intake[i, j];
-
-    //    //        q++;
-    //    //        i--;
-    //    //    }
-    //    //    j++;
-    //    //    i = intake.GetLength(0) - 1;
-    //    //    q = 0;
-    //    //    p++;
-
-    //    //}
-
-    //    ////Cal pos
-    //    //for (int x = 0; x < result.GetLength(0); x++)
-    //    //{
-    //    //    for (int y = 0; y < result.GetLength(1); y++)
-    //    //    {
-    //    //        if(result[x, y] != null)
-    //    //        {
-    //    //            result[x, y].GetComponent<Dot>().tablePosition = new Vector2(2, 2);
-    //    //        }
-    //    //    }
-    //    //}
-
-    //    return result;
-    //}
 
     private void OnMouseDown()
     {

@@ -131,6 +131,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 864815926823463312, guid: b00ff27986d241541a267b6faa04c152, type: 3}
+      propertyPath: rotateSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 864815926823463312, guid: b00ff27986d241541a267b6faa04c152, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 864815926823463312, guid: b00ff27986d241541a267b6faa04c152, type: 3}
