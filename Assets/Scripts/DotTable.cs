@@ -25,6 +25,12 @@ public class DotTable : SerializedMonoBehaviour
 
     private Vector2 startPosition;
 
+    //Rotation
+    private float targetRotation;
+    [SerializeField] private float rotateSpeed = 5;
+    private float rotateAmount;
+    private float oldRotation;
+
     void Start()
     {
         col = GetComponent<BoxCollider2D>();
@@ -34,6 +40,48 @@ public class DotTable : SerializedMonoBehaviour
         {
             if (t.GetComponent<Dot>())
                 content.Add(t.gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (followMouse)
+        {
+            //Follow mouse
+            Vector2 cal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = cal;
+
+            //Drop table
+            if (Input.GetKeyDown(KeyCode.Mouse2))
+            {
+                Board.Instance.TableDrop();
+                followMouse = false;
+                col.enabled = true;
+
+                //Back to noraml
+                transform.position = startPosition;
+                sr.enabled = true;
+                transform.localScale = new Vector2(inventoryScale, inventoryScale);
+                //Rotation
+                transform.localEulerAngles = Vector3.zero;
+                targetRotation = 0;
+            }
+
+            //Rotate table
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                rotateAmount = 0;
+                oldRotation = transform.eulerAngles.z;
+                targetRotation = transform.eulerAngles.z - 90;
+            }
+            if(transform.rotation.z != targetRotation)
+            {
+                rotateAmount += rotateSpeed * Time.deltaTime;
+                if(rotateAmount > 1)
+                    rotateAmount = 1;
+
+                transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldRotation, targetRotation, rotateAmount));
+            }
         }
     }
 
@@ -85,9 +133,8 @@ public class DotTable : SerializedMonoBehaviour
                 }
             }
         }
-        //Diagonal
-        //Lag scaleability
-        if(!haveNeighbor)
+        //Diagonal* Lag scaleability
+        if (!haveNeighbor)
         {
             for (int x = 0; x < pattern.GetLength(0); x++)
             {
@@ -120,39 +167,6 @@ public class DotTable : SerializedMonoBehaviour
         line.SetPosition(1, new Vector3(direction.x, direction.y, 0));
     }
 
-
-    private void Update()
-    {
-        if(followMouse)
-        {
-            //Follow mouse
-            Vector2 cal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = cal;
-
-            //Drop table
-            if(Input.GetKeyDown(KeyCode.Mouse2))
-            {
-                Board.Instance.TableDrop();
-                followMouse = false;
-                col.enabled = true;
-
-                //Back to noraml
-                transform.position = startPosition;
-                sr.enabled = true;
-                transform.localScale = new Vector2(inventoryScale, inventoryScale);
-                transform.localEulerAngles = Vector3.zero;
-            }
-                      
-
-            //Rotate table
-            if(Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                transform.eulerAngles -= new Vector3(0, 0, 90);
-            }
-        }
-    }
-
-
     private void OnMouseDown()
     {
         //Save origon
@@ -166,5 +180,30 @@ public class DotTable : SerializedMonoBehaviour
 
         //Disable background
         sr.enabled = false;
+    }
+
+    public void HighlightTable()
+    {
+
+        foreach (Transform t in gameObject.transform)
+        {
+            if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
+                targetSR.sortingOrder = 4;
+
+            if(t.gameObject.TryGetComponent(out LineRenderer line))
+                line.sortingOrder = 3;
+        }
+    }
+
+    public void NormalTable()
+    {
+        foreach (Transform t in gameObject.transform)
+        {
+            if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
+                targetSR.sortingOrder = 2;
+
+            if (t.gameObject.TryGetComponent(out LineRenderer line))
+                line.sortingOrder = 1;
+        }
     }
 }

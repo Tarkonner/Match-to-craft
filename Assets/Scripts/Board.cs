@@ -51,17 +51,18 @@ public class Board : MonoBehaviour
             {
                 if(holdingGameObject == null)
                 {
-                    Vector2 testPos = gridPosition + new Vector2(2, 2);
-                    if (gridMemori[(int)testPos.x, (int)testPos.y] == null)
-                        Debug.Log(testPos);
-                    else
-                        Debug.Log(gridMemori[(int)testPos.x, (int)testPos.y]);
-
                     //Take table from board
                     if (gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2] != null)
-                    {                        
-                        gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable.followMouse = true;
+                    {
+                        DotTable table = gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable;
+                        table.followMouse = true;
                         TablePickup(gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable.gameObject);
+
+                        for (int i = 0; i < table.content.Count; i++)
+                        {
+                            Vector2Int removePos = table.content[i].GetComponent<Dot>().gridPos;
+                            gridMemori[removePos.x, removePos.y] = null;
+                        }
                     }
                 }
                 else
@@ -71,13 +72,9 @@ public class Board : MonoBehaviour
                     if (result)
                     {
                         holdingTable.followMouse = false;
-
-                        holdingGameObject = null;
-                        holdingTable = null;
+                        TableDrop();
                     }
                 }
-
-
             }
         }
     }
@@ -106,20 +103,18 @@ public class Board : MonoBehaviour
                 return false;
         }
 
-        foreach (GameObject item in holdingTable.content)
-        {
-            item.transform.position = (Vector3)SnapToGrid(item.transform.position);
-        }
+        //Snap table to grid
+        holdingTable.transform.position = (Vector3)SnapToGrid(holdingTable.transform.position);
 
-        //Copy dots from table
+        //Place dots in memory
         foreach (GameObject item in holdingTable.content)
         {
             Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + 2,
                 (int)SnapToGrid(item.transform.position).y + 2);
                        
-            gridMemori[gridPos.x, gridPos.y] = item.GetComponent<Dot>();
-
-            Debug.Log(gridMemori[gridPos.x, gridPos.y]);
+            Dot targetDot = item.GetComponent<Dot>();
+            gridMemori[gridPos.x, gridPos.y] = targetDot;
+            targetDot.gridPos = gridPos;
         }
 
         return true;
@@ -129,10 +124,12 @@ public class Board : MonoBehaviour
     {
         holdingGameObject = table;
         holdingTable = table.GetComponent<DotTable>();
+        holdingTable.HighlightTable();
     }
 
     public void TableDrop()
     {
+        holdingTable.NormalTable();
         holdingGameObject = null;
         holdingTable = null;
     }

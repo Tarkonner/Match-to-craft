@@ -176,3 +176,4 @@ MonoBehaviour:
   inventoryScale: 0.5
   followMouse: 0
   lineLink: {fileID: 4214093016603776075, guid: caba02de405b136448688de0e461009b, type: 3}
+  rotateSpeed: 10

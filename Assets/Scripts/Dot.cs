@@ -7,4 +7,5 @@ public class Dot : MonoBehaviour
     public dotType type;
 
     [HideInInspector] public DotTable ownerTable;
+    [HideInInspector] public Vector2Int gridPos;
 }

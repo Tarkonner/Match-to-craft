@@ -226,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   ownerTable: {fileID: 5318892794795981104}
+  gridPos: {x: 0, y: 0}
 --- !u!1 &3553797719570617437
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   ownerTable: {fileID: 5318892794795981104}
+  gridPos: {x: 0, y: 0}
 --- !u!1 &5318892794795981105
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +511,7 @@ MonoBehaviour:
   inventoryScale: 0.5
   followMouse: 0
   lineLink: {fileID: 4214093016603776075, guid: caba02de405b136448688de0e461009b, type: 3}
+  rotateSpeed: 10
 --- !u!1 &5506160420617674530
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   ownerTable: {fileID: 5318892794795981104}
+  gridPos: {x: 0, y: 0}
 --- !u!1 &7619116620065258149
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,3 +965,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   ownerTable: {fileID: 5318892794795981104}
+  gridPos: {x: 0, y: 0}
