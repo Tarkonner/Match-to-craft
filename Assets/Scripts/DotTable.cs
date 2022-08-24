@@ -169,6 +169,9 @@ public class DotTable : SerializedMonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Board.Instance.holdingTable != null)
+            return;
+
         //Save origon
         startPosition = transform.position;
 
