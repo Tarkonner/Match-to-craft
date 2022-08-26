@@ -18,8 +18,6 @@ public class DotTable : SerializedMonoBehaviour
 
     public List<GameObject> content { get; private set; } = new List<GameObject>();
 
-    [HideInInspector] public bool followMouse = false;
-
     public int tableSize { get; private set; } = 3;
 
     [SerializeField] private GameObject lineLink;
@@ -47,65 +45,96 @@ public class DotTable : SerializedMonoBehaviour
         }
     }
 
-    private void Update()
+    public void HoldingUpdate()
     {
-        if (followMouse)
-        {
-            //Follow mouse
-            Vector2 cal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = cal;
+        rotateAmount += rotateSpeed * Time.deltaTime;
+        if (rotateAmount > 1)
+            rotateAmount = 1;
 
-            //Drop table
-            if (Input.GetKeyDown(KeyCode.Mouse2))
-            {
-                Board.Instance.TableDrop();
-                followMouse = false;
-                col.enabled = true;
-
-                //Back to noraml
-                transform.position = startPosition;
-                sr.enabled = true;
-                transform.localScale = new Vector2(inventoryScale, inventoryScale);
-                //Rotation
-                transform.localEulerAngles = Vector3.zero;
-                targetRotation = 0;
-            }
-
-            //Rotate table
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                rotateAmount = 0;
-                oldRotation = transform.eulerAngles.z;
-                targetRotation = transform.eulerAngles.z - 90;
-            }
-            if(transform.rotation.z != targetRotation)
-            {
-                rotateAmount += rotateSpeed * Time.deltaTime;
-                if(rotateAmount > 1)
-                    rotateAmount = 1;
-
-                transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldRotation, targetRotation, rotateAmount));
-            }
-        }
+        transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldRotation, targetRotation, rotateAmount));
     }
 
-
-    private void OnMouseDown()
+    private void Update()
     {
-        if (Board.Instance.holdingTable != null)
-            return;
+        //if (followMouse)
+        //{
+        //    //Follow mouse
+        //    Vector2 cal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    transform.position = cal;
 
+        //    //Drop table
+        //    if (Input.GetKeyDown(KeyCode.Mouse2))
+        //    {
+        //        Board.Instance.TableDrop();
+        //        followMouse = false;
+        //        col.enabled = true;
+
+        //        //Back to noraml
+        //        transform.position = startPosition;
+        //        sr.enabled = true;
+        //        transform.localScale = new Vector2(inventoryScale, inventoryScale);
+        //        //Rotation
+        //        transform.localEulerAngles = Vector3.zero;
+        //        targetRotation = 0;
+        //    }
+
+        //    //Rotate table
+        //    if (Input.GetKeyDown(KeyCode.Mouse1))
+        //    {
+        //        rotateAmount = 0;
+        //        oldRotation = transform.eulerAngles.z;
+        //        targetRotation = transform.eulerAngles.z - 90;
+        //    }
+        //    if(transform.rotation.z != targetRotation)
+        //    {
+        //        rotateAmount += rotateSpeed * Time.deltaTime;
+        //        if(rotateAmount > 1)
+        //            rotateAmount = 1;
+
+        //        transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldRotation, targetRotation, rotateAmount));
+        //    }
+        //}
+    }
+
+    public void RotateTable()
+    {
+        rotateAmount = 0;
+        oldRotation = transform.eulerAngles.z;
+        targetRotation = transform.eulerAngles.z - 90;
+    }
+
+    public void ResetTable()
+    {
+        col.enabled = true;
+
+        //Back to noraml
+        transform.position = startPosition;
+        sr.enabled = true;
+        transform.localScale = new Vector2(inventoryScale, inventoryScale);
+        //Rotation
+        transform.localEulerAngles = Vector3.zero;
+        targetRotation = 0;
+
+        RemoveHighlight();
+    }
+
+    public void PickupTable()
+    {
         //Save origon
         startPosition = transform.position;
 
         //Follow mouse
-        Board.Instance.TablePickup(gameObject);
-        followMouse = true;
+        //followMouse = true;
         col.enabled = false;
         transform.localScale = Vector3.one;
 
         //Disable background
         sr.enabled = false;
+    }
+
+    public void DropTable()
+    {
+        RemoveHighlight();
     }
 
     public void HighlightTable()
@@ -120,7 +149,7 @@ public class DotTable : SerializedMonoBehaviour
         }
     }
 
-    public void NormalTable()
+    public void RemoveHighlight()
     {
         foreach (Transform t in gameObject.transform)
         {
