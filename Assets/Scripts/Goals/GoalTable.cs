@@ -11,6 +11,13 @@ public abstract class GoalTable : SerializedMonoBehaviour
     [TableMatrix(HorizontalTitle = "X axis", VerticalTitle = "Y axis")]
     public GameObject[,] pattern;
 
+    [HideInInspector] public List<DotTable> subsubscribers;
+
+    private SpriteRenderer sr;
+
+    public bool completet { get; private set; } = false;
+
+    #region Make piece
     [Button("Resize grid")]
     void MakeGrid()
     {
@@ -34,7 +41,13 @@ public abstract class GoalTable : SerializedMonoBehaviour
                 if (pattern[x, y] != null)
                 {
                     GameObject spawn = Instantiate(pattern[x, y], transform);
-                    Vector2 calPos = new Vector2(x - 1, y - 1);
+
+                    Vector2 calPos;
+                    if (size % 2 == 0)
+                        calPos = new Vector2(x - 0.5f, y - 0.5f);
+                    else
+                        calPos = new Vector2(x - 1, y - 1);
+
                     spawn.transform.localPosition = calPos;
                 }
             }
@@ -43,8 +56,8 @@ public abstract class GoalTable : SerializedMonoBehaviour
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.size = new Vector2(size, size);
     }
+    #endregion
 
-    private SpriteRenderer sr;
 
     private void Start()
     {
@@ -54,10 +67,19 @@ public abstract class GoalTable : SerializedMonoBehaviour
     public void GoalCompletet()
     {
         sr.color = Color.yellow;
+
+        completet = true;
     }
 
     public void GoalUncomplet()
     {
         sr.color = Color.white;
+
+        foreach (DotTable item in subsubscribers)
+        {
+            item.pickedupAction -= GoalCompletet;
+        }
+
+        completet = false;
     }
 }

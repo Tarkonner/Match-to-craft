@@ -55,10 +55,13 @@ public class Board : MonoBehaviour
             {
                 //Take table from board
                 if (gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2] != null)
-                {
+                {            
                     DotTable table = gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable;
                     table.followMouse = true;
                     TablePickup(gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable.gameObject);
+
+                    //See if it was part of complete goal
+                    table.pickedupAction?.Invoke();
 
                     //Remove dots from memori
                     for (int i = 0; i < table.content.Count; i++)
@@ -131,11 +134,15 @@ public class Board : MonoBehaviour
         {
             for (int y = 0; y < gridMemori.GetLength(1); y++)
             {
+                //Check goals
                 foreach (GoalTable goal in goals)
                 {
+                    //Bouncs
                     if (goal.pattern.GetLength(0) + x > gridMemori.GetLength(0)
                         || goal.pattern.GetLength(1) + y > gridMemori.GetLength(1))
                         continue;
+
+                    List<DotTable> pieces = new List<DotTable>();
 
                     bool match = true;
                     for (int i = 0; i < goal.pattern.GetLength(0); i++)
@@ -155,11 +162,21 @@ public class Board : MonoBehaviour
                                 match = false;
                                 break;
                             }
+
+                            if(!pieces.Contains(checking.ownerTable))
+                                pieces.Add(checking.ownerTable);
                         }
                     }
 
                     if (match)
+                    {
                         goal.GoalCompletet();
+
+                        //Save pieces there are part of goal
+                        goal.subsubscribers = pieces;
+                        foreach (DotTable item in pieces)
+                            item.pickedupAction += goal.GoalUncomplet;
+                    }
                 }
             }
         }

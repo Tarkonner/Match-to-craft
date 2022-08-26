@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class DotTable : SerializedMonoBehaviour
@@ -30,6 +31,9 @@ public class DotTable : SerializedMonoBehaviour
     [SerializeField] private float rotateSpeed = 5;
     private float rotateAmount;
     private float oldRotation;
+
+    //Being moved
+    public Action pickedupAction;
 
     void Start()
     {
@@ -85,6 +89,50 @@ public class DotTable : SerializedMonoBehaviour
         }
     }
 
+
+    private void OnMouseDown()
+    {
+        if (Board.Instance.holdingTable != null)
+            return;
+
+        //Save origon
+        startPosition = transform.position;
+
+        //Follow mouse
+        Board.Instance.TablePickup(gameObject);
+        followMouse = true;
+        col.enabled = false;
+        transform.localScale = Vector3.one;
+
+        //Disable background
+        sr.enabled = false;
+    }
+
+    public void HighlightTable()
+    {       
+        foreach (Transform t in gameObject.transform)
+        {
+            if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
+                targetSR.sortingOrder = 4;
+
+            if(t.gameObject.TryGetComponent(out LineRenderer line))
+                line.sortingOrder = 3;
+        }
+    }
+
+    public void NormalTable()
+    {
+        foreach (Transform t in gameObject.transform)
+        {
+            if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
+                targetSR.sortingOrder = 2;
+
+            if (t.gameObject.TryGetComponent(out LineRenderer line))
+                line.sortingOrder = 1;
+        }
+    }
+
+    #region BuildPrefab
     [Button("Build pattorn")]
     private void BuildPattorn()
     {
@@ -166,47 +214,5 @@ public class DotTable : SerializedMonoBehaviour
         line.SetPosition(0, new Vector3(0, 0, 0));
         line.SetPosition(1, new Vector3(direction.x, direction.y, 0));
     }
-
-    private void OnMouseDown()
-    {
-        if (Board.Instance.holdingTable != null)
-            return;
-
-        //Save origon
-        startPosition = transform.position;
-
-        //Follow mouse
-        Board.Instance.TablePickup(gameObject);
-        followMouse = true;
-        col.enabled = false;
-        transform.localScale = Vector3.one;
-
-        //Disable background
-        sr.enabled = false;
-    }
-
-    public void HighlightTable()
-    {
-
-        foreach (Transform t in gameObject.transform)
-        {
-            if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
-                targetSR.sortingOrder = 4;
-
-            if(t.gameObject.TryGetComponent(out LineRenderer line))
-                line.sortingOrder = 3;
-        }
-    }
-
-    public void NormalTable()
-    {
-        foreach (Transform t in gameObject.transform)
-        {
-            if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
-                targetSR.sortingOrder = 2;
-
-            if (t.gameObject.TryGetComponent(out LineRenderer line))
-                line.sortingOrder = 1;
-        }
-    }
+    #endregion
 }
