@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 57f0fb18552962f40b8e83550acedced, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96862745, b: 0.972549, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -132,3 +132,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   size: 2
+  subsubscribers: []
+  winColor: {r: 0.7490196, g: 0.38039216, b: 0.19607843, a: 1}
+  norColor: {r: 0.7490196, g: 0.7294118, b: 0.7294118, a: 1}

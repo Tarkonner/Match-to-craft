@@ -11,12 +11,7 @@ public class Board : MonoBehaviour
     private SpriteRenderer sr;
     private Vector2 gridPosition;
 
-
     [SerializeField] private GameObject dotPrefab;
-
-    //[HideInInspector] public DotTable holdingTable;
-    //private GameObject holdingGameObject;
-    //private bool mouseOnBoard = false;
 
     //Memori
     private Dot[,] gridMemori;
@@ -30,48 +25,8 @@ public class Board : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         sr.size = gridSize;
 
-        //pointZero = new Vector2(-gridSize.x / 2, -gridSize.y / 2);
-
         //Collider
         GetComponent<BoxCollider2D>().size = gridSize;
-    }
-
-    void Update()
-    {
-        //if (!mouseOnBoard)
-        //    return;
-
-        ////Boards boarder
-        //Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //gridPosition = SnapToGrid(mousePos);
-
-        //if (Input.GetKeyDown(KeyCode.Mouse0))
-        //{
-        //    if (holdingGameObject == null)
-        //    {
-        //        //Take table from board
-        //        if (gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2] != null)
-        //        {            
-        //            DotTable table = gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable;
-        //            //table.followMouse = true;
-        //            TablePickup(gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable.gameObject);
-
-        //            //See if it was part of complete goal
-        //            table.pickedupAction?.Invoke();
-
-        //            //Remove dots from memori
-        //            for (int i = 0; i < table.content.Count; i++)
-        //            {
-        //                Vector2Int removePos = table.content[i].GetComponent<Dot>().gridPos;
-        //                gridMemori[removePos.x, removePos.y] = null;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        CheckGoals();
-        //    }
-        //}
     }
 
     private Vector2 SnapToGrid(Vector2 targetPosition)
@@ -194,28 +149,4 @@ public class Board : MonoBehaviour
             }
         }
     }
-
-    //public void TablePickup(GameObject table)
-    //{
-    //    holdingGameObject = table;
-    //    holdingTable = table.GetComponent<DotTable>();
-    //    holdingTable.HighlightTable();
-    //}
-
-    //public void TableDrop()
-    //{
-    //    holdingTable.NormalTable();
-    //    holdingGameObject = null;
-    //    holdingTable = null;
-    //}
-
-    //private void OnMouseEnter()
-    //{
-    //    mouseOnBoard = true;
-    //}
-
-    //private void OnMouseExit()
-    //{
-    //    mouseOnBoard = false;
-    //}
 }

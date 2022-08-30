@@ -71,9 +71,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: 6673cb591b36f204b854e0e4abfa00db, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.06464243, a: 1}
+  m_Color: {r: 1, g: 0.85490197, b: 0.27058825, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,4 +96,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  tablePosition: {x: 2, y: 2}
+  ownerTable: {fileID: 0}
+  gridPos: {x: 0, y: 0}

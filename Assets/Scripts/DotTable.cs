@@ -54,49 +54,7 @@ public class DotTable : SerializedMonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldRotation, targetRotation, rotateAmount));
     }
 
-    private void Update()
-    {
-        //if (followMouse)
-        //{
-        //    //Follow mouse
-        //    Vector2 cal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    transform.position = cal;
-
-        //    //Drop table
-        //    if (Input.GetKeyDown(KeyCode.Mouse2))
-        //    {
-        //        Board.Instance.TableDrop();
-        //        followMouse = false;
-        //        col.enabled = true;
-
-        //        //Back to noraml
-        //        transform.position = startPosition;
-        //        sr.enabled = true;
-        //        transform.localScale = new Vector2(inventoryScale, inventoryScale);
-        //        //Rotation
-        //        transform.localEulerAngles = Vector3.zero;
-        //        targetRotation = 0;
-        //    }
-
-        //    //Rotate table
-        //    if (Input.GetKeyDown(KeyCode.Mouse1))
-        //    {
-        //        rotateAmount = 0;
-        //        oldRotation = transform.eulerAngles.z;
-        //        targetRotation = transform.eulerAngles.z - 90;
-        //    }
-        //    if(transform.rotation.z != targetRotation)
-        //    {
-        //        rotateAmount += rotateSpeed * Time.deltaTime;
-        //        if(rotateAmount > 1)
-        //            rotateAmount = 1;
-
-        //        transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldRotation, targetRotation, rotateAmount));
-        //    }
-        //}
-    }
-
-    public void RotateTable()
+     public void RotateTable()
     {
         rotateAmount = 0;
         oldRotation = transform.eulerAngles.z;
@@ -124,7 +82,6 @@ public class DotTable : SerializedMonoBehaviour
         startPosition = transform.position;
 
         //Follow mouse
-        //followMouse = true;
         col.enabled = false;
         transform.localScale = Vector3.one;
 
@@ -239,9 +196,12 @@ public class DotTable : SerializedMonoBehaviour
     {
         GameObject spawn = Instantiate(lineLink, transform);
         spawn.transform.localPosition = spawnPosition - Vector2.one;
-        LineRenderer line = spawn.GetComponent<LineRenderer>();
+        LineRenderer line = spawn.GetComponent<LineRenderer>();        
         line.SetPosition(0, new Vector3(0, 0, 0));
-        line.SetPosition(1, new Vector3(direction.x, direction.y, 0));
+        line.SetPosition(1, Vector3.Lerp(Vector3.zero, direction, .25f));
+        line.SetPosition(2, Vector3.Lerp(Vector3.zero, direction, .5f));
+        line.SetPosition(3, Vector3.Lerp(Vector3.zero, direction, .75f));
+        line.SetPosition(4, new Vector3(direction.x, direction.y, 0));
     }
     #endregion
 }

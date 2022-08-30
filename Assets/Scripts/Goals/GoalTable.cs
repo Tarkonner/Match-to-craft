@@ -13,6 +13,9 @@ public abstract class GoalTable : SerializedMonoBehaviour
 
     [HideInInspector] public List<DotTable> subsubscribers;
 
+    public Color winColor = new Color(255, 129, 66, 255);
+    public Color norColor = new Color(255, 247, 248, 255);
+
     private SpriteRenderer sr;
 
     public bool completet { get; private set; } = false;
@@ -66,14 +69,14 @@ public abstract class GoalTable : SerializedMonoBehaviour
 
     public void GoalCompletet()
     {
-        sr.color = Color.yellow;
+        sr.color = winColor;
 
         completet = true;
     }
 
     public void GoalUncomplet()
     {
-        sr.color = Color.white;
+        sr.color = norColor;
 
         foreach (DotTable item in subsubscribers)
         {
