@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using System.Drawing;
 
-public class Board : MonoBehaviour
+public class Board : SerializedMonoBehaviour
 {
     //Board
     [SerializeField] private Vector2Int gridSize = new Vector2Int(3, 3);
@@ -19,6 +21,14 @@ public class Board : MonoBehaviour
     void Start()
     {
         gridMemori = new Dot[gridSize.x, gridSize.y];
+        for (int x = 0; x < pattern.GetLength(0); x++)
+        {
+            for (int y = 0; y < pattern.GetLength(1); y++)
+            {
+                if (pattern[x, y] != null)
+                    gridMemori[x, y] = pattern[x, y].GetComponent<Dot>();
+            }
+        }
 
         sr = GetComponent<SpriteRenderer>();
         sr.size = gridSize;
@@ -129,7 +139,7 @@ public class Board : MonoBehaviour
                                 break;
                             }
 
-                            if(!pieces.Contains(checking.ownerTable))
+                            if(checking.ownerTable != null && !pieces.Contains(checking.ownerTable))
                                 pieces.Add(checking.ownerTable);
                         }
                     }
@@ -139,6 +149,8 @@ public class Board : MonoBehaviour
                         goal.GoalCompletet();
 
                         //Save pieces there are part of goal
+                        
+
                         goal.subsubscribers = pieces;
                         foreach (DotTable item in pieces)
                             item.pickedupAction += goal.GoalUncomplet;
@@ -147,4 +159,45 @@ public class Board : MonoBehaviour
             }
         }
     }
+
+    #region Pattern
+    [BoxGroup("Pattern")]
+    [TableMatrix(HorizontalTitle = "X axis", VerticalTitle = "Y axis")]
+    public GameObject[,] pattern;
+    [Button("Resize grid")]
+    void MakeGrid()
+    {
+        pattern = new GameObject[gridSize.x, gridSize.y];
+    }
+
+    [Button("Place dots")]
+    void SpawnDots()
+    {
+        //Destroy old
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(transform.GetChild(i).gameObject);
+        }
+
+        //Make dots
+        for (int x = 0; x < pattern.GetLength(0); x++)
+        {
+            for (int y = 0; y < pattern.GetLength(1); y++)
+            {
+                if (pattern[x, y] != null)
+                {
+                    GameObject spawn = Instantiate(pattern[x, y], transform);
+
+                    Vector2 calPos;
+                    if (gridSize.x % 2 == 0)
+                        calPos = new Vector2(x - 0.5f, y - 0.5f);
+                    else
+                        calPos = new Vector2(x - 1, y - 1);
+
+                    spawn.transform.localPosition = calPos;
+                }
+            }
+        }
+    }
+    #endregion
 }
