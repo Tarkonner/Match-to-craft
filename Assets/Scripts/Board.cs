@@ -11,8 +11,6 @@ public class Board : MonoBehaviour
     private SpriteRenderer sr;
     private Vector2 gridPosition;
 
-    [SerializeField] private GameObject dotPrefab;
-
     //Memori
     private Dot[,] gridMemori;
 
@@ -41,8 +39,8 @@ public class Board : MonoBehaviour
         //Check if allowed
         foreach (GameObject item in targetTable.content)
         {
-            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + 2,
-                (int)SnapToGrid(item.transform.position).y + 2);
+            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + gridSize.x / 2,
+                (int)SnapToGrid(item.transform.position).y + gridSize.y / 2);
 
             //Bounderi
             if (gridPos.x < 0 || gridPos.y < 0 || gridPos.x >= gridSize.x || gridPos.y >= gridSize.y)
@@ -59,8 +57,8 @@ public class Board : MonoBehaviour
         //Place dots in memory
         foreach (GameObject item in targetTable.content)
         {
-            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + 2,
-                (int)SnapToGrid(item.transform.position).y + 2);
+            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + gridSize.x / 2,
+                (int)SnapToGrid(item.transform.position).y + gridSize.y / 2);
 
             Dot targetDot = item.GetComponent<Dot>();
             gridMemori[gridPos.x, gridPos.y] = targetDot;
@@ -78,9 +76,9 @@ public class Board : MonoBehaviour
         DotTable table = null;
 
         //Take table from board
-        if (gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2] != null)
+        if (gridMemori[(int)gridPosition.x + gridSize.x / 2, (int)gridPosition.y + gridSize.y / 2] != null)
         {
-            table = gridMemori[(int)gridPosition.x + 2, (int)gridPosition.y + 2].ownerTable;
+            table = gridMemori[(int)gridPosition.x + gridSize.x / 2, (int)gridPosition.y + gridSize.y / 2].ownerTable;
 
             //See if it was part of complete goal
             table.pickedupAction?.Invoke();
