@@ -18,6 +18,10 @@ public class Board : SerializedMonoBehaviour
 
     [SerializeField] private List<GoalTable> goals;
 
+    private bool nextLevel = false;
+    private float sceneTransistenTime = 1;
+    private float sceneClock;
+
     void Start()
     {
         gridMemori = new Dot[gridSize.x, gridSize.y];
@@ -35,6 +39,16 @@ public class Board : SerializedMonoBehaviour
 
         //Collider
         GetComponent<BoxCollider2D>().size = gridSize;
+    }
+
+    private void Update()
+    {
+        if(nextLevel)
+        {
+            sceneClock += Time.deltaTime;
+            if (sceneClock >= sceneTransistenTime)
+                SceneLoader.NextScene();
+        }
     }
 
     private Vector2 SnapToGrid(Vector2 targetPosition)
@@ -76,6 +90,18 @@ public class Board : SerializedMonoBehaviour
         }
 
         CheckGoals();
+
+        bool allDone = true;
+        foreach (GoalTable item in goals)
+        {
+            if(!item.completet)
+            {
+                allDone = false;
+                break;
+            }
+        }
+        if (allDone)
+            nextLevel = true;
 
         return true;
     }
