@@ -607,6 +607,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336268307}
   m_CullTransparentMesh: 1
+--- !u!114 &381660636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8787280578551275753, guid: ee553cefcfd2e5f4b983af508a6dd07b, type: 3}
+  m_PrefabInstance: {fileID: 5662571653094160968}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a01bf8355f0f143b2d8192926fa174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &385276390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1626,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 242021918657376993, guid: e5743f27fa0d0d144b21ae3e65775c1f, type: 3}
+      propertyPath: goals.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 242021918657376993, guid: e5743f27fa0d0d144b21ae3e65775c1f, type: 3}
+      propertyPath: goals.Array.data[0]
+      value: 
+      objectReference: {fileID: 381660636}
+    - target: {fileID: 242021918657376993, guid: e5743f27fa0d0d144b21ae3e65775c1f, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 242021918657376993, guid: e5743f27fa0d0d144b21ae3e65775c1f, type: 3}
@@ -1706,6 +1725,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6909048342254672218, guid: 0ad430626daf97645b3f30b9b5c9e996, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -7972945967384696931, guid: 0444b172db5073d4eb093a517fec47ff, type: 2}
     - target: {fileID: 7915347144484172573, guid: 0ad430626daf97645b3f30b9b5c9e996, type: 3}
       propertyPath: m_RootOrder
       value: 3

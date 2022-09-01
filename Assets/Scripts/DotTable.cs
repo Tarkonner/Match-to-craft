@@ -8,7 +8,6 @@ using System;
 public class DotTable : SerializedMonoBehaviour
 {
     private BoxCollider2D col;
-    private SpriteRenderer sr;
 
     [SerializeField] private float inventoryScale = 0.5f;
 
@@ -36,7 +35,6 @@ public class DotTable : SerializedMonoBehaviour
     void Start()
     {
         col = GetComponent<BoxCollider2D>();
-        sr = GetComponent<SpriteRenderer>();
 
         foreach (Transform t in transform)
         {
@@ -67,7 +65,6 @@ public class DotTable : SerializedMonoBehaviour
 
         //Back to noraml
         transform.position = startPosition;
-        sr.enabled = true;
         transform.localScale = new Vector2(inventoryScale, inventoryScale);
         //Rotation
         transform.localEulerAngles = Vector3.zero;
@@ -84,9 +81,6 @@ public class DotTable : SerializedMonoBehaviour
         //Follow mouse
         col.enabled = false;
         transform.localScale = Vector3.one;
-
-        //Disable background
-        sr.enabled = false;
     }
 
     public void DropTable()

@@ -7,10 +7,22 @@ public class Mouse : MonoBehaviour
     //Holding
     public DotTable holdingTable;
 
+    private AudioSource audioSource;
+
+    [Header("Sound")]
+    [SerializeField] float minPitch = .9f;
+    [SerializeField] float maxPitch = 1;
+    [SerializeField] float volumeOffset = .2f;
+    private float normalVolume;
+    [SerializeField] AudioClip rotateSound;
+    [SerializeField] AudioClip failPlacement;
 
     private void Awake()
     {
         Instance = this;
+
+        audioSource = GetComponent<AudioSource>();
+        normalVolume = audioSource.volume;
     }
 
     void Update()
@@ -61,6 +73,8 @@ public class Mouse : MonoBehaviour
                         holdingTable.DropTable();
                         holdingTable = null;
                     }
+                    else
+                        PlayAudio(failPlacement);
                 }
             }
         }
@@ -69,6 +83,7 @@ public class Mouse : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && holdingTable != null)
         {
             holdingTable.RotateTable();
+            PlayAudio(rotateSound);
         }
 
         //Middle mouse buttom
@@ -78,5 +93,14 @@ public class Mouse : MonoBehaviour
             holdingTable.DropTable();
             holdingTable = null;
         }
+    }
+
+    public void PlayAudio(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.pitch = Random.Range(minPitch, maxPitch);
+        audioSource.volume = Random.Range(normalVolume - volumeOffset, normalVolume);
+
+        audioSource.Play();
     }
 }
