@@ -47,9 +47,17 @@ MonoBehaviour:
   holdingTable: {fileID: 0}
   minPitch: 0.8
   maxPitch: 1
-  volumeOffset: 0.2
-  rotateSound: {fileID: 8300000, guid: be4eeffe251614b4eb51f858609a57c1, type: 3}
-  failPlacement: {fileID: 8300000, guid: 34b285240eaddd948ab7ea9bfce7f983, type: 3}
+  rotateSounds:
+  - {fileID: 8300000, guid: 3e4f18f6285fb5649a53cf5eab2e0983, type: 3}
+  - {fileID: 8300000, guid: 985768c5b80104f4e8303a50799c9796, type: 3}
+  - {fileID: 8300000, guid: 944eb825c9e8e6e409a6e74cf8a48d9f, type: 3}
+  failPlacement: {fileID: 8300000, guid: e62b45517eb77a143b592b98d0493b59, type: 3}
+  placeSounds:
+  - {fileID: 8300000, guid: fb03bf69d80e3cd43a1f72858e4d0195, type: 3}
+  - {fileID: 8300000, guid: 56e7048259686264d97f904fdea13bb4, type: 3}
+  - {fileID: 8300000, guid: 4fb2742de4d3ebe45b0b5ad0a9deec27, type: 3}
+  pickupSound: {fileID: 8300000, guid: 6f6d964632115d44098f6e75921acec6, type: 3}
+  dropSound: {fileID: 8300000, guid: 935e8bae4d911df41b94f8dd0573a49b, type: 3}
 --- !u!82 &6909048342254672218
 AudioSource:
   m_ObjectHideFlags: 0

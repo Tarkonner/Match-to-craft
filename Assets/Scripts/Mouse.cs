@@ -12,17 +12,17 @@ public class Mouse : MonoBehaviour
     [Header("Sound")]
     [SerializeField] float minPitch = .9f;
     [SerializeField] float maxPitch = 1;
-    [SerializeField] float volumeOffset = .2f;
-    private float normalVolume;
-    [SerializeField] AudioClip rotateSound;
+    [SerializeField] AudioClip[] rotateSounds;
     [SerializeField] AudioClip failPlacement;
+    [SerializeField] AudioClip[] placeSounds;
+    [SerializeField] AudioClip pickupSound;
+    [SerializeField] AudioClip dropSound;
 
     private void Awake()
     {
         Instance = this;
 
         audioSource = GetComponent<AudioSource>();
-        normalVolume = audioSource.volume;
     }
 
     void Update()
@@ -50,6 +50,7 @@ public class Mouse : MonoBehaviour
                     holdingTable = table;
                     table.PickupTable();
                     table.HighlightTable();
+                    PlayAudio(pickupSound);
                 }
                 else if(hit.collider.TryGetComponent(out Board board))
                 {
@@ -58,6 +59,7 @@ public class Mouse : MonoBehaviour
                     {
                         holdingTable = result;
                         result.HighlightTable();
+                        PlayAudio(pickupSound);
                     }
                 }
 
@@ -72,6 +74,7 @@ public class Mouse : MonoBehaviour
                     {
                         holdingTable.DropTable();
                         holdingTable = null;
+                        PlayAudio(placeSounds);
                     }
                     else
                         PlayAudio(failPlacement);
@@ -83,7 +86,7 @@ public class Mouse : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && holdingTable != null)
         {
             holdingTable.RotateTable();
-            PlayAudio(rotateSound);
+            PlayAudio(rotateSounds);
         }
 
         //Middle mouse buttom
@@ -92,6 +95,7 @@ public class Mouse : MonoBehaviour
             holdingTable.ResetTable();
             holdingTable.DropTable();
             holdingTable = null;
+            PlayAudio(dropSound);
         }
     }
 
@@ -99,8 +103,13 @@ public class Mouse : MonoBehaviour
     {
         audioSource.clip = clip;
         audioSource.pitch = Random.Range(minPitch, maxPitch);
-        audioSource.volume = Random.Range(normalVolume - volumeOffset, normalVolume);
+        audioSource.Play();
+    }
 
+    public void PlayAudio(AudioClip[] clips)
+    {
+        audioSource.clip = clips[Random.Range(0, clips.Length)];
+        audioSource.pitch = Random.Range(minPitch, maxPitch);
         audioSource.Play();
     }
 }

@@ -22,6 +22,19 @@ public class Board : SerializedMonoBehaviour
     private float sceneTransistenTime = 1;
     private float sceneClock;
 
+    [Header("Sound")]
+    [SerializeField] float minPitch = .9f;
+    [SerializeField] float maxPitch = 1;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip goalComplete;
+    [SerializeField] AudioClip winLevel;
+
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
         gridMemori = new Dot[gridSize.x, gridSize.y];
@@ -89,7 +102,7 @@ public class Board : SerializedMonoBehaviour
             targetDot.gridPos = gridPos;
         }
 
-        CheckGoals();
+        bool makedGoal = CheckGoals();
 
         bool allDone = true;
         foreach (GoalTable item in goals)
@@ -101,7 +114,12 @@ public class Board : SerializedMonoBehaviour
             }
         }
         if (allDone)
+        {
+            PlayAudio(winLevel);
             nextLevel = true;
+        }
+        else if(makedGoal)
+            PlayAudio(goalComplete);
 
         return true;
     }
@@ -130,8 +148,10 @@ public class Board : SerializedMonoBehaviour
         return table;
     }
 
-    private void CheckGoals()
+    private bool CheckGoals()
     {
+        bool result = false;
+
         for (int x = 0; x < gridMemori.GetLength(0); x++)
         {
             for (int y = 0; y < gridMemori.GetLength(1); y++)
@@ -174,8 +194,7 @@ public class Board : SerializedMonoBehaviour
                     {
                         goal.GoalCompletet();
 
-                        //Save pieces there are part of goal
-                        
+                        result = true;
 
                         goal.subsubscribers = pieces;
                         foreach (DotTable item in pieces)
@@ -184,12 +203,30 @@ public class Board : SerializedMonoBehaviour
                 }
             }
         }
+
+        return result;
+    }
+
+    public void PlayAudio(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.pitch = Random.Range(minPitch, maxPitch);
+        audioSource.Play();
+    }
+
+    public void PlayAudio(AudioClip[] clips)
+    {
+        audioSource.clip = clips[Random.Range(0, clips.Length)];
+        audioSource.pitch = Random.Range(minPitch, maxPitch);
+        audioSource.Play();
     }
 
     #region Pattern
     [BoxGroup("Pattern")]
     [TableMatrix(HorizontalTitle = "X axis", VerticalTitle = "Y axis")]
     public GameObject[,] pattern;
+
+
     [Button("Resize grid")]
     void MakeGrid()
     {

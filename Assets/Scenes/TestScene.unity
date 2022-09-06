@@ -420,6 +420,10 @@ PrefabInstance:
       propertyPath: goals.Array.data[1]
       value: 
       objectReference: {fileID: 738684570013979841}
+    - target: {fileID: 2499797759648773224, guid: 52b05d7725c925e40a4b22efc0fb9d86, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2499797759648773224, guid: 52b05d7725c925e40a4b22efc0fb9d86, type: 3}
     - target: {fileID: 2499797759648773225, guid: 52b05d7725c925e40a4b22efc0fb9d86, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -466,7 +470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2499797759648773227, guid: 52b05d7725c925e40a4b22efc0fb9d86, type: 3}
       propertyPath: m_Name
-      value: Board
+      value: Test Board
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52b05d7725c925e40a4b22efc0fb9d86, type: 3}

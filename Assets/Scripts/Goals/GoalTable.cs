@@ -20,6 +20,11 @@ public abstract class GoalTable : SerializedMonoBehaviour
 
     public bool completet { get; private set; } = false;
 
+    [Header("Sound")]
+    [SerializeField] float minPitch = .9f;
+    [SerializeField] float maxPitch = 1;
+    private AudioSource audioSource;
+
     #region Make piece
     [Button("Resize grid")]
     void MakeGrid()
@@ -65,6 +70,7 @@ public abstract class GoalTable : SerializedMonoBehaviour
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void GoalCompletet()
