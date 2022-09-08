@@ -9,7 +9,6 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-
     private AudioSource audioSource;
     [SerializeField] AudioClip[] songs;
     private int currentSong = -1;
@@ -23,9 +22,14 @@ public class SoundManager : MonoBehaviour
     private Slider masterSlider;
     private Slider musicSlider;
     private Slider effectSlider;
+    private TextMeshProUGUI masterText;
+    private TextMeshProUGUI effektText;
+    private TextMeshProUGUI musicText;
     private float savedMasterVolume = 1;
     private float savedEffectVolume = 1;
     private float savedMusicVolume = 1;
+
+    public bool Muted { get; private set; }
 
     private void Awake()
     {
@@ -72,14 +76,17 @@ public class SoundManager : MonoBehaviour
         masterSlider = masterSliderHolder.transform.GetChild(0).GetComponent<Slider>();
         masterSlider.value = savedMasterVolume;
         masterSlider.onValueChanged.AddListener(delegate { ChangeMasterVolume(masterSlider.value); });
+        masterText = masterSliderHolder.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
         musicSlider = musicSliderHolder.transform.GetChild(0).GetComponent<Slider>();
         musicSlider.value = savedMusicVolume;
         musicSlider.onValueChanged.AddListener(delegate { ChangeMusicVolume(musicSlider.value); });
+        musicText = musicSliderHolder.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
         effectSlider = effektSliderHolder.transform.GetChild(0).GetComponent<Slider>();
         effectSlider.value = savedEffectVolume;
         effectSlider.onValueChanged.AddListener(delegate { ChangeEffektVolume(effectSlider.value); });
+        effektText = effektSliderHolder.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
 
     private float VolumeCalculation(float value)
@@ -90,26 +97,29 @@ public class SoundManager : MonoBehaviour
     private void ChangeMasterVolume(float value)
     {
         mixer.SetFloat("MasterVolume", VolumeCalculation(value));
-        TextMeshProUGUI text = masterSlider.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        text.text = Mathf.Round(masterSlider.value * 100).ToString() + "%"; 
+        savedMasterVolume = value;
+        masterText.text = Mathf.Round(masterSlider.value * 100).ToString() + "%"; 
     }
     private void ChangeMusicVolume(float value)
     {
         mixer.SetFloat("MusicVolume", VolumeCalculation(value));
-        TextMeshProUGUI text = musicSliderHolder.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        text.text = Mathf.Round(musicSlider.value * 100).ToString() + "%";
+        savedMusicVolume = value;
+        musicText.text = Mathf.Round(musicSlider.value * 100).ToString() + "%";
     }
     private void ChangeEffektVolume(float value)
     {
         mixer.SetFloat("EffektVolume", VolumeCalculation(value));
-        TextMeshProUGUI text = effektSliderHolder.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        text.text = Mathf.Round(effectSlider.value * 100).ToString() + "%";
+        savedEffectVolume = value;
+        effektText.text = Mathf.Round(effectSlider.value * 100).ToString() + "%";
     }
 
     public void MuteAudio()
     {
-        ChangeMasterVolume(0.001f);
-        ChangeMusicVolume(0.001f);
-        ChangeEffektVolume(0.001f);        
+        if(!Muted)
+            ChangeMasterVolume(0.001f);  
+        else
+            ChangeMasterVolume(masterSlider.value);
+
+        Muted = !Muted;
     }
 }
