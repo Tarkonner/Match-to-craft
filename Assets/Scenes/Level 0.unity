@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &156543010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,19 +483,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4544789264274111088, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4544789265042314658, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4544789265042629850, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7202787732669805278, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
       propertyPath: m_Name
       value: VolumeControl
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202787732669805278, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7202787732669805279, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
       propertyPath: m_Pivot.x
@@ -583,15 +587,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8903452943707109581, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8903452943707376053, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8903452944609814119, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52a5024ee7791ce48af55f5531cc3646, type: 3}
@@ -1990,7 +1994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2669672287396288561, guid: 65d08a9d9fbaf794a88b08948616094e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2669672287396288562, guid: 65d08a9d9fbaf794a88b08948616094e, type: 3}
       propertyPath: goals.Array.data[0]

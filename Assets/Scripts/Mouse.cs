@@ -27,6 +27,9 @@ public class Mouse : MonoBehaviour
 
     void Update()
     {
+        if (MenuManager.Instance.ActiveMenu)
+            return;
+
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
         //Make table follow mouse

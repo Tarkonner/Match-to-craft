@@ -28,6 +28,9 @@ public class SoundManager : MonoBehaviour
     private float savedMasterVolume = 1;
     private float savedEffectVolume = 1;
     private float savedMusicVolume = 1;
+    public float SavedMasterVolume { get { return savedMasterVolume; } }
+    public float SavedEffectVolume { get { return savedEffectVolume; } }
+    public float SavedMusicVolume { get { return savedMusicVolume; } }
 
     public bool Muted { get; private set; }
 
@@ -89,24 +92,24 @@ public class SoundManager : MonoBehaviour
         effektText = effektSliderHolder.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
 
-    private float VolumeCalculation(float value)
+    public float VolumeCalculation(float value)
     {
         return Mathf.Log(value) * 20;
     }
 
-    private void ChangeMasterVolume(float value)
+    public void ChangeMasterVolume(float value)
     {
         mixer.SetFloat("MasterVolume", VolumeCalculation(value));
         savedMasterVolume = value;
         masterText.text = Mathf.Round(masterSlider.value * 100).ToString() + "%"; 
     }
-    private void ChangeMusicVolume(float value)
+    public void ChangeMusicVolume(float value)
     {
         mixer.SetFloat("MusicVolume", VolumeCalculation(value));
         savedMusicVolume = value;
         musicText.text = Mathf.Round(musicSlider.value * 100).ToString() + "%";
     }
-    private void ChangeEffektVolume(float value)
+    public void ChangeEffektVolume(float value)
     {
         mixer.SetFloat("EffektVolume", VolumeCalculation(value));
         savedEffectVolume = value;
