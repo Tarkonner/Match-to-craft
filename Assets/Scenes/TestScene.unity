@@ -752,6 +752,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+      propertyPath: goals.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: goals.Array.data[0]
       value: 
       objectReference: {fileID: 1278413136197355428}
@@ -763,6 +767,22 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+    - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+      propertyPath: serializationData.SerializationNodes.Array.size
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+      propertyPath: serializationData.ReferencedUnityObjects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+      propertyPath: serializationData.SerializationNodes.Array.data[0].Data
+      value: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
+      objectReference: {fileID: 0}
+    - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+      propertyPath: serializationData.SerializationNodes.Array.data[0].Entry
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
 --- !u!1001 &7696308638049082502

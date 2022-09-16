@@ -6,8 +6,22 @@ using System.Drawing;
 
 public class Board : SerializedMonoBehaviour
 {
-    //Board
-    [SerializeField] private Vector2Int gridSize = new Vector2Int(3, 3);
+    [Header("Board size")]
+    [SerializeField] private bool sameLength = true;
+    [ShowIf("sameLength")]
+    [SerializeField][Range(1, 8)] private int gridSize;
+    [HideIf("sameLength")] [SerializeField][Range(1, 8)] private int gridSizeX = 3;
+    [HideIf("sameLength")] [SerializeField][Range(1, 8)] private int gridSizeY = 3;
+    private Vector2Int currentGridSize
+    {
+        get {
+            if (sameLength)
+                return new Vector2Int(gridSize, gridSize);
+            else
+                return new Vector2Int(gridSizeX, gridSizeY);
+        }
+    }
+
     //private Vector2 pointZero;
     private const float sizeOfGrid = 1;
     private SpriteRenderer sr;
@@ -17,6 +31,8 @@ public class Board : SerializedMonoBehaviour
     private Dot[,] gridMemori;
 
     [SerializeField] private List<GoalTable> goals;
+
+    [SerializeField] private GameObject dotHolder;
 
     private bool nextLevel = false;
     private float sceneTransistenTime = 1;
@@ -37,7 +53,7 @@ public class Board : SerializedMonoBehaviour
 
     void Start()
     {
-        gridMemori = new Dot[gridSize.x, gridSize.y];
+        gridMemori = new Dot[currentGridSize.x, currentGridSize.y];
         for (int x = 0; x < pattern.GetLength(0); x++)
         {
             for (int y = 0; y < pattern.GetLength(1); y++)
@@ -48,10 +64,11 @@ public class Board : SerializedMonoBehaviour
         }
 
         sr = GetComponent<SpriteRenderer>();
-        sr.size = gridSize;
+
+        sr.size = currentGridSize;
 
         //Collider
-        GetComponent<BoxCollider2D>().size = gridSize;
+        GetComponent<BoxCollider2D>().size = currentGridSize;
     }
 
     private void Update()
@@ -76,11 +93,11 @@ public class Board : SerializedMonoBehaviour
         //Check if allowed
         foreach (GameObject item in targetTable.content)
         {
-            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + gridSize.x / 2,
-                (int)SnapToGrid(item.transform.position).y + gridSize.y / 2);
+            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + currentGridSize.x / 2,
+                (int)SnapToGrid(item.transform.position).y + currentGridSize.y / 2);
 
             //Bounderi
-            if (gridPos.x < 0 || gridPos.y < 0 || gridPos.x >= gridSize.x || gridPos.y >= gridSize.y)
+            if (gridPos.x < 0 || gridPos.y < 0 || gridPos.x >= currentGridSize.x || gridPos.y >= currentGridSize.y)
                 return false;
 
             //Is there already something
@@ -94,8 +111,8 @@ public class Board : SerializedMonoBehaviour
         //Place dots in memory
         foreach (GameObject item in targetTable.content)
         {
-            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + gridSize.x / 2,
-                (int)SnapToGrid(item.transform.position).y + gridSize.y / 2);
+            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + currentGridSize.x / 2,
+                (int)SnapToGrid(item.transform.position).y + currentGridSize.y / 2);
 
             Dot targetDot = item.GetComponent<Dot>();
             gridMemori[gridPos.x, gridPos.y] = targetDot;
@@ -130,9 +147,9 @@ public class Board : SerializedMonoBehaviour
         DotTable table = null;
 
         //Take table from board
-        if (gridMemori[(int)gridPosition.x + gridSize.x / 2, (int)gridPosition.y + gridSize.y / 2] != null)
+        if (gridMemori[(int)gridPosition.x + currentGridSize.x / 2, (int)gridPosition.y + currentGridSize.y / 2] != null)
         {
-            table = gridMemori[(int)gridPosition.x + gridSize.x / 2, (int)gridPosition.y + gridSize.y / 2].ownerTable;
+            table = gridMemori[(int)gridPosition.x + currentGridSize.x / 2, (int)gridPosition.y + currentGridSize.y / 2].ownerTable;
 
             //See if it was part of complete goal
             table.pickedupAction?.Invoke();
@@ -230,7 +247,7 @@ public class Board : SerializedMonoBehaviour
     [Button("Resize grid")]
     void MakeGrid()
     {
-        pattern = new GameObject[gridSize.x, gridSize.y];
+        pattern = new GameObject[currentGridSize.x, currentGridSize.y];
     }
 
     [Button("Place dots")]
@@ -250,14 +267,16 @@ public class Board : SerializedMonoBehaviour
                 if (pattern[x, y] != null)
                 {
                     GameObject spawn = Instantiate(pattern[x, y], transform);
+                    GameObject holder = Instantiate(dotHolder, transform);
 
                     Vector2 calPos;
-                    if (gridSize.x % 2 == 0)
+                    if (currentGridSize.x % 2 == 0)
                         calPos = new Vector2(x - 0.5f, y - 0.5f);
                     else
                         calPos = new Vector2(x - 1, y - 1);
 
                     spawn.transform.localPosition = calPos;
+                    holder.transform.localPosition = calPos;
                 }
             }
         }

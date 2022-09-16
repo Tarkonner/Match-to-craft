@@ -5,7 +5,7 @@ public class Mouse : MonoBehaviour
     public Mouse Instance { get; private set; }
 
     //Holding
-    public DotTable holdingTable;
+    [SerializeField] private DotTable holdingTable;
 
     private AudioSource audioSource;
 
