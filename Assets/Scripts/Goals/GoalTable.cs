@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public abstract class GoalTable : SerializedMonoBehaviour
 {
@@ -24,6 +25,8 @@ public abstract class GoalTable : SerializedMonoBehaviour
     [SerializeField] float minPitch = .9f;
     [SerializeField] float maxPitch = 1;
     private AudioSource audioSource;
+
+    public Action undoGoal;
 
     #region Make piece
     [Button("Resize grid")]
@@ -83,6 +86,8 @@ public abstract class GoalTable : SerializedMonoBehaviour
     public void GoalUncomplet()
     {
         sr.color = norColor;
+
+        undoGoal?.Invoke();
 
         foreach (DotTable item in subsubscribers)
         {

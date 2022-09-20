@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using System.Drawing;
+using System;
 
 public class Board : SerializedMonoBehaviour
 {
@@ -44,7 +45,7 @@ public class Board : SerializedMonoBehaviour
     private AudioSource audioSource;
     [SerializeField] AudioClip goalComplete;
     [SerializeField] AudioClip winLevel;
-
+    [SerializeField] AudioClip undoGoal;
 
     private void Awake()
     {
@@ -211,6 +212,8 @@ public class Board : SerializedMonoBehaviour
                     {
                         goal.GoalCompletet();
 
+                        goal.undoGoal += UncompleteGoal;
+
                         result = true;
 
                         goal.subsubscribers = pieces;
@@ -224,17 +227,22 @@ public class Board : SerializedMonoBehaviour
         return result;
     }
 
+    private void UncompleteGoal()
+    {
+        PlayAudio(undoGoal);
+    }
+
     public void PlayAudio(AudioClip clip)
     {
         audioSource.clip = clip;
-        audioSource.pitch = Random.Range(minPitch, maxPitch);
+        audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         audioSource.Play();
     }
 
     public void PlayAudio(AudioClip[] clips)
     {
-        audioSource.clip = clips[Random.Range(0, clips.Length)];
-        audioSource.pitch = Random.Range(minPitch, maxPitch);
+        audioSource.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+        audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         audioSource.Play();
     }
 

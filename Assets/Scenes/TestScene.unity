@@ -752,8 +752,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+      propertyPath: undoGoal
+      value: 
+      objectReference: {fileID: 8300000, guid: 35ec1542971a65645902604f99cae0bd, type: 3}
+    - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: goals.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: goals.Array.data[0]
@@ -766,7 +770,7 @@ PrefabInstance:
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: serializationData.SerializationNodes.Array.size
       value: 30
