@@ -581,17 +581,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a34941522a2976e4a897f99177500b8d, type: 3}
---- !u!114 &738684570013979841 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1886123702663918036, guid: c657cfbb6f918d7498115bc02f35f943, type: 3}
-  m_PrefabInstance: {fileID: 1183477140361110805}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a01bf8355f0f143b2d8192926fa174, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1183477140361110805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -685,17 +674,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c657cfbb6f918d7498115bc02f35f943, type: 3}
---- !u!114 &1278413136197355428 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8895473569041160994, guid: 962218b5aa7ad3141aae3a6252464f2b, type: 3}
-  m_PrefabInstance: {fileID: 7696308638049082502}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08397aa08809eb34f891cfb223f974b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3446627627252571354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -756,17 +734,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 35ec1542971a65645902604f99cae0bd, type: 3}
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
+      propertyPath: sameLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: goals.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: goals.Array.data[0]
       value: 
-      objectReference: {fileID: 1278413136197355428}
+      objectReference: {fileID: 0}
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: goals.Array.data[1]
       value: 
-      objectReference: {fileID: 738684570013979841}
+      objectReference: {fileID: 0}
     - target: {fileID: 965442960351757231, guid: 2fb00fcdf624e1343a2820b9356326b9, type: 3}
       propertyPath: serializationData.Prefab
       value: 

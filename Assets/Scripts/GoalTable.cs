@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class GoalTable : SerializedMonoBehaviour
 {
@@ -11,23 +10,6 @@ public abstract class GoalTable : SerializedMonoBehaviour
     [BoxGroup("Pattern")]
     [TableMatrix(HorizontalTitle = "X axis", VerticalTitle = "Y axis")]
     public GameObject[,] pattern;
-
-    [HideInInspector] public List<DotTable> subsubscribers;
-
-    public Color winColor = new Color(255, 129, 66, 255);
-    public Color norColor = new Color(255, 247, 248, 255);
-
-    private SpriteRenderer sr;
-
-    public bool completet { get; private set; } = false;
-
-    [Header("Sound")]
-    [SerializeField] float minPitch = .9f;
-    [SerializeField] float maxPitch = 1;
-    private AudioSource audioSource;
-
-    public Action undoGoal;
-
     #region Make piece
     [Button("Resize grid")]
     void MakeGrid()
@@ -68,6 +50,24 @@ public abstract class GoalTable : SerializedMonoBehaviour
         sr.size = new Vector2(size, size);
     }
     #endregion
+
+    [HideInInspector] public List<DotTable> subsubscribers;
+
+    public Color winColor = new Color(255, 129, 66, 255);
+    public Color norColor = new Color(255, 247, 248, 255);
+
+    private SpriteRenderer sr;
+
+    public bool completet { get; private set; } = false;
+
+    [Header("Sound")]
+    [SerializeField] float minPitch = .9f;
+    [SerializeField] float maxPitch = 1;
+    private AudioSource audioSource;
+
+    public Action undoGoal;
+
+
 
 
     private void Start()

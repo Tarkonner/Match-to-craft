@@ -5,25 +5,8 @@ using Sirenix.OdinInspector;
 using System.Drawing;
 using System;
 
-public class Board : SerializedMonoBehaviour
+public class Board : InspectorGrid
 {
-    [Header("Board size")]
-    [SerializeField] private bool sameLength = true;
-    [ShowIf("sameLength")]
-    [SerializeField][Range(1, 8)] private int gridSize;
-    [HideIf("sameLength")] [SerializeField][Range(1, 8)] private int gridSizeX = 3;
-    [HideIf("sameLength")] [SerializeField][Range(1, 8)] private int gridSizeY = 3;
-    private Vector2Int currentGridSize
-    {
-        get {
-            if (sameLength)
-                return new Vector2Int(gridSize, gridSize);
-            else
-                return new Vector2Int(gridSizeX, gridSizeY);
-        }
-    }
-
-    //private Vector2 pointZero;
     private const float sizeOfGrid = 1;
     private SpriteRenderer sr;
     private Vector2 gridPosition;
@@ -246,18 +229,7 @@ public class Board : SerializedMonoBehaviour
         audioSource.Play();
     }
 
-    #region Pattern
-    [BoxGroup("Pattern")]
-    [TableMatrix(HorizontalTitle = "X axis", VerticalTitle = "Y axis")]
-    public GameObject[,] pattern;
-
-
-    [Button("Resize grid")]
-    void MakeGrid()
-    {
-        pattern = new GameObject[currentGridSize.x, currentGridSize.y];
-    }
-
+    [FoldoutGroup("Pattorn")]
     [Button("Place dots")]
     void SpawnDots()
     {
@@ -289,5 +261,4 @@ public class Board : SerializedMonoBehaviour
             }
         }
     }
-    #endregion
 }
