@@ -7,9 +7,6 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance { get; private set; }
 
-    [Header("Don't show UI i scnes")]
-    [SerializeField] private int[] notShowScenes;
-
     [Header("UI elemnts")]
     [SerializeField] GameObject menuElement;
 
@@ -23,7 +20,6 @@ public class MenuManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
         else
             Destroy(gameObject);
@@ -31,18 +27,6 @@ public class MenuManager : MonoBehaviour
        
     private void Update()
     {
-        bool takeInput = true;
-        foreach (int item in notShowScenes)
-        {
-            if(SceneManager.GetActiveScene().buildIndex == item)
-            {
-                takeInput = false;
-                break;
-            }
-        }
-        if (!takeInput)
-            return;
-
         if(Input.GetKeyDown(KeyCode.Escape))
             ChangeMenuState();
     }

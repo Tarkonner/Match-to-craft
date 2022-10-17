@@ -696,7 +696,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4964761083263154886}
   - component: {fileID: 3886948857390464452}
-  - component: {fileID: 1980696157143030080}
   m_Layer: 0
   m_Name: Level 0
   m_TagString: Untagged
@@ -778,76 +777,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1980696157143030080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7916497482442534309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a01bf8355f0f143b2d8192926fa174, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 753699212720471812, guid: 76bae9c8e6bf1da46ae36e7a48e8ca85, type: 3}
-    - {fileID: 6567574717997971157, guid: 477d4256e047df3478f354a76be00c96, type: 3}
-    - {fileID: 8124140608007832816, guid: 32b4d6165030381479df2302589e88a4, type: 3}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: pattern
-      Entry: 7
-      Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
-    - Name: 
-      Entry: 12
-      Data: 9
-    - Name: ranks
-      Entry: 1
-      Data: 3|3
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  size: 3
-  subsubscribers: []
-  winColor: {r: 0.7490196, g: 0.38039216, b: 0.19607843, a: 1}
-  norColor: {r: 0.7490196, g: 0.7294118, b: 0.7294118, a: 1}
 --- !u!1 &8040430743778951959
 GameObject:
   m_ObjectHideFlags: 0

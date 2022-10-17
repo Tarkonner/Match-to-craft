@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7565282682009023959}
   - component: {fileID: 1867340208002101973}
-  - component: {fileID: 3992388069673621073}
   m_Layer: 0
   m_Name: 3x3 GoalTable
   m_TagString: Untagged
@@ -83,70 +82,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3992388069673621073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4739506334898610868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a01bf8355f0f143b2d8192926fa174, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: pattern
-      Entry: 7
-      Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
-    - Name: 
-      Entry: 12
-      Data: 9
-    - Name: ranks
-      Entry: 1
-      Data: 3|3
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  size: 3
-  subsubscribers: []
-  winColor: {r: 0.7490196, g: 0.38039216, b: 0.19607843, a: 1}
-  norColor: {r: 0.7490196, g: 0.7294118, b: 0.7294118, a: 1}

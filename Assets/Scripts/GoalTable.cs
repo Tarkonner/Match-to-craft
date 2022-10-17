@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GoalTable : SerializedMonoBehaviour
+public  class GoalTable : SerializedMonoBehaviour
 {
     public int size;
 
@@ -60,32 +60,37 @@ public abstract class GoalTable : SerializedMonoBehaviour
 
     public bool completet { get; private set; } = false;
 
-    [Header("Sound")]
-    [SerializeField] float minPitch = .9f;
-    [SerializeField] float maxPitch = 1;
-    private AudioSource audioSource;
+    //[Header("Sound")]
+    //[SerializeField] float minPitch = .9f;
+    //[SerializeField] float maxPitch = 1;
+    //private AudioSource audioSource;
 
     public Action undoGoal;
 
 
-
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
 
     private void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();
+        
+        //audioSource = GetComponent<AudioSource>();
     }
 
     public void GoalCompletet()
     {
-        sr.color = winColor;
+        GetComponent<SpriteRenderer>().color = winColor;
+        //sr.color = winColor;
 
         completet = true;
     }
 
     public void GoalUncomplet()
     {
-        sr.color = norColor;
+        GetComponent<SpriteRenderer>().color = norColor;
+        //sr.color = norColor;
 
         undoGoal?.Invoke();
 

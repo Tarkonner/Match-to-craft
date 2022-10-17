@@ -55,9 +55,9 @@ public class Mouse : MonoBehaviour
                     table.HighlightTable();
                     PlayAudio(pickupSound);
                 }
-                else if(hit.collider.TryGetComponent(out Board board))
+                else if (hit.collider.TryGetComponent(out GameGrid grid))
                 {
-                    DotTable result = board.TakeFromBoard(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    DotTable result = grid.TakeFromBoard(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                     if (result != null)
                     {
                         holdingTable = result;
@@ -68,10 +68,10 @@ public class Mouse : MonoBehaviour
 
             }
             else
-            {               
-                if (hit.collider.TryGetComponent(out Board board))
+            {
+                if (hit.collider.TryGetComponent(out GameGrid grid))
                 {
-                    bool result = board.PlaceDots(holdingTable);
+                    bool result = grid.PlaceDots(holdingTable);
 
                     if (result)
                     {
