@@ -198,6 +198,8 @@ MonoBehaviour:
   goalsOffest: {x: 1, y: 3}
   levels:
   - {fileID: 11400000, guid: 6509c4ac297589c448155d6d88898cc3, type: 2}
+  currentLevelsPieces: []
+  currentLevelsGoals: []
 --- !u!4 &206946775
 Transform:
   m_ObjectHideFlags: 0

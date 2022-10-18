@@ -116,8 +116,8 @@ MonoBehaviour:
   - {fileID: 4984071832989513666, guid: 14a11cfd067dcdb49b2bd695504e95f5, type: 3}
   - {fileID: 9188024887269647146, guid: f0e73ca1cf5f8be4bac85c41b8480ba2, type: 3}
   goals:
-  - {fileID: 5250335075881617396, guid: 962218b5aa7ad3141aae3a6252464f2b, type: 3}
-  - {fileID: 7821925371158529329, guid: c657cfbb6f918d7498115bc02f35f943, type: 3}
+  - {fileID: 1693747106828672202, guid: 08ffcb0d7acdff9498aeae2e256b6910, type: 3}
+  - {fileID: 9077768603712964822, guid: 9e9cd8e383bd8fb4381d457ed9b47f84, type: 3}
   sameLength: 1
   gridSize: 5
   gridSizeX: 2

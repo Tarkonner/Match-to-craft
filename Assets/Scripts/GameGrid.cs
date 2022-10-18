@@ -106,6 +106,7 @@ public class GameGrid : SerializedMonoBehaviour
                 break;
             }
         }
+        //Is goal maked or level complete?
         if (allDone)
         {
             PlayAudio(winLevel);
@@ -131,7 +132,7 @@ public class GameGrid : SerializedMonoBehaviour
 
             //See if it was part of complete goal
             table.pickedupAction?.Invoke();
-
+            
             //Remove dots from memori
             for (int i = 0; i < table.content.Count; i++)
             {
@@ -177,10 +178,6 @@ public class GameGrid : SerializedMonoBehaviour
                             if (goal.pattern[i, j] == null)
                                 continue;
 
-                            //Is there somehing
-                            if (gridMemori[x + i, y + j] == null)
-                                continue;
-
                             Dot checking;
                             if (gridMemori[x + i, y + j] != null)
                                 checking = gridMemori[x + i, y + j].GetComponent<Dot>();
@@ -202,14 +199,15 @@ public class GameGrid : SerializedMonoBehaviour
                         }
                     }
 
+                    //If there was a match
                     if (match)
                     {
+                        //Goal completet
                         goal.GoalCompletet();
-
-                        goal.undoGoal += UncompleteGoal;
-
                         result = true;
 
+                        //Tell then uncompeltet
+                        goal.undoGoal += UncompleteGoal;
                         goal.subsubscribers = pieces;
                         foreach (DotTable p in pieces)
                             p.pickedupAction += goal.GoalUncomplet;
@@ -224,6 +222,7 @@ public class GameGrid : SerializedMonoBehaviour
     private void UncompleteGoal()
     {
         PlayAudio(undoGoal);
+        
     }
 
     public void PlayAudio(AudioClip clip)

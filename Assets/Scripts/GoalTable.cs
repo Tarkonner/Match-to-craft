@@ -52,6 +52,7 @@ public  class GoalTable : SerializedMonoBehaviour
     #endregion
 
     [HideInInspector] public List<DotTable> subsubscribers;
+    public int TestSub;
 
     public Color winColor = new Color(255, 129, 66, 255);
     public Color norColor = new Color(255, 247, 248, 255);
@@ -60,32 +61,29 @@ public  class GoalTable : SerializedMonoBehaviour
 
     public bool completet { get; private set; } = false;
 
-    //[Header("Sound")]
-    //[SerializeField] float minPitch = .9f;
-    //[SerializeField] float maxPitch = 1;
-    //private AudioSource audioSource;
-
     public Action undoGoal;
 
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        sr.color = norColor;
+    }
+
+    private void Update()
+    {
+        TestSub = subsubscribers.Count;
     }
 
     public void GoalCompletet()
     {
-        GetComponent<SpriteRenderer>().color = winColor;
-        //sr.color = winColor;
+        sr.color = winColor;
 
         completet = true;
     }
 
     public void GoalUncomplet()
     {
-        GetComponent<SpriteRenderer>().color = norColor;
-        //sr.color = norColor;
+        sr.color = norColor;
 
         undoGoal?.Invoke();
 
