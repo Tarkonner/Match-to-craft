@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +39,7 @@ public class GameGrid : SerializedMonoBehaviour
         {
             sceneClock += Time.deltaTime;
             if (sceneClock >= sceneTransistenTime)
-                SceneLoader.NextScene();
+                board.NextLevel();
         }
     }
 
@@ -67,13 +66,13 @@ public class GameGrid : SerializedMonoBehaviour
         //Check if allowed
         foreach (GameObject item in targetTable.content)
         {
-            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + board.CurrentLevel.CurrentGridSize.x / 2,
-                (int)SnapToGrid(item.transform.position).y + board.CurrentLevel.CurrentGridSize.y / 2);
+            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + board.CurrentLevelGridSize.x / 2,
+                (int)SnapToGrid(item.transform.position).y + board.CurrentLevelGridSize.y / 2);
 
             //Bounderi
-            if (gridPos.x < 0 || gridPos.y < 0 || 
-                gridPos.x >= board.CurrentLevel.CurrentGridSize.x || 
-                gridPos.y >= board.CurrentLevel.CurrentGridSize.y)
+            if (gridPos.x < 0 || gridPos.y < 0 ||
+                gridPos.x >= board.CurrentLevelGridSize.x ||
+                gridPos.y >= board.CurrentLevelGridSize.y)
                 return false;
 
             //Is there already something
@@ -87,8 +86,8 @@ public class GameGrid : SerializedMonoBehaviour
         //Place dots in memory
         foreach (GameObject item in targetTable.content)
         {
-            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + board.CurrentLevel.CurrentGridSize.x / 2,
-                (int)SnapToGrid(item.transform.position).y + board.CurrentLevel.CurrentGridSize.y / 2);
+            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + board.CurrentLevelGridSize.x / 2,
+                (int)SnapToGrid(item.transform.position).y + board.CurrentLevelGridSize.y / 2);
 
             gridMemori[gridPos.x, gridPos.y] = item;
             item.GetComponent<Dot>().gridPos = gridPos;
@@ -97,7 +96,7 @@ public class GameGrid : SerializedMonoBehaviour
         bool makedGoal = CheckGoals();
 
         bool allDone = true;
-        foreach (GameObject item in board.CurrentLevel.goals)
+        foreach (GameObject item in board.currentLevelsGoals)
         {
             GoalTable goalTable = item.GetComponent<GoalTable>();
 
@@ -124,11 +123,11 @@ public class GameGrid : SerializedMonoBehaviour
         DotTable table = null;
 
         //Take table from board
-        if (gridMemori[(int)gridPosition.x + board.CurrentLevel.CurrentGridSize.x / 2, 
-            (int)gridPosition.y + board.CurrentLevel.CurrentGridSize.y / 2] != null)
+        if (gridMemori[(int)gridPosition.x + board.CurrentLevelGridSize.x / 2,
+            (int)gridPosition.y + board.CurrentLevelGridSize.y / 2] != null)
         {
-            table = gridMemori[(int)gridPosition.x + board.CurrentLevel.CurrentGridSize.x / 2, 
-                (int)gridPosition.y + board.CurrentLevel.CurrentGridSize.y / 2].GetComponent<Dot>().ownerTable;
+            table = gridMemori[(int)gridPosition.x + board.CurrentLevelGridSize.x / 2,
+                (int)gridPosition.y + board.CurrentLevelGridSize.y / 2].GetComponent<Dot>().ownerTable;
 
             //See if it was part of complete goal
             table.pickedupAction?.Invoke();
@@ -153,35 +152,46 @@ public class GameGrid : SerializedMonoBehaviour
             for (int y = 0; y < gridMemori.GetLength(1); y++)
             {
                 //Check goals
-                foreach (GameObject item in board.CurrentLevel.goals)
+                foreach (GameObject item in board.currentLevelsGoals)
                 {
                     GoalTable goal = item.GetComponent<GoalTable>();
 
                     //Bouncs
                     if (goal.pattern.GetLength(0) + x > gridMemori.GetLength(0)
                         || goal.pattern.GetLength(1) + y > gridMemori.GetLength(1))
-                        continue;
+                        break;
 
+                    //Pieces there are part of the goal
                     List<DotTable> pieces = new List<DotTable>();
 
+                    //See if there is a match
                     bool match = true;
                     for (int i = 0; i < goal.pattern.GetLength(0); i++)
                     {
                         if (!match)
-                            continue;
+                            break;
 
                         for (int j = 0; j < goal.pattern.GetLength(1); j++)
                         {
-                            //Is there somehing
-                            if (gridMemori[x + i, y + j] == null)
-                                continue;
-                            Dot checking = gridMemori[x + i, y + j].GetComponent<Dot>();
-
+                            //Spaces in goals
                             if (goal.pattern[i, j] == null)
                                 continue;
 
+                            //Is there somehing
+                            if (gridMemori[x + i, y + j] == null)
+                                continue;
 
-                            if (checking == null || checking.type != goal.pattern[i, j].GetComponent<Dot>().type)
+                            Dot checking;
+                            if (gridMemori[x + i, y + j] != null)
+                                checking = gridMemori[x + i, y + j].GetComponent<Dot>();
+                            else
+                            {
+                                checking = null;
+                                match = false;
+                                break;
+                            }
+
+                            if (checking.type != goal.pattern[i, j].GetComponent<Dot>().type)
                             {
                                 match = false;
                                 break;

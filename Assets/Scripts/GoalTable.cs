@@ -71,12 +71,7 @@ public  class GoalTable : SerializedMonoBehaviour
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-    }
-
-    private void Start()
-    {
-        
-        //audioSource = GetComponent<AudioSource>();
+        sr.color = norColor;
     }
 
     public void GoalCompletet()

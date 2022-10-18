@@ -6,9 +6,9 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(fileName = "Level info")]
 public class LevelInfo : SerializedScriptableObject
 {
-    public List<GameObject> pieces;
+    [SerializeField] private List<GameObject> pieces;
 
-    public List<GameObject> goals;
+    [SerializeField] private List<GameObject> goals;
 
     [FoldoutGroup("Pattorn")]
     [SerializeField] protected bool sameLength = true;
@@ -21,6 +21,10 @@ public class LevelInfo : SerializedScriptableObject
     [FoldoutGroup("Pattorn")]
     [HideIf("sameLength")]
     [SerializeField][Range(1, 8)] protected int gridSizeY = 3;
+
+    public List<GameObject> Pieces { get { return pieces; } }
+    public List<GameObject> Goals { get { return goals; } }
+
     public Vector2Int CurrentGridSize
     {
         get

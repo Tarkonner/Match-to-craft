@@ -31,8 +31,8 @@ public class SceneLoader : MonoBehaviour
     }
 
     //Fast funktions
-    public static void LoadScene(int targetScene) => SceneManager.LoadScene(targetScene);
-    public static void RestartScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    public static void QuitGame() => Application.Quit();
-    public static void NextScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    public void LoadScene(int targetScene) => SceneManager.LoadScene(targetScene);
+    public void RestartScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    public void QuitGame() => Application.Quit();
+    public void NextScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 }
