@@ -1,6 +1,8 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class GameGrid : SerializedMonoBehaviour
 {
@@ -8,10 +10,10 @@ public class GameGrid : SerializedMonoBehaviour
 
     private const float sizeOfGrid = 1;
     private SpriteRenderer sr;
-    private Vector2 gridPosition;
+    private Vector2 gridsUpperLeftCorner;
 
     //Memori
-    private GameObject[,] gridMemori;
+    private GameObject[,] gridMemori = new GameObject[0, 0];
 
 
     [SerializeField] private GameObject dotHolder;
@@ -19,6 +21,8 @@ public class GameGrid : SerializedMonoBehaviour
     private bool nextLevel = false;
     private float sceneTransistenTime = 1;
     private float sceneClock;
+
+    [SerializeField] private GameObject[,] debugGrid;
 
 
     private void Update()
@@ -29,17 +33,57 @@ public class GameGrid : SerializedMonoBehaviour
             if (sceneClock >= sceneTransistenTime)
                 board.NextLevel();
         }
+
+        debugGrid = gridMemori;
     }
 
 
     public void SetupPattorn(LevelInfo li)
     {
+        Vector2 cornorPos = Vector2.zero;
+        cornorPos.x = (li.CurrentGridSize.x % 2 == 0) ? -li.CurrentGridSize.x / 2 * sizeOfGrid + sizeOfGrid / 2 
+            : -li.CurrentGridSize.x / 2 * sizeOfGrid;
+        cornorPos.y = (li.CurrentGridSize.y % 2 == 0) ? li.CurrentGridSize.y / 2 * sizeOfGrid - sizeOfGrid / 2 
+            : li.CurrentGridSize.y / 2 * sizeOfGrid;
+        gridsUpperLeftCorner = cornorPos;
+
         //Set size
         GetComponent<BoxCollider2D>().size = li.CurrentGridSize;
         //Set sprite
         GetComponent<SpriteRenderer>().size = li.CurrentGridSize;
-        //Set memory
-        gridMemori = li.Pattern;
+        
+        //Clear memory
+        for (int x = 0; x < gridMemori.GetLength(0); x++)
+        {
+            for (int y = 0; y < gridMemori.GetLength(0); y++)
+            {
+                //Remove old dots
+                if (gridMemori[x, y] != null)
+                    Destroy(gridMemori[x, y]);
+            }
+        }
+        gridMemori = new GameObject[li.CurrentGridSize.x, li.CurrentGridSize.y];
+
+        //New dots
+        for (int x = 0; x < li.Pattern.GetLength(0); x++)
+        {
+            for (int y = 0; y < li.Pattern.GetLength(1); y++)
+            {
+                //Place dot
+                if (li.Pattern[x, y] != null)
+                {
+                    //Dot
+                    GameObject spawn = Instantiate(li.Pattern[x, y], transform);
+                    spawn.transform.localPosition = cornorPos + new Vector2(x, -y) * sizeOfGrid;
+                    //Place in memori
+                    gridMemori[x, li.Pattern.GetLength(1) - 1 - y] = spawn;
+                    
+                    //Holder
+                    GameObject holder = Instantiate(dotHolder, spawn.transform);
+                    holder.transform.localPosition = Vector2.zero;
+                }
+            }
+        }
     }
 
     private Vector2 SnapToGrid(Vector2 targetPosition)

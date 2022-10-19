@@ -61,8 +61,6 @@ public  class GoalTable : SerializedMonoBehaviour
 
     public bool completet { get; private set; } = false;
 
-    //public Action undoGoal;
-
 
     private void Awake()
     {
