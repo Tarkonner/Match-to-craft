@@ -61,7 +61,7 @@ public  class GoalTable : SerializedMonoBehaviour
 
     public bool completet { get; private set; } = false;
 
-    public Action undoGoal;
+    //public Action undoGoal;
 
 
     private void Awake()
@@ -85,12 +85,13 @@ public  class GoalTable : SerializedMonoBehaviour
     {
         sr.color = norColor;
 
-        undoGoal?.Invoke();
-
         foreach (DotTable item in subsubscribers)
         {
-            item.pickedupAction -= GoalCompletet;
+            item.pieceInGoal = null;
         }
+        subsubscribers.Clear();
+
+        BoardsSounds.Instance.UndoGoal();
 
         completet = false;
     }

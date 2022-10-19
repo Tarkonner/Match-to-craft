@@ -20,18 +20,6 @@ public class GameGrid : SerializedMonoBehaviour
     private float sceneTransistenTime = 1;
     private float sceneClock;
 
-    [Header("Sound")]
-    [SerializeField] float minPitch = .9f;
-    [SerializeField] float maxPitch = 1;
-    private AudioSource audioSource;
-    [SerializeField] AudioClip goalComplete;
-    [SerializeField] AudioClip winLevel;
-    [SerializeField] AudioClip undoGoal;
-
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
 
     private void Update()
     {
@@ -109,11 +97,11 @@ public class GameGrid : SerializedMonoBehaviour
         //Is goal maked or level complete?
         if (allDone)
         {
-            PlayAudio(winLevel);
+            BoardsSounds.Instance.CompletLevel();
             nextLevel = true;
         }
         else if (makedGoal)
-            PlayAudio(goalComplete);
+            BoardsSounds.Instance.GoalComplete();
 
         return true;
     }
@@ -131,8 +119,9 @@ public class GameGrid : SerializedMonoBehaviour
                 (int)gridPosition.y + board.CurrentLevelGridSize.y / 2].GetComponent<Dot>().ownerTable;
 
             //See if it was part of complete goal
-            table.pickedupAction?.Invoke();
-            
+            if (table.pieceInGoal != null)
+                table.PickupTable();        
+
             //Remove dots from memori
             for (int i = 0; i < table.content.Count; i++)
             {
@@ -207,35 +196,18 @@ public class GameGrid : SerializedMonoBehaviour
                         result = true;
 
                         //Tell then uncompeltet
-                        goal.undoGoal += UncompleteGoal;
+                        //goal.undoGoal += UncompleteGoal;
                         goal.subsubscribers = pieces;
                         foreach (DotTable p in pieces)
-                            p.pickedupAction += goal.GoalUncomplet;
+                        {
+                            //p.pickedupAction += goal.GoalUncomplet;
+                            p.pieceInGoal = goal;
+                        }
                     }
                 }
             }
         }
 
         return result;
-    }
-
-    private void UncompleteGoal()
-    {
-        PlayAudio(undoGoal);
-        
-    }
-
-    public void PlayAudio(AudioClip clip)
-    {
-        audioSource.clip = clip;
-        audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-        audioSource.Play();
-    }
-
-    public void PlayAudio(AudioClip[] clips)
-    {
-        audioSource.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-        audioSource.Play();
     }
 }

@@ -46,8 +46,10 @@ public class Mouse : MonoBehaviour
             if (hit.collider == null)
                 return;
 
+            //Not holding a piece
             if (holdingTable == null)
             {
+                //Pickup piece not in grid
                 if (hit.collider.TryGetComponent(out DotTable table))
                 {
                     holdingTable = table;
@@ -55,6 +57,7 @@ public class Mouse : MonoBehaviour
                     table.HighlightTable();
                     PlayAudio(pickupSound);
                 }
+                //Pickup piece in grid
                 else if (hit.collider.TryGetComponent(out GameGrid grid))
                 {
                     DotTable result = grid.TakeFromBoard(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -65,10 +68,9 @@ public class Mouse : MonoBehaviour
                         PlayAudio(pickupSound);
                     }
                 }
-
             }
             else
-            {
+            {   //Holding a piece
                 if (hit.collider.TryGetComponent(out GameGrid grid))
                 {
                     bool result = grid.PlaceDots(holdingTable);
@@ -88,6 +90,7 @@ public class Mouse : MonoBehaviour
         //Right mouse button
         if (Input.GetKeyDown(KeyCode.Mouse1) && holdingTable != null)
         {
+            //Rotate holding piece
             holdingTable.RotateTable();
             PlayAudio(rotateSounds);
         }

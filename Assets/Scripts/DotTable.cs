@@ -30,7 +30,9 @@ public class DotTable : SerializedMonoBehaviour
     private float oldRotation;
 
     //Being moved
-    public Action pickedupAction;
+    //public Action pickedupAction;
+
+    public GoalTable pieceInGoal;
 
     void Start()
     {
@@ -81,6 +83,12 @@ public class DotTable : SerializedMonoBehaviour
         //Follow mouse
         col.enabled = false;
         transform.localScale = Vector3.one;
+
+        //Tell if goal is uncomplete
+        if(pieceInGoal != null)
+        {
+            pieceInGoal.GoalUncomplet();
+        }
     }
 
     public void DropTable()
