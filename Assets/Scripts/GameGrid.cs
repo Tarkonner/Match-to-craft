@@ -1,8 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class GameGrid : SerializedMonoBehaviour
 {
@@ -24,7 +22,6 @@ public class GameGrid : SerializedMonoBehaviour
 
     [SerializeField] private GameObject[,] debugGrid;
 
-
     private void Update()
     {
         if (nextLevel)
@@ -41,9 +38,9 @@ public class GameGrid : SerializedMonoBehaviour
     public void SetupPattorn(LevelInfo li)
     {
         Vector2 cornorPos = Vector2.zero;
-        cornorPos.x = (li.CurrentGridSize.x % 2 == 0) ? -li.CurrentGridSize.x / 2 * sizeOfGrid + sizeOfGrid / 2 
+        cornorPos.x = (li.CurrentGridSize.x % 2 == 0) ? -li.CurrentGridSize.x / 2 * sizeOfGrid + sizeOfGrid / 2
             : -li.CurrentGridSize.x / 2 * sizeOfGrid;
-        cornorPos.y = (li.CurrentGridSize.y % 2 == 0) ? li.CurrentGridSize.y / 2 * sizeOfGrid - sizeOfGrid / 2 
+        cornorPos.y = (li.CurrentGridSize.y % 2 == 0) ? li.CurrentGridSize.y / 2 * sizeOfGrid - sizeOfGrid / 2
             : li.CurrentGridSize.y / 2 * sizeOfGrid;
         gridsUpperLeftCorner = cornorPos;
 
@@ -51,7 +48,7 @@ public class GameGrid : SerializedMonoBehaviour
         GetComponent<BoxCollider2D>().size = li.CurrentGridSize;
         //Set sprite
         GetComponent<SpriteRenderer>().size = li.CurrentGridSize;
-        
+
         //Clear memory
         for (int x = 0; x < gridMemori.GetLength(0); x++)
         {
@@ -77,7 +74,7 @@ public class GameGrid : SerializedMonoBehaviour
                     spawn.transform.localPosition = cornorPos + new Vector2(x, -y) * sizeOfGrid;
                     //Place in memori
                     gridMemori[x, li.Pattern.GetLength(1) - 1 - y] = spawn;
-                    
+
                     //Holder
                     GameObject holder = Instantiate(dotHolder, spawn.transform);
                     holder.transform.localPosition = Vector2.zero;
@@ -88,9 +85,28 @@ public class GameGrid : SerializedMonoBehaviour
 
     private Vector2 SnapToGrid(Vector2 targetPosition)
     {
-        return new Vector2(
-            Mathf.Round(targetPosition.x / sizeOfGrid) * sizeOfGrid,
-            Mathf.Round(targetPosition.y / sizeOfGrid) * sizeOfGrid);
+        Vector2 result;
+        result.x = (board.CurrentLevelGridSize.x % 2 != 0) ?
+            Mathf.Round(targetPosition.x) :
+            Mathf.Round(targetPosition.x - sizeOfGrid / 2) + sizeOfGrid / 2;
+        result.y = (board.CurrentLevelGridSize.y % 2 != 0) ?
+            Mathf.Round(targetPosition.y) :
+            Mathf.Round(targetPosition.y - sizeOfGrid / 2) + sizeOfGrid / 2;
+
+        return result;
+    }
+
+    private Vector2Int SnapToGridInt(Vector2 targetPosition)
+    {
+        Vector2Int result = Vector2Int.zero;
+        result.x = (board.CurrentLevelGridSize.x % 2 != 0) ?
+            (int)Mathf.Round(targetPosition.x / sizeOfGrid) :
+            (int)Mathf.Round(targetPosition.x / sizeOfGrid - sizeOfGrid / 2);
+        result.y = (board.CurrentLevelGridSize.y % 2 != 0) ?
+            (int)Mathf.Round(targetPosition.y / sizeOfGrid) :
+            (int)Mathf.Round(targetPosition.y / sizeOfGrid - sizeOfGrid / 2);
+
+        return result;
     }
 
     public bool PlaceDots(DotTable targetTable)
@@ -98,8 +114,7 @@ public class GameGrid : SerializedMonoBehaviour
         //Check if allowed
         foreach (GameObject item in targetTable.content)
         {
-            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + board.CurrentLevelGridSize.x / 2,
-                (int)SnapToGrid(item.transform.position).y + board.CurrentLevelGridSize.y / 2);
+            Vector2Int gridPos = SnapToGridInt(item.transform.position) + board.CurrentLevelGridSize / 2;
 
             //Bounderi
             if (gridPos.x < 0 || gridPos.y < 0 ||
@@ -112,18 +127,17 @@ public class GameGrid : SerializedMonoBehaviour
                 return false;
         }
 
-        //Snap table to grid
-        targetTable.transform.position = (Vector3)SnapToGrid(targetTable.transform.position);
-
         //Place dots in memory
         foreach (GameObject item in targetTable.content)
         {
-            Vector2Int gridPos = new Vector2Int((int)SnapToGrid(item.transform.position).x + board.CurrentLevelGridSize.x / 2,
-                (int)SnapToGrid(item.transform.position).y + board.CurrentLevelGridSize.y / 2);
+            Vector2Int dotPos = SnapToGridInt(item.transform.position) + board.CurrentLevelGridSize / 2;
 
-            gridMemori[gridPos.x, gridPos.y] = item;
-            item.GetComponent<Dot>().gridPos = gridPos;
+            gridMemori[dotPos.x, dotPos.y] = item;
+            item.GetComponent<Dot>().gridPos = dotPos;
         }
+
+        //Snap table to grid
+        targetTable.transform.position = (Vector3)SnapToGrid(targetTable.transform.position);
 
         bool makedGoal = CheckGoals();
 
@@ -152,19 +166,17 @@ public class GameGrid : SerializedMonoBehaviour
 
     public DotTable TakeFromBoard(Vector2 clickPosition)
     {
-        Vector2 gridPosition = SnapToGrid(clickPosition);
+        Vector2Int gridPosition = SnapToGridInt(clickPosition + board.CurrentLevelGridSize / 2);
         DotTable table = null;
 
         //Take table from board
-        if (gridMemori[(int)gridPosition.x + board.CurrentLevelGridSize.x / 2,
-            (int)gridPosition.y + board.CurrentLevelGridSize.y / 2] != null)
+        if (gridMemori[gridPosition.x, gridPosition.y] != null)
         {
-            table = gridMemori[(int)gridPosition.x + board.CurrentLevelGridSize.x / 2,
-                (int)gridPosition.y + board.CurrentLevelGridSize.y / 2].GetComponent<Dot>().ownerTable;
+            table = gridMemori[gridPosition.x, gridPosition.y].GetComponent<Dot>().ownerTable;
 
             //See if it was part of complete goal
             if (table.pieceInGoal != null)
-                table.PickupTable();        
+                table.PickupTable();
 
             //Remove dots from memori
             for (int i = 0; i < table.content.Count; i++)
