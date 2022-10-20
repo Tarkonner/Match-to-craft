@@ -47,7 +47,7 @@ public class Board : SerializedMonoBehaviour
         if (piecesHolder.transform.childCount > 0)
         {
             for (int i = piecesHolder.transform.childCount - 1; i >= 0; i--)
-                Destroy(piecesHolder.transform.GetChild(i));
+                Destroy(piecesHolder.transform.GetChild(i).gameObject);
         }
         //Add new        
         for (int i = 0; i < levels[targetLevel].Pieces.Count; i++)
@@ -63,7 +63,7 @@ public class Board : SerializedMonoBehaviour
         if (goalHolder.transform.childCount > 0)
         {
             for (int i = goalHolder.transform.childCount - 1; i >= 0; i--)
-                Destroy(goalHolder.transform.GetChild(i));
+                Destroy(goalHolder.transform.GetChild(i).gameObject);
         }
         //Add new
         for (int i = 0; i < levels[targetLevel].Goals.Count; i++)

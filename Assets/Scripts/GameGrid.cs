@@ -28,7 +28,11 @@ public class GameGrid : SerializedMonoBehaviour
         {
             sceneClock += Time.deltaTime;
             if (sceneClock >= sceneTransistenTime)
+            {
+                nextLevel = false;
                 board.NextLevel();
+                sceneClock = 0;
+            }
         }
 
         debugGrid = gridMemori;
@@ -59,6 +63,7 @@ public class GameGrid : SerializedMonoBehaviour
                     Destroy(gridMemori[x, y]);
             }
         }
+        //Load levels pattorn
         gridMemori = new GameObject[li.CurrentGridSize.x, li.CurrentGridSize.y];
 
         //New dots
@@ -252,7 +257,6 @@ public class GameGrid : SerializedMonoBehaviour
                         result = true;
 
                         //Tell then uncompeltet
-                        //goal.undoGoal += UncompleteGoal;
                         goal.subsubscribers = pieces;
                         foreach (DotTable p in pieces)
                         {

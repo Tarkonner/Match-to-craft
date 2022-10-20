@@ -29,13 +29,12 @@ public class DotTable : SerializedMonoBehaviour
     private float rotateAmount;
     private float oldRotation;
 
-    //Being moved
-    //public Action pickedupAction;
-
-    public GoalTable pieceInGoal;
+    [HideInInspector] public GoalTable pieceInGoal;
 
     void Start()
     {
+        startPosition = transform.position;
+
         col = GetComponent<BoxCollider2D>();
 
         foreach (Transform t in transform)
@@ -77,9 +76,6 @@ public class DotTable : SerializedMonoBehaviour
 
     public void PickupTable()
     {
-        //Save origon
-        startPosition = transform.position;
-
         //Follow mouse
         col.enabled = false;
         transform.localScale = Vector3.one;
