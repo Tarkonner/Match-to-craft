@@ -207,9 +207,12 @@ public class GameGrid : SerializedMonoBehaviour
                 {
                     GoalTable goal = item.GetComponent<GoalTable>();
 
+                    if (goal.completet)
+                        continue;
+
                     //Bouncs
-                    if (goal.pattern.GetLength(0) + x > gridMemori.GetLength(0)
-                        || goal.pattern.GetLength(1) + y > gridMemori.GetLength(1))
+                    if (goal.Pattern.GetLength(0) + x > gridMemori.GetLength(0)
+                        || goal.Pattern.GetLength(1) + y > gridMemori.GetLength(1))
                         break;
 
                     //Pieces there are part of the goal
@@ -217,15 +220,15 @@ public class GameGrid : SerializedMonoBehaviour
 
                     //See if there is a match
                     bool match = true;
-                    for (int i = 0; i < goal.pattern.GetLength(0); i++)
+                    for (int i = 0; i < goal.Pattern.GetLength(0); i++)
                     {
                         if (!match)
                             break;
 
-                        for (int j = 0; j < goal.pattern.GetLength(1); j++)
+                        for (int j = 0; j < goal.Pattern.GetLength(1); j++)
                         {
                             //Spaces in goals
-                            if (goal.pattern[i, j] == null)
+                            if (goal.Pattern[i, j] == null)
                                 continue;
 
                             Dot checking;
@@ -238,7 +241,7 @@ public class GameGrid : SerializedMonoBehaviour
                                 break;
                             }
 
-                            if (checking.type != goal.pattern[i, j].GetComponent<Dot>().type)
+                            if (checking.type != goal.Pattern[i, j].GetComponent<Dot>().type)
                             {
                                 match = false;
                                 break;
@@ -252,6 +255,7 @@ public class GameGrid : SerializedMonoBehaviour
                     //If there was a match
                     if (match)
                     {
+                        Debug.Log(goal.name);
                         //Goal completet
                         goal.GoalCompletet();
                         result = true;

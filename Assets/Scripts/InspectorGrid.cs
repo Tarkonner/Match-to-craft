@@ -43,29 +43,49 @@ public class InspectorGrid : SerializedMonoBehaviour
         //Destroy old
         for (int i = transform.childCount - 1; i >= 0; i--)
         {
-            DestroyImmediate(transform.GetChild(i).gameObject);
+            DestroyImmediate(transform.GetChild(i).gameObject, true);
         }
 
         //Make dots
-        for (int y = 0; y < pattern.GetLength(1); y++)
+        Vector2 cornorPos = Vector2.zero;
+        float gridSize = 1;
+        cornorPos.x = (currentGridSize.x % 2 == 0) ? -currentGridSize.x / 2 + gridSize / 2
+            : -currentGridSize.x / 2 * gridSize;
+        cornorPos.y = (currentGridSize.y % 2 == 0) ? currentGridSize.y / 2 - gridSize / 2
+            : currentGridSize.y / 2;
+        
+        for (int x = 0; x < pattern.GetLength(0); x++)
         {
-            for (int x = 0; x < pattern.GetLength(0); x++)
+            for (int y = 0; y < pattern.GetLength(1); y++)
             {
                 if (pattern[x, y] != null)
                 {
                     GameObject spawn = Instantiate(pattern[x, y], transform);
-                    //GameObject holder = Instantiate(dotHolder, transform);
-
-                    Vector2 calPos;
-                    if (currentGridSize.x % 2 == 0)
-                        calPos = new Vector2(x - 0.5f, y - 0.5f);
-                    else
-                        calPos = new Vector2(x - 1, y - 1);
-
-                    spawn.transform.localPosition = calPos;
-                    //holder.transform.localPosition = calPos;
+                    spawn.transform.localPosition = cornorPos + new Vector2(x, -y);
                 }
             }
         }
+
+        //for (int y = 0; y < pattern.GetLength(1); y++)
+        //{
+        //    for (int x = 0; x < pattern.GetLength(0); x++)
+        //    {
+        //        if (pattern[x, y] != null)
+        //        {
+        //            GameObject spawn = Instantiate(pattern[x, y], transform);
+        //            spawn.transform.parent = transform;
+
+        //            Vector2 calPos;
+        //            if (currentGridSize.x % 2 == 0)
+        //                calPos = new Vector2(x - 0.5f, y - 0.5f);
+        //            else
+        //                calPos = new Vector2(x - 1, y - 1);
+
+        //            calPos += cornorPos;
+
+        //            spawn.transform.localPosition = calPos;
+        //        }
+        //    }
+        //}
     }
 }
