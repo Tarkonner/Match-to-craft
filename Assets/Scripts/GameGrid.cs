@@ -198,16 +198,19 @@ public class GameGrid : SerializedMonoBehaviour
     {
         bool result = false;
 
-        for (int x = 0; x < gridMemori.GetLength(0); x++)
+        //if(gridMemori[0, 0] != null)
+        //    Debug.Log(gridMemori[0, 0].gameObject.name);
+
+        foreach (GameObject item in board.currentLevelsGoals)
         {
+            GoalTable goal = item.GetComponent<GoalTable>();
+
             for (int y = 0; y < gridMemori.GetLength(1); y++)
             {
-                //Check goals
-                foreach (GameObject item in board.currentLevelsGoals)
+                for (int x = 0; x < gridMemori.GetLength(0); x++)
                 {
-                    GoalTable goal = item.GetComponent<GoalTable>();
-
-                    if (goal.completet)
+                    //Don't look at empty spaces
+                    if (gridMemori[x, y] == null)
                         continue;
 
                     //Bouncs
@@ -220,52 +223,51 @@ public class GameGrid : SerializedMonoBehaviour
 
                     //See if there is a match
                     bool match = true;
-                    for (int i = 0; i < goal.Pattern.GetLength(0); i++)
-                    {
+                    for (int l = 0; l < goal.Pattern.GetLength(1); l++)
+                    {                     
+                        //No match here
                         if (!match)
                             break;
 
-                        for (int j = 0; j < goal.Pattern.GetLength(1); j++)
+                        for (int v = 0; v < goal.Pattern.GetLength(0); v++)
                         {
                             //Spaces in goals
-                            if (goal.Pattern[i, j] == null)
+                            if (goal.Pattern[v, l] == null)
                                 continue;
 
-                            Dot checking;
-                            if (gridMemori[x + i, y + j] != null)
-                                checking = gridMemori[x + i, y + j].GetComponent<Dot>();
+                            //Checking for match
+                            int targetY = y + ((goal.Pattern.GetLength(1) - 1) - l);
+                            if (gridMemori[x + v, targetY] != null)
+                            {
+                                Dot checking = gridMemori[x + v, targetY].GetComponent<Dot>();
+                                if(checking.type != goal.Pattern[v, l].GetComponent<Dot>().type)
+                                {
+                                    match = false;
+                                    break;
+                                }
+                                else if (checking.ownerTable != null && !pieces.Contains(checking.ownerTable))
+                                    pieces.Add(checking.ownerTable);
+                            }
                             else
                             {
-                                checking = null;
                                 match = false;
                                 break;
                             }
-
-                            if (checking.type != goal.Pattern[i, j].GetComponent<Dot>().type)
-                            {
-                                match = false;
-                                break;
-                            }
-
-                            if (checking.ownerTable != null && !pieces.Contains(checking.ownerTable))
-                                pieces.Add(checking.ownerTable);
                         }
                     }
-
                     //If there was a match
                     if (match)
                     {
-                        Debug.Log(goal.name);
-                        //Goal completet
-                        goal.GoalCompletet();
-                        result = true;
-
-                        //Tell then uncompeltet
-                        goal.subsubscribers = pieces;
-                        foreach (DotTable p in pieces)
+                        if(!goal.completet)
                         {
-                            //p.pickedupAction += goal.GoalUncomplet;
-                            p.pieceInGoal = goal;
+                            //Goal completet
+                            goal.GoalCompletet();
+                            result = true;
+
+                            //Tell then uncompeltet
+                            goal.subsubscribers = pieces;
+                            foreach (DotTable p in pieces)
+                                p.pieceInGoal = goal;
                         }
                     }
                 }
