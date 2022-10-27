@@ -9,10 +9,10 @@ public class DotTable : InspectorGrid
 
     [SerializeField] private float inventoryScale = 0.5f;
 
-
     public List<GameObject> content { get; private set; } = new List<GameObject>();
 
     public int tableSize { get; private set; } = 3;
+    
 
     [SerializeField] private GameObject lineLink;
 
@@ -25,6 +25,11 @@ public class DotTable : InspectorGrid
     private float oldRotation;
 
     [HideInInspector] public GoalTable pieceInGoal;
+
+    [Header("Not rotate")]
+    [SerializeField] private bool canNotRotate;
+    public bool CanNotRotate { get => canNotRotate; set => canNotRotate = value; }
+    [SerializeField] private Sprite dotsRotateSprite;
 
     void Start()
     {
@@ -39,6 +44,9 @@ public class DotTable : InspectorGrid
             {
                 content.Add(t.gameObject);
                 t.GetComponent<Dot>().ownerTable = this;
+
+                if(canNotRotate)
+                    t.GetComponent<SpriteRenderer>().sprite = dotsRotateSprite;
             }
         }
     }
@@ -96,10 +104,15 @@ public class DotTable : InspectorGrid
         foreach (Transform t in gameObject.transform)
         {
             if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
-                targetSR.sortingOrder = 4;
+                targetSR.sortingOrder = 5;
 
             if (t.gameObject.TryGetComponent(out LineRenderer line))
+            {
+                //on object
                 line.sortingOrder = 3;
+                //on child
+                t.gameObject.transform.GetChild(0).GetComponent<LineRenderer>().sortingOrder = 4;
+            }
         }
     }
 
@@ -108,10 +121,15 @@ public class DotTable : InspectorGrid
         foreach (Transform t in gameObject.transform)
         {
             if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
-                targetSR.sortingOrder = 2;
+                targetSR.sortingOrder = 3;
 
             if (t.gameObject.TryGetComponent(out LineRenderer line))
+            {
+                //on object
                 line.sortingOrder = 1;
+                //on child
+                t.gameObject.transform.GetChild(0).GetComponent<LineRenderer>().sortingOrder = 2;
+            }
         }
     }
 
@@ -122,10 +140,8 @@ public class DotTable : InspectorGrid
     {
         //Place dots
         base.SpawnDots();
-
         Vector2 cornorPos = new Vector2(-1, 1);
 
-        List<GameObject> connectedDots = new List<GameObject>();
         for (int x = 0; x < pattern.GetLength(0); x++)
         {
             for (int y = 0; y < pattern.GetLength(1); y++)
@@ -139,50 +155,18 @@ public class DotTable : InspectorGrid
 
                 //Horizontal and vertical
                 //Right
-                if (x + 1 < pattern.GetLength(0) && pattern[x + 1, y] != null)
+                if (x + 1 < pattern.GetLength(0) && 
+                    pattern[x + 1, y] != null)
                 {
                     foundNeighbor = true;
-
-                    if (!connectedDots.Contains(pattern[x + 1, y]))
-                        connectedDots.Add(pattern[x + 1, y]);
-                    if (!connectedDots.Contains(pattern[x, y]))
-                        connectedDots.Add(pattern[x, y]);
 
                     ConnectLine(calPosition, Vector2.right);
                 }
-                //Left
-                if (x - 1 >= 0 && pattern[x - 1, y] != null)
-                {
-                    foundNeighbor = true;
-
-                    if (!connectedDots.Contains(pattern[x - 1, y]))
-                        connectedDots.Add(pattern[x - 1, y]);
-                    if (!connectedDots.Contains(pattern[x, y]))
-                        connectedDots.Add(pattern[x, y]);
-
-                    ConnectLine(calPosition, Vector2.left);
-                }
-                //Up
-                //if (y - 1 >= 0 && pattern[x, y - 1] != null)
-                //{
-                //    foundNeighbor = true;
-
-                //    if (!connectedDots.Contains(pattern[x, y - 1]))
-                //        connectedDots.Add(pattern[x, y - 1]);
-                //    if (!connectedDots.Contains(pattern[x, y]))
-                //        connectedDots.Add(pattern[x, y]);
-
-                //    ConnectLine(calPosition, Vector2.up);
-                //}
                 //Down
-                if (y + 1 < pattern.GetLength(1) && pattern[x, y + 1] != null)
+                if (y + 1 < pattern.GetLength(1) && 
+                    pattern[x, y + 1] != null)
                 {
                     foundNeighbor = true;
-
-                    if (!connectedDots.Contains(pattern[x, y + 1]))
-                        connectedDots.Add(pattern[x, y + 1]);
-                    if (!connectedDots.Contains(pattern[x, y]))
-                        connectedDots.Add(pattern[x, y]);
 
                     ConnectLine(calPosition, Vector2.down);
                 }
@@ -194,24 +178,13 @@ public class DotTable : InspectorGrid
                         x + 1 < pattern.GetLength(0) &&
                         pattern[x + 1, y + 1] != null)
                     {
-                        if (!connectedDots.Contains(pattern[x + 1, y + 1]))
-                            connectedDots.Add(pattern[x + 1, y + 1]);
-                        if (!connectedDots.Contains(pattern[x, y]))
-                            connectedDots.Add(pattern[x, y]);
-
-                        ConnectLine(calPosition, new Vector2(1, -1));
+                        ConnectLine(calPosition, new Vector2(1, -1));                        
                     }
-
                     //Down left
                     if (y + 1 < pattern.GetLength(1) &&
                         x - 1 >= 0 &&
                         pattern[x - 1, y + 1] != null)
                     {
-                        if (!connectedDots.Contains(pattern[x - 1, y + 1]))
-                            connectedDots.Add(pattern[x - 1, y + 1]);
-                        if (!connectedDots.Contains(pattern[x, y]))
-                            connectedDots.Add(pattern[x, y]);
-
                         ConnectLine(calPosition, new Vector2(-1, -1));
                     }
                 }
@@ -221,18 +194,21 @@ public class DotTable : InspectorGrid
 
 
 
-    private void ConnectLine(Vector2 spawnPosition, Vector2 direction)
+    private GameObject ConnectLine(Vector2 spawnPosition, Vector2 direction)
     {
         GameObject spawn = Instantiate(lineLink, transform);
         spawn.transform.localPosition = spawnPosition;
 
         //Set line
-        LineRenderer line = spawn.GetComponent<LineRenderer>();
-        line.SetPosition(0, new Vector3(0, 0, 0));
-        line.SetPosition(1, Vector3.Lerp(Vector3.zero, direction, .25f));
-        line.SetPosition(2, Vector3.Lerp(Vector3.zero, direction, .5f));
-        line.SetPosition(3, Vector3.Lerp(Vector3.zero, direction, .75f));
-        line.SetPosition(4, new Vector3(direction.x, direction.y, 0));
+        spawn.GetComponent<TableLinkSetup>().DrawDirection(direction);
+        //LineRenderer line = spawn.GetComponent<LineRenderer>();
+        //line.SetPosition(0, new Vector3(0, 0, 0));
+        //line.SetPosition(1, Vector3.Lerp(Vector3.zero, direction, .25f));
+        //line.SetPosition(2, Vector3.Lerp(Vector3.zero, direction, .5f));
+        //line.SetPosition(3, Vector3.Lerp(Vector3.zero, direction, .75f));
+        //line.SetPosition(4, new Vector3(direction.x, direction.y, 0));
+
+        return spawn;
     }
     #endregion
 }

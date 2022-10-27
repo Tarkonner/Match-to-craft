@@ -120,8 +120,11 @@ public class Mouse : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && holdingTable != null)
         {
             //Rotate holding piece
-            holdingTable.RotateTable();
-            PlayAudio(rotateSounds);
+            if(!holdingTable.CanNotRotate)
+            {
+                holdingTable.RotateTable();
+                PlayAudio(rotateSounds);
+            }
         }
 
         //Middle mouse buttom
@@ -141,8 +144,15 @@ public class Mouse : MonoBehaviour
 
     private void UIPickup()
     {
-        rightMouseButton.TurnOn();
-        rightMouseButton.ChangeText("Rotate");
+        if(holdingTable != null && !holdingTable.CanNotRotate)
+        {
+            rightMouseButton.TurnOn();
+            rightMouseButton.ChangeText("Rotate");
+        }
+        else if(holdingTable != null && holdingTable.CanNotRotate)
+        {
+            rightMouseButton.TurnOff();
+        }
 
         middleMouseButton.TurnOn();
         middleMouseButton.ChangeText("Return piece");

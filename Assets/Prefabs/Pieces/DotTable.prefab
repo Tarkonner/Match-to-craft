@@ -121,9 +121,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: pickedupAction
-      Entry: 6
-      Data: 
+  sameLength: 1
+  gridSize: 3
+  gridSizeX: 3
+  gridSizeY: 3
   inventoryScale: 0.5
   lineLink: {fileID: 4214093016603776075, guid: caba02de405b136448688de0e461009b, type: 3}
   rotateSpeed: 10
+  pieceInGoal: {fileID: 0}
+  canRotate: 0
+  dotsRotateSprite: {fileID: 21300000, guid: 6c84041c9b6c3cf4f9011081e959bf58, type: 3}
