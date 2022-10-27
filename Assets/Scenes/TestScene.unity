@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &40757478 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1283258871208491619, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+  m_PrefabInstance: {fileID: 5124586717098798810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448e38ad8d43fdb41819da0a7a9e3361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +217,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1039885715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5666411388793495449, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+  m_PrefabInstance: {fileID: 5124586717098798810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448e38ad8d43fdb41819da0a7a9e3361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1266327875 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8954881180987711008, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+  m_PrefabInstance: {fileID: 5124586717098798810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448e38ad8d43fdb41819da0a7a9e3361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1763244224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,6 +246,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7823092985183702021, guid: 0ad430626daf97645b3f30b9b5c9e996, type: 3}
+      propertyPath: leftMouseButton
+      value: 
+      objectReference: {fileID: 1266327875}
+    - target: {fileID: 7823092985183702021, guid: 0ad430626daf97645b3f30b9b5c9e996, type: 3}
+      propertyPath: rightMouseButton
+      value: 
+      objectReference: {fileID: 1039885715}
+    - target: {fileID: 7823092985183702021, guid: 0ad430626daf97645b3f30b9b5c9e996, type: 3}
+      propertyPath: middleMouseButton
+      value: 
+      objectReference: {fileID: 40757478}
     - target: {fileID: 7915347144484172573, guid: 0ad430626daf97645b3f30b9b5c9e996, type: 3}
       propertyPath: m_RootOrder
       value: 1

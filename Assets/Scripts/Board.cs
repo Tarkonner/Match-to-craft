@@ -29,8 +29,11 @@ public class Board : SerializedMonoBehaviour
 
     public void NextLevel()
     {
-        targetLevel++;
+        //Reset UI
+        Mouse.Instance.acDrop?.Invoke();
 
+        //Find next level
+        targetLevel++;
         if (targetLevel >= levels.Length)
             SceneLoader.Instance.LoadScene(0);
         else

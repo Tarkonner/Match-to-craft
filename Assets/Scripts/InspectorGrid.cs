@@ -65,27 +65,5 @@ public class InspectorGrid : SerializedMonoBehaviour
                 }
             }
         }
-
-        //for (int y = 0; y < pattern.GetLength(1); y++)
-        //{
-        //    for (int x = 0; x < pattern.GetLength(0); x++)
-        //    {
-        //        if (pattern[x, y] != null)
-        //        {
-        //            GameObject spawn = Instantiate(pattern[x, y], transform);
-        //            spawn.transform.parent = transform;
-
-        //            Vector2 calPos;
-        //            if (currentGridSize.x % 2 == 0)
-        //                calPos = new Vector2(x - 0.5f, y - 0.5f);
-        //            else
-        //                calPos = new Vector2(x - 1, y - 1);
-
-        //            calPos += cornorPos;
-
-        //            spawn.transform.localPosition = calPos;
-        //        }
-        //    }
-        //}
     }
 }

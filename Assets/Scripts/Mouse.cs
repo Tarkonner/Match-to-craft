@@ -1,8 +1,17 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Mouse : MonoBehaviour
 {
-    public Mouse Instance { get; private set; }
+    [Header("Mouse UI")]
+    [SerializeField] MouseUI rightMouseButton;
+    [SerializeField] MouseUI middleMouseButton;
+    [SerializeField] MouseUI leftMouseButton;
+    private Action acPickUp;
+    public Action acDrop { get; private set; }
+
+    public static Mouse Instance { get; private set; }
 
     //Holding
     [SerializeField] private DotTable holdingTable;
@@ -23,12 +32,23 @@ public class Mouse : MonoBehaviour
         Instance = this;
 
         audioSource = GetComponent<AudioSource>();
+
+        acPickUp += UIPickup;
+        acDrop += UIDrop;
+        acDrop?.Invoke();
     }
 
     void Update()
     {
         if (MenuManager.Instance.ActiveMenu)
+        {
+            //Turnoff UI
+            rightMouseButton.TurnOff();
+            middleMouseButton.TurnOff();
+            leftMouseButton.TurnOff();
+
             return;
+        }
 
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
@@ -44,8 +64,10 @@ public class Mouse : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (hit.collider == null)
+            {
                 return;
-
+            }
+                        
             //Not holding a piece
             if (holdingTable == null)
             {
@@ -56,6 +78,8 @@ public class Mouse : MonoBehaviour
                     table.PickupTable();
                     table.HighlightTable();
                     PlayAudio(pickupSound);
+
+                    acPickUp?.Invoke();
                 }
                 //Pickup piece in grid
                 else if (hit.collider.TryGetComponent(out GameGrid grid))
@@ -66,6 +90,8 @@ public class Mouse : MonoBehaviour
                         holdingTable = result;
                         result.HighlightTable();
                         PlayAudio(pickupSound);
+
+                        acPickUp?.Invoke();
                     }
                 }
             }
@@ -80,6 +106,9 @@ public class Mouse : MonoBehaviour
                         holdingTable.DropTable();
                         holdingTable = null;
                         PlayAudio(placeSounds);
+
+                        //Update UI
+                        acDrop?.Invoke();
                     }
                     else
                         PlayAudio(failPlacement);
@@ -98,11 +127,34 @@ public class Mouse : MonoBehaviour
         //Middle mouse buttom
         if (Input.GetKeyDown(KeyCode.Mouse2) && holdingTable != null)
         {
+            //UI
+            acDrop?.Invoke();
+
+            //Reset table
             holdingTable.ResetTable();
             holdingTable.DropTable();
             holdingTable = null;
             PlayAudio(dropSound);
         }
+
+    }
+
+    private void UIPickup()
+    {
+        rightMouseButton.TurnOn();
+        rightMouseButton.ChangeText("Rotate");
+
+        middleMouseButton.TurnOn();
+        middleMouseButton.ChangeText("Return piece");
+
+        leftMouseButton.ChangeText("Place");
+    }
+    private void UIDrop()
+    {
+        rightMouseButton.TurnOff();
+        middleMouseButton.TurnOff();
+
+        leftMouseButton.ChangeText("Pickup");
     }
 
     public void PlayAudio(AudioClip clip)
