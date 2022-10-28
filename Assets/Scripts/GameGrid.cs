@@ -56,7 +56,7 @@ public class GameGrid : SerializedMonoBehaviour
         //Clear memory
         for (int x = 0; x < gridMemori.GetLength(0); x++)
         {
-            for (int y = 0; y < gridMemori.GetLength(0); y++)
+            for (int y = 0; y < gridMemori.GetLength(1); y++)
             {
                 //Remove old dots
                 if (gridMemori[x, y] != null)
@@ -197,9 +197,6 @@ public class GameGrid : SerializedMonoBehaviour
     private bool CheckGoals()
     {
         bool result = false;
-
-        //if(gridMemori[0, 0] != null)
-        //    Debug.Log(gridMemori[0, 0].gameObject.name);
 
         foreach (GameObject item in board.currentLevelsGoals)
         {

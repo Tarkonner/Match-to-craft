@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: TestLevel
+  m_Name: Bugged
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -26,70 +26,10 @@ MonoBehaviour:
       Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 36
+      Data: 16
     - Name: ranks
       Entry: 1
-      Data: 6|6
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
+      Data: 4|4
     - Name: 
       Entry: 6
       Data: 
@@ -146,10 +86,12 @@ MonoBehaviour:
       Data: 
   pieces:
   - {fileID: 5318892794795981105, guid: acc00721e24809c49aaad0afd1c60d34, type: 3}
+  - {fileID: 9188024887269647146, guid: f0e73ca1cf5f8be4bac85c41b8480ba2, type: 3}
   - {fileID: 9177721433298209073, guid: c6cbe7a7837984349ac3e33f660eae75, type: 3}
   goals:
   - {fileID: 253969854824639146, guid: 6653137beb69cc94abd4a3acc6929eac, type: 3}
+  - {fileID: 4578223767842683038, guid: d7aca41c3ce120b4b93b6448a039fe2d, type: 3}
   sameLength: 1
-  gridSize: 6
-  gridSizeX: 2
-  gridSizeY: 3
+  gridSize: 4
+  gridSizeX: 3
+  gridSizeY: 5
