@@ -21,7 +21,7 @@ public class DotTable : InspectorGrid
     //Rotation
     private float targetRotation;
     [SerializeField] private float rotateSpeed = 5;
-    private float rotateAmount;
+    private float rotateAmount = 1;
     private float oldRotation;
 
     [HideInInspector] public GoalTable pieceInGoal;
@@ -62,9 +62,12 @@ public class DotTable : InspectorGrid
 
     public void RotateTable()
     {
-        rotateAmount = 0;
-        oldRotation = transform.eulerAngles.z;
-        targetRotation = transform.eulerAngles.z - 90;
+        if(rotateAmount == 1)
+        {
+            rotateAmount = 0;
+            oldRotation = transform.eulerAngles.z;
+            targetRotation = transform.eulerAngles.z - 90;
+        }
     }
 
     public void ResetTable()
