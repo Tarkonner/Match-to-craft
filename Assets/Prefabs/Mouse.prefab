@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c786b4ebfc3603e4b8f15d9e39277b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightMouseButton: {fileID: 0}
+  middleMouseButton: {fileID: 0}
+  leftMouseButton: {fileID: 0}
   holdingTable: {fileID: 0}
   minPitch: 0.8
   maxPitch: 1
@@ -51,7 +54,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3e4f18f6285fb5649a53cf5eab2e0983, type: 3}
   - {fileID: 8300000, guid: 985768c5b80104f4e8303a50799c9796, type: 3}
   - {fileID: 8300000, guid: 944eb825c9e8e6e409a6e74cf8a48d9f, type: 3}
-  failPlacement: {fileID: 8300000, guid: e62b45517eb77a143b592b98d0493b59, type: 3}
+  failPlacement: {fileID: 8300000, guid: 94e2419d5ebc9384fa8df9329c6c0b46, type: 3}
   placeSounds:
   - {fileID: 8300000, guid: fb03bf69d80e3cd43a1f72858e4d0195, type: 3}
   - {fileID: 8300000, guid: 56e7048259686264d97f904fdea13bb4, type: 3}

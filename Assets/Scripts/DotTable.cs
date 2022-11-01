@@ -29,7 +29,7 @@ public class DotTable : InspectorGrid
     [Header("Not rotate")]
     [SerializeField] private bool canNotRotate;
     public bool CanNotRotate { get => canNotRotate; set => canNotRotate = value; }
-    [SerializeField] private Sprite dotsRotateSprite;
+    //[SerializeField] private Sprite dotsRotateSprite;
 
     void Start()
     {
@@ -45,8 +45,8 @@ public class DotTable : InspectorGrid
                 content.Add(t.gameObject);
                 t.GetComponent<Dot>().ownerTable = this;
 
-                if(canNotRotate)
-                    t.GetComponent<SpriteRenderer>().sprite = dotsRotateSprite;
+                //if(canNotRotate)
+                //    t.GetComponent<SpriteRenderer>().sprite = dotsRotateSprite;
             }
         }
     }
@@ -200,13 +200,7 @@ public class DotTable : InspectorGrid
         spawn.transform.localPosition = spawnPosition;
 
         //Set line
-        spawn.GetComponent<TableLinkSetup>().DrawDirection(direction);
-        //LineRenderer line = spawn.GetComponent<LineRenderer>();
-        //line.SetPosition(0, new Vector3(0, 0, 0));
-        //line.SetPosition(1, Vector3.Lerp(Vector3.zero, direction, .25f));
-        //line.SetPosition(2, Vector3.Lerp(Vector3.zero, direction, .5f));
-        //line.SetPosition(3, Vector3.Lerp(Vector3.zero, direction, .75f));
-        //line.SetPosition(4, new Vector3(direction.x, direction.y, 0));
+        spawn.GetComponent<TableLinkSetup>().DrawDirection(direction, canNotRotate);
 
         return spawn;
     }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TableLinkSetup : MonoBehaviour
 {
-    public void DrawDirection(Vector2 dir)
+    [SerializeField] Gradient notRotateColor;
+
+    public void DrawDirection(Vector2 dir, bool notRotatebul)
     {
         //mine line
         LineRenderer lr = GetComponent<LineRenderer>();
@@ -15,5 +17,8 @@ public class TableLinkSetup : MonoBehaviour
         LineRenderer cLr = transform.GetChild(0).GetComponent<LineRenderer>();
         cLr.SetPosition(0, Vector2.zero);
         cLr.SetPosition(1, dir);
+        //Diffent color if not rotation
+        if (notRotatebul)
+            cLr.colorGradient = notRotateColor;
     }
 }
