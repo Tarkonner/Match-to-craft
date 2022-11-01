@@ -60,11 +60,23 @@ public class Mouse : MonoBehaviour
             holdingTable.HoldingUpdate();
         }
 
+        //Update left mouse UI sprite to what the button do
+        if (hit.collider != null && holdingTable != null)
+            leftMouseButton.ChangeText("Place");
+        else if (hit.collider != null && hit.collider.TryGetComponent(out DotTable table))
+            leftMouseButton.ChangeText("Pickup");
+        else if (hit.collider == null && holdingTable != null)
+            leftMouseButton.ChangeText("Drop");
+
         //Left mouse button
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (hit.collider == null)
             {
+                //Return holdt table
+                if(holdingTable)
+                    ReturnTable();
+
                 return;
             }
                         
@@ -96,7 +108,8 @@ public class Mouse : MonoBehaviour
                 }
             }
             else
-            {   //Holding a piece
+            {                  
+                //Holding a piece
                 if (hit.collider.TryGetComponent(out GameGrid grid))
                 {
                     bool result = grid.PlaceDots(holdingTable);
@@ -129,17 +142,19 @@ public class Mouse : MonoBehaviour
 
         //Middle mouse buttom
         if (Input.GetKeyDown(KeyCode.Mouse2) && holdingTable != null)
-        {
-            //UI
-            acDrop?.Invoke();
+            ReturnTable();
+    }
 
-            //Reset table
-            holdingTable.ResetTable();
-            holdingTable.DropTable();
-            holdingTable = null;
-            PlayAudio(dropSound);
-        }
+    private void ReturnTable()
+    {
+        //UI
+        acDrop?.Invoke();
 
+        //Reset table
+        holdingTable.ResetTable();
+        holdingTable.DropTable();
+        holdingTable = null;
+        PlayAudio(dropSound);
     }
 
     private void UIPickup()
@@ -157,14 +172,14 @@ public class Mouse : MonoBehaviour
         middleMouseButton.TurnOn();
         middleMouseButton.ChangeText("Return piece");
 
-        leftMouseButton.ChangeText("Place");
+        //leftMouseButton.ChangeText("Drop");
     }
     private void UIDrop()
     {
         rightMouseButton.TurnOff();
         middleMouseButton.TurnOff();
 
-        leftMouseButton.ChangeText("Pickup");
+        //leftMouseButton.ChangeText("Pickup");
     }
 
     public void PlayAudio(AudioClip clip)
