@@ -23,6 +23,7 @@ public class Board : SerializedMonoBehaviour
 
     public void Start()
     {
+        targetLevel = SceneLoader.Instance.levelIndex;
         LoadLevel(targetLevel);
     }
 

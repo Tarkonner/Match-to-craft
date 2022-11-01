@@ -35,4 +35,10 @@ public class SceneLoader : MonoBehaviour
     public void RestartScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     public void QuitGame() => Application.Quit();
     public void NextScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    public void LoadLevel(int levelIndex)
+    {
+        this.levelIndex = levelIndex;
+        LoadScene(1);
+    }
 }

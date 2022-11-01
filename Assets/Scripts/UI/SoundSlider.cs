@@ -17,19 +17,27 @@ public class SoundSlider : MonoBehaviour
         {
             case volumeType.Master:
                 volumeSlider.onValueChanged.AddListener(delegate { SoundManager.Instance.ChangeMasterVolume(volumeSlider.value); });
-                procentText.text = Mathf.Round(volumeSlider.value * 100).ToString() + "%";
+                //procentText.text = Mathf.Round(volumeSlider.value * 100).ToString() + "%";
+                volumeSlider.onValueChanged.AddListener(delegate { ShowPercentage(); });
                 break;
             case volumeType.Effekt:
                 volumeSlider.onValueChanged.AddListener(delegate { SoundManager.Instance.ChangeEffektVolume(volumeSlider.value); });
-                procentText.text = Mathf.Round(volumeSlider.value * 100).ToString() + "%";
+                //procentText.text = Mathf.Round(volumeSlider.value * 100).ToString() + "%";
+                volumeSlider.onValueChanged.AddListener(delegate { ShowPercentage(); });
                 break;
             case volumeType.Music:
                 volumeSlider.onValueChanged.AddListener(delegate { SoundManager.Instance.ChangeMusicVolume(volumeSlider.value); });
-                procentText.text = Mathf.Round(volumeSlider.value * 100).ToString() + "%";
+                //procentText.text = Mathf.Round(volumeSlider.value * 100).ToString() + "%";
+                volumeSlider.onValueChanged.AddListener(delegate { ShowPercentage(); });
                 break;
             default:
                 break;
         }
+    }
+
+    private void ShowPercentage()
+    {
+        procentText.text = Mathf.Round(volumeSlider.value * 100).ToString() + "%";
     }
 
     private void OnEnable()
@@ -37,7 +45,7 @@ public class SoundSlider : MonoBehaviour
         switch (volumeToChange)
         {
             case volumeType.Master:
-                volumeSlider.value = SoundManager.Instance.SavedMasterVolume;
+                volumeSlider.value = SoundManager.Instance.SavedMasterVolume;                
                 break;
             case volumeType.Effekt:
                 volumeSlider.value = SoundManager.Instance.SavedEffectVolume;
@@ -48,5 +56,7 @@ public class SoundSlider : MonoBehaviour
             default:
                 break;
         }
+
+        ShowPercentage();
     }
 }
