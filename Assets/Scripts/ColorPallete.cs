@@ -12,6 +12,9 @@ public static class ColorPallete
     public static Color lightBlu = new Color(166, 228, 240, 255);
     public static Color darkBlu = new Color(0, 142, 180, 255);
 
+    //Goal color
+    public static Color green = new Color(187, 220, 211);
+
     //Background
     public static Color darkGray = new Color(30, 40, 51, 255);
     public static Color gray = new Color(47, 51, 62, 255);

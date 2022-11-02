@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: Level9
+  m_Name: Redherrion
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 6567574717997971157, guid: 477d4256e047df3478f354a76be00c96, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -26,10 +27,10 @@ MonoBehaviour:
       Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 15
+      Data: 16
     - Name: ranks
       Entry: 1
-      Data: 5|3
+      Data: 4|4
     - Name: 
       Entry: 6
       Data: 
@@ -63,6 +64,9 @@ MonoBehaviour:
     - Name: 
       Entry: 6
       Data: 
+    - Name: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 6
       Data: 
@@ -82,12 +86,13 @@ MonoBehaviour:
       Entry: 8
       Data: 
   pieces:
-  - {fileID: 5099957482606440922, guid: d5f393d72c790a94686563a81be966bb, type: 3}
-  - {fileID: 8486615426818879014, guid: 087cd19c81bfb9e45b77b794a8152850, type: 3}
-  - {fileID: 1667413541990792155, guid: 7f6c842d9c4506d4abd2b49966ff8625, type: 3}
+  - {fileID: 4984071832989513666, guid: 14a11cfd067dcdb49b2bd695504e95f5, type: 3}
+  - {fileID: 826772298420604973, guid: 98351ac9a0a7829478accac31e5996e8, type: 3}
+  - {fileID: 826772298420604973, guid: 98351ac9a0a7829478accac31e5996e8, type: 3}
   goals:
-  - {fileID: 1146118369773501922, guid: 4ca00174389d8594598ef9278312fa35, type: 3}
-  sameLength: 0
+  - {fileID: 7041724186604834661, guid: 4b0dae3876f88b54b9cc991b36e2172a, type: 3}
+  - {fileID: 8799763078083459534, guid: 7afb55d3b8831ce48a7acb184e72c3f8, type: 3}
+  sameLength: 1
   gridSize: 4
-  gridSizeX: 5
-  gridSizeY: 3
+  gridSizeX: 4
+  gridSizeY: 4

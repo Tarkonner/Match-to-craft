@@ -829,7 +829,7 @@ MonoBehaviour:
   piecesHolder: {fileID: 5124586717033084890}
   piecesOffest: {x: 1, y: 1.6}
   goalHolder: {fileID: 5124586717584393897}
-  goalsOffest: {x: 1, y: 3}
+  goalsOffest: {x: 1, y: 3.2}
   levels:
   - {fileID: 11400000, guid: 6509c4ac297589c448155d6d88898cc3, type: 2}
   currentLevelsPieces: []

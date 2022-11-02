@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: Level7
+  m_Name: 2lvl Intro
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 6567574717997971157, guid: 477d4256e047df3478f354a76be00c96, type: 3}
+    - {fileID: 8124140608007832816, guid: 32b4d6165030381479df2302589e88a4, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,10 +28,10 @@ MonoBehaviour:
       Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 15
+      Data: 9
     - Name: ranks
       Entry: 1
-      Data: 5|3
+      Data: 3|3
     - Name: 
       Entry: 6
       Data: 
@@ -51,31 +52,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 10
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 6
       Data: 
     - Name: 
       Entry: 6
       Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -83,11 +66,11 @@ MonoBehaviour:
       Entry: 8
       Data: 
   pieces:
-  - {fileID: 8890027315183995424, guid: 44d29469e2f6f0141a87ddc5b71c8f9d, type: 3}
-  - {fileID: 4344106569551568265, guid: 21f70b4dee56768449322b76a23b863b, type: 3}
+  - {fileID: 4002707176675430236, guid: a34941522a2976e4a897f99177500b8d, type: 3}
+  - {fileID: 9188024887269647146, guid: f0e73ca1cf5f8be4bac85c41b8480ba2, type: 3}
   goals:
-  - {fileID: 4183540653839361138, guid: dbfa95e8e42bfc843847dd5fcf6ab640, type: 3}
-  sameLength: 0
-  gridSize: 4
-  gridSizeX: 5
+  - {fileID: 7011460364669268282, guid: b840300bf0b9b9b4fb7cf611d6b11587, type: 3}
+  sameLength: 1
+  gridSize: 3
+  gridSizeX: 3
   gridSizeY: 3

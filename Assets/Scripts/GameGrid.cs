@@ -144,21 +144,21 @@ public class GameGrid : SerializedMonoBehaviour
         //Snap table to grid
         targetTable.transform.position = (Vector3)SnapToGrid(targetTable.transform.position);
 
+        //Check goals
         bool makedGoal = CheckGoals();
-
-        bool allDone = true;
+        bool allGoalsDone = true;
         foreach (GameObject item in board.currentLevelsGoals)
         {
             GoalTable goalTable = item.GetComponent<GoalTable>();
 
             if (!goalTable.completet)
             {
-                allDone = false;
+                allGoalsDone = false;
                 break;
             }
         }
         //Is goal maked or level complete?
-        if (allDone)
+        if (allGoalsDone)
         {
             BoardsSounds.Instance.CompletLevel();
             nextLevel = true;
@@ -198,6 +198,7 @@ public class GameGrid : SerializedMonoBehaviour
     {
         bool result = false;
 
+        //Match with goals
         foreach (GameObject item in board.currentLevelsGoals)
         {
             GoalTable goal = item.GetComponent<GoalTable>();

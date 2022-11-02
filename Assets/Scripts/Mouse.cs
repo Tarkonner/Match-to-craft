@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UIElements.Image;
 
 public class Mouse : MonoBehaviour
 {
@@ -26,6 +29,7 @@ public class Mouse : MonoBehaviour
     [SerializeField] AudioClip[] placeSounds;
     [SerializeField] AudioClip pickupSound;
     [SerializeField] AudioClip dropSound;
+    [SerializeField] AudioClip canNotRotateSound;
 
     private void Awake()
     {
@@ -133,11 +137,13 @@ public class Mouse : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && holdingTable != null)
         {
             //Rotate holding piece
-            if(!holdingTable.CanNotRotate)
+            if (!holdingTable.CanNotRotate)
             {
                 holdingTable.RotateTable();
                 PlayAudio(rotateSounds);
             }
+            else
+                PlayAudio(canNotRotateSound);
         }
 
         //Middle mouse buttom
@@ -162,11 +168,14 @@ public class Mouse : MonoBehaviour
         if(holdingTable != null && !holdingTable.CanNotRotate)
         {
             rightMouseButton.TurnOn();
+            rightMouseButton.ChangeImageColor(Color.white);
             rightMouseButton.ChangeText("Rotate");
         }
         else if(holdingTable != null && holdingTable.CanNotRotate)
         {
-            rightMouseButton.TurnOff();
+            rightMouseButton.TurnOn();
+            rightMouseButton.ChangeText("Can't rotate");
+            rightMouseButton.ChangeImageColor(Color.gray);
         }
 
         middleMouseButton.TurnOn();

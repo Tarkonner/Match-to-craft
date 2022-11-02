@@ -61,6 +61,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4fb2742de4d3ebe45b0b5ad0a9deec27, type: 3}
   pickupSound: {fileID: 8300000, guid: 6f6d964632115d44098f6e75921acec6, type: 3}
   dropSound: {fileID: 8300000, guid: 935e8bae4d911df41b94f8dd0573a49b, type: 3}
+  canNotRotateSound: {fileID: 8300000, guid: 7ae13fd33472bac4cbcc0f05f08c5b2c, type: 3}
 --- !u!82 &6909048342254672218
 AudioSource:
   m_ObjectHideFlags: 0
