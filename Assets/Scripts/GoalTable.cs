@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public  class GoalTable : InspectorGrid
+public  class GoalTable : InspectorGrid, GameGoal
 {
     [HideInInspector] public List<DotTable> subsubscribers;
 
@@ -12,7 +12,7 @@ public  class GoalTable : InspectorGrid
 
     private SpriteRenderer sr;
 
-    public bool completet { get; private set; } = false;
+    private bool completet = false;
 
 
     private void Awake()
@@ -21,14 +21,13 @@ public  class GoalTable : InspectorGrid
     }
 
 
-    public void GoalCompletet()
+    public void GoalComplete()
     {
         sr.color = winColor;
-
         completet = true;
     }
 
-    public void GoalUncomplet()
+    public void GoalUncomleted()
     {
         sr.color = norColor;
 
@@ -43,6 +42,12 @@ public  class GoalTable : InspectorGrid
         completet = false;
     }
 
+    public bool GoalState()
+    {
+        return completet;
+    }
+
+
     [FoldoutGroup("Pattorn")]
     [Button("Place dots")]
     public override void SpawnDots()
@@ -52,4 +57,6 @@ public  class GoalTable : InspectorGrid
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.size = new Vector2(currentGridSize.x, currentGridSize.y);
     }
+
+
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: TestLevel
+  m_Name: 12lvl Intro placement goals
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -27,25 +27,10 @@ MonoBehaviour:
       Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 36
+      Data: 9
     - Name: ranks
       Entry: 1
-      Data: 6|6
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
+      Data: 3|3
     - Name: 
       Entry: 6
       Data: 
@@ -61,72 +46,6 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 0
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
     - Name: 
       Entry: 6
       Data: 
@@ -146,12 +65,10 @@ MonoBehaviour:
       Entry: 8
       Data: 
   pieces:
-  - {fileID: 5318892794795981105, guid: acc00721e24809c49aaad0afd1c60d34, type: 3}
-  - {fileID: 9177721433298209073, guid: c6cbe7a7837984349ac3e33f660eae75, type: 3}
+  - {fileID: 864815926823463313, guid: b00ff27986d241541a267b6faa04c152, type: 3}
   goals:
-  - {fileID: 253969854824639146, guid: 6653137beb69cc94abd4a3acc6929eac, type: 3}
   - {fileID: 7274913272880914306, guid: 987392cd40a47dc45870cf646d836b66, type: 3}
   sameLength: 1
-  gridSize: 6
-  gridSizeX: 2
+  gridSize: 3
+  gridSizeX: 3
   gridSizeY: 3

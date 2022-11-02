@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GameGoal : MonoBehaviour
-{    public bool completet { get; private set; } = false;
+public interface GameGoal
+{
+    public abstract void GoalComplete();
+    public abstract void GoalUncomleted();
 
-    public abstract bool GoalComplete();
-    public abstract bool GoalUncomleted();
+    public abstract bool GoalState();
 }

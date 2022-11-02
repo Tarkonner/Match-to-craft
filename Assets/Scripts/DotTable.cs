@@ -92,9 +92,7 @@ public class DotTable : InspectorGrid
 
         //Tell if goal is uncomplete
         if (pieceInGoal != null)
-        {
-            pieceInGoal.GoalUncomplet();
-        }
+            pieceInGoal.GoalUncomleted();
     }
 
     public void DropTable()
