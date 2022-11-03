@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GridPlaceGoal : MonoBehaviour
 {
+    [SerializeField] dotType opinionFilledGoal = dotType.None;
+    
     public Vector2Int GridPlacement { get; private set; }
+    public dotType OpinionFilledGoal { get => opinionFilledGoal; set => opinionFilledGoal = value; }
 
     public void Setup(Board board, Vector2Int placement)
     {
@@ -13,7 +16,6 @@ public class GridPlaceGoal : MonoBehaviour
             if(item.TryGetComponent(out PlacementGoal goal))
             {
                 goal.boardGoals.Add(this);
-                break;
             }
         }
 

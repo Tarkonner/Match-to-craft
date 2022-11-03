@@ -109,8 +109,11 @@ public class GameGrid : SerializedMonoBehaviour
         foreach (Transform item in board.goalHolder.transform)
         {
             if (item.gameObject.TryGetComponent(out PlacementGoal g))
+            {
                 placementGoal = g;
+            }
         }
+        placementGoal.UpdateScore(0);
     }
 
     private Vector2 SnapToGrid(Vector2 targetPosition)
@@ -319,9 +322,18 @@ public class GameGrid : SerializedMonoBehaviour
         {
             Vector2Int targetPlacement = placementGoal.boardGoals[i].GridPlacement;
             if (gridMemori[targetPlacement.x, targetPlacement.y] != null)
-                score++;
+            {
+                GridPlaceGoal checker = placementGoal.boardGoals[i];
+                Dot candidate = gridMemori[targetPlacement.x, targetPlacement.y].GetComponent<Dot>();
+                if (checker.OpinionFilledGoal == dotType.None
+                    || checker.OpinionFilledGoal == candidate.type)
+                {
+                    score++;
+                }              
+            }
         }
 
+        //Update UI and tell if goal is complete
         placementGoal.UpdateScore(score);
         if (placementGoal.boardGoals.Count == score && !placementGoal.GoalState())
         {
