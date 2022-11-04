@@ -113,7 +113,8 @@ public class GameGrid : SerializedMonoBehaviour
                 placementGoal = g;
             }
         }
-        placementGoal.UpdateScore(0);
+        if(placementGoal != null)
+            placementGoal.UpdateScore(0);
     }
 
     private Vector2 SnapToGrid(Vector2 targetPosition)
@@ -219,7 +220,8 @@ public class GameGrid : SerializedMonoBehaviour
             }
 
             //See if there was placement goal
-            PlacementGoalUpdate();
+            if(placementGoal != null)
+                PlacementGoalUpdate();
         }
 
         return table;
@@ -339,10 +341,9 @@ public class GameGrid : SerializedMonoBehaviour
         {
             placementGoal.GoalComplete();
         }
-        else
+        else if (placementGoal.GoalState() && placementGoal.boardGoals.Count != score)
         {
-            if (placementGoal.GoalState())
-                placementGoal.GoalUncomleted();
+            placementGoal.GoalUncomleted();
         }
     }
 }
