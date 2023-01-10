@@ -290,6 +290,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 655099929314775709, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 96b74c8176c963346a766d22826ba350, type: 2}
+    - target: {fileID: 655099929314775709, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6553096964815047843, guid: 96b74c8176c963346a766d22826ba350, type: 2}
+    - target: {fileID: 4797213798652889716, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 96b74c8176c963346a766d22826ba350, type: 2}
+    - target: {fileID: 4797213798652889716, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6553096964815047843, guid: 96b74c8176c963346a766d22826ba350, type: 2}
     - target: {fileID: 5124586716892376844, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
       propertyPath: levels.Array.size
       value: 18
@@ -426,6 +442,14 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 6277827698647042351, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+    - target: {fileID: 7275993822778870968, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 96b74c8176c963346a766d22826ba350, type: 2}
+    - target: {fileID: 7275993822778870968, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6553096964815047843, guid: 96b74c8176c963346a766d22826ba350, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
 --- !u!114 &1169154213 stripped
@@ -515,29 +539,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3973484512254219007, guid: 28453584e945cb548a77949ac454a743, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3973484514187086933, guid: 28453584e945cb548a77949ac454a743, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3973484514187410733, guid: 28453584e945cb548a77949ac454a743, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7765194883239762513, guid: 28453584e945cb548a77949ac454a743, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7765194883459809300, guid: 28453584e945cb548a77949ac454a743, type: 3}
       propertyPath: m_Name
       value: Gameplay Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7765194883459809300, guid: 28453584e945cb548a77949ac454a743, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7765194883459809320, guid: 28453584e945cb548a77949ac454a743, type: 3}
       propertyPath: m_Pivot.x
@@ -622,18 +626,6 @@ PrefabInstance:
     - target: {fileID: 7765194883459809320, guid: 28453584e945cb548a77949ac454a743, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338865073995473210, guid: 28453584e945cb548a77949ac454a743, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338865073995747394, guid: 28453584e945cb548a77949ac454a743, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338865075794431720, guid: 28453584e945cb548a77949ac454a743, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28453584e945cb548a77949ac454a743, type: 3}
