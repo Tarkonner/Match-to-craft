@@ -112,7 +112,7 @@ public class DotTable : InspectorGrid
                 //on object
                 line.sortingOrder = 3;
                 //on child
-                t.gameObject.transform.GetChild(0).GetComponent<LineRenderer>().sortingOrder = 4;
+                //t.gameObject.transform.GetChild(0).GetComponent<LineRenderer>().sortingOrder = 4;
             }
         }
     }
@@ -129,7 +129,7 @@ public class DotTable : InspectorGrid
                 //on object
                 line.sortingOrder = 1;
                 //on child
-                t.gameObject.transform.GetChild(0).GetComponent<LineRenderer>().sortingOrder = 2;
+                //t.gameObject.transform.GetChild(0).GetComponent<LineRenderer>().sortingOrder = 2;
             }
         }
     }
