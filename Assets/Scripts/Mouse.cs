@@ -31,6 +31,8 @@ public class Mouse : MonoBehaviour
     [SerializeField] AudioClip dropSound;
     [SerializeField] AudioClip canNotRotateSound;
 
+    public bool CantTakePieces = true;
+
     private void Awake()
     {
         Instance = this;
@@ -44,6 +46,9 @@ public class Mouse : MonoBehaviour
 
     void Update()
     {
+        if (!CantTakePieces)
+            return;
+
         if (MenuManager.Instance.ActiveMenu)
         {
             //Turnoff UI

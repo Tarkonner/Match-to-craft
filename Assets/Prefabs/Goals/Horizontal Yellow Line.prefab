@@ -235,7 +235,7 @@ MonoBehaviour:
   gridSizeX: 3
   gridSizeY: 1
   subsubscribers: []
-  winColor: {r: 0.15686275, g: 0.8, b: 0.15294118, a: 255}
+  winColor: {r: 0.019607844, g: 0.972549, b: 0.4862745, a: 255}
   norColor: {r: 255, g: 247, b: 248, a: 255}
 --- !u!1 &5272525823714791105
 GameObject:

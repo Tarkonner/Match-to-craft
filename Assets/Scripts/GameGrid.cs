@@ -7,7 +7,6 @@ public class GameGrid : SerializedMonoBehaviour
     [SerializeField] Board board;
 
     private const float sizeOfGrid = 1;
-    private SpriteRenderer sr;
     private Vector2 gridsUpperLeftCorner;
 
     //Memori
@@ -15,14 +14,16 @@ public class GameGrid : SerializedMonoBehaviour
 
 
     [SerializeField] private GameObject dotHolder;
+    [SerializeField] private GameObject gridField;
 
-    private bool nextLevel = false;
+    public bool nextLevel { get; private set; } = false;
     private float sceneTransistenTime = 1;
     private float sceneClock;
 
-    [SerializeField] private GameObject[,] debugGrid;
 
     private PlacementGoal placementGoal;
+
+    [SerializeField] private GameObject[,] debugGrid;
 
     private void Update()
     {
@@ -34,6 +35,8 @@ public class GameGrid : SerializedMonoBehaviour
                 nextLevel = false;
                 board.NextLevel();
                 sceneClock = 0;
+
+                Mouse.Instance.CantTakePieces = true;
             }
         }
 
@@ -52,8 +55,6 @@ public class GameGrid : SerializedMonoBehaviour
 
         //Set size
         GetComponent<BoxCollider2D>().size = li.CurrentGridSize;
-        //Set sprite
-        GetComponent<SpriteRenderer>().size = li.CurrentGridSize;
 
         //Clear memory
         for (int x = 0; x < gridMemori.GetLength(0); x++)
@@ -66,11 +67,25 @@ public class GameGrid : SerializedMonoBehaviour
             }
         }
         //Clear goals
-        if(placementGoal != null)
+        if (placementGoal != null)
         {
             for (int i = placementGoal.boardGoals.Count - 1; i >= 0; i--)
                 Destroy(placementGoal.boardGoals[i].gameObject);
             placementGoal = null;
+        }
+
+        //Make grid
+        //Remove old
+        for (int i = transform.childCount - 1; i >= 0; i--)
+            Destroy(transform.GetChild(i).gameObject);
+        //Make new grid
+        for (int x = 0; x < li.CurrentGridSize.x; x++)
+        {
+            for (int y = 0; y < li.CurrentGridSize.y; y++)
+            {
+                GameObject spawn = Instantiate(gridField, transform);
+                spawn.transform.position = cornorPos + new Vector2(x, -y) * sizeOfGrid;
+            }
         }
 
         //Load levels pattorn
@@ -113,7 +128,7 @@ public class GameGrid : SerializedMonoBehaviour
                 placementGoal = g;
             }
         }
-        if(placementGoal != null)
+        if (placementGoal != null)
             placementGoal.UpdateScore(0);
     }
 
@@ -191,6 +206,7 @@ public class GameGrid : SerializedMonoBehaviour
         {
             BoardsSounds.Instance.CompletLevel();
             nextLevel = true;
+            Mouse.Instance.CantTakePieces = false;
         }
         else if (makedGoal)
             BoardsSounds.Instance.GoalComplete();
@@ -220,7 +236,7 @@ public class GameGrid : SerializedMonoBehaviour
             }
 
             //See if there was placement goal
-            if(placementGoal != null)
+            if (placementGoal != null)
                 PlacementGoalUpdate();
         }
 
@@ -306,7 +322,7 @@ public class GameGrid : SerializedMonoBehaviour
                 }
             }
             //Placing goal
-            if(item.TryGetComponent(out PlacementGoal pg))
+            if (item.TryGetComponent(out PlacementGoal pg))
             {
                 PlacementGoalUpdate();
                 result = placementGoal.GoalState();
@@ -331,7 +347,7 @@ public class GameGrid : SerializedMonoBehaviour
                     || checker.OpinionFilledGoal == candidate.type)
                 {
                     score++;
-                }              
+                }
             }
         }
 

@@ -21,6 +21,7 @@ public class Board : SerializedMonoBehaviour
     [HideInInspector] public List<GameObject> currentLevelsGoals = new List<GameObject>();
     public Vector2Int CurrentLevelGridSize { get; private set; }
 
+
     public void Start()
     {
         targetLevel = SceneLoader.Instance.levelIndex;

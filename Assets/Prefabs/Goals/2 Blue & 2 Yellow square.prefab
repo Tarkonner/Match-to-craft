@@ -240,7 +240,7 @@ MonoBehaviour:
   gridSizeX: 3
   gridSizeY: 3
   subsubscribers: []
-  winColor: {r: 0.15635921, g: 0.8018868, b: 0.15432535, a: 255}
+  winColor: {r: 0.019607844, g: 0.972549, b: 0.4862745, a: 255}
   norColor: {r: 255, g: 247, b: 248, a: 255}
 --- !u!1 &2382226134398209123
 GameObject:
