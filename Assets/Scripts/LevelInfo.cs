@@ -14,13 +14,13 @@ public class LevelInfo : SerializedScriptableObject
     [SerializeField] protected bool sameLength = true;
     [FoldoutGroup("Pattorn")]
     [ShowIf("sameLength")]
-    [SerializeField][Range(1, 8)] protected int gridSize = 3;
+    [SerializeField][Range(1, 6)] protected int gridSize = 3;
     [FoldoutGroup("Pattorn")]
     [HideIf("sameLength")]
-    [SerializeField][Range(1, 8)] protected int gridSizeX = 3;
+    [SerializeField][Range(1, 6)] protected int gridSizeX = 3;
     [FoldoutGroup("Pattorn")]
     [HideIf("sameLength")]
-    [SerializeField][Range(1, 8)] protected int gridSizeY = 3;
+    [SerializeField][Range(1, 6)] protected int gridSizeY = 3;
 
     public List<GameObject> Pieces { get { return pieces; } }
     public List<GameObject> Goals { get { return goals; } }
