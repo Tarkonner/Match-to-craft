@@ -17,11 +17,12 @@ public class Board : SerializedMonoBehaviour
     [SerializeField] private float piecesHolderOffset = 2;
     [SerializeField] private float piecesSize = 1.5f;
     private Vector2 piecesHolderTop;
-    [SerializeField] private GameObject piecesBackground;
+    [SerializeField] private GameObject backgroundField;
     [SerializeField] private float backgroundScale = 1.5f;
     private int maxVerticalPieces = 4;
 
     private Vector2 goalsHolderTop;
+    [SerializeField] private float goalsScale = .7f;
 
     [Header("Levels")]
     [SerializeField] private LevelInfo[] levels;
@@ -79,7 +80,7 @@ public class Board : SerializedMonoBehaviour
         {
             //Calculate position
             Vector2 targetPosition;
-            if (levels[targetLevel].Pieces.Count < 5)
+            if (levels[targetLevel].Pieces.Count <= maxVerticalPieces)
                 targetPosition = new Vector2(0, piecesHolderTop.y - piecesHolderOffset - i * piecesSize);
             else
             {
@@ -96,7 +97,7 @@ public class Board : SerializedMonoBehaviour
             currentLevelsPieces.Add(spawn);
 
             //Background
-            spawn = Instantiate(piecesBackground, piecesHolder.transform);
+            spawn = Instantiate(backgroundField, piecesHolder.transform);
             spawn.transform.localScale = new Vector3(backgroundScale, backgroundScale, backgroundScale);
             spawn.transform.localPosition = targetPosition;
         }
@@ -113,8 +114,23 @@ public class Board : SerializedMonoBehaviour
         for (int i = 0; i < levels[targetLevel].Goals.Count; i++)
         {
             GameObject spawn = Instantiate(levels[targetLevel].Goals[i], goalHolder.transform);
-            spawn.transform.localPosition = new Vector2(0, -i * goalsOffest.y);
+            spawn.transform.localPosition = new Vector2(0, goalsHolderTop.y - i * goalsOffest.y);
+            spawn.transform.localScale = new Vector2(goalsScale, goalsScale);
             currentLevelsGoals.Add(spawn);
+
+            ////Background
+            //Vector2 size = spawn.GetComponent<GoalTable>().CurrentGridSize;
+            //for (int x = 0; x < size.x; x++)
+            //{
+            //    for (int y = 0; y < size.y; y++)
+            //    {
+            //        Vector2 targetPosition = new Vector2(
+            //            spawn.transform.position.x - size.x / 2 * goalsScale + x * goalsScale,
+            //            spawn.transform.position.y - size.y / 2 * goalsScale + y * goalsScale);
+            //        spawn = Instantiate(backgroundField, goalHolder.transform);
+            //        spawn.transform.localPosition = targetPosition;
+            //    }
+            //}
         }
 
         //Grid

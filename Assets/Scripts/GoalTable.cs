@@ -5,31 +5,47 @@ using UnityEngine;
 
 public  class GoalTable : InspectorGrid, GameGoal
 {
+    [SerializeField] private GameObject backgroundField;
     [HideInInspector] public List<DotTable> subsubscribers;
 
     public Color winColor = new Color(255, 129, 66, 255);
     public Color norColor = new Color(255, 247, 248, 255);
 
-    private SpriteRenderer sr;
-
     private bool completet = false;
 
+    private List<SpriteRenderer> fieldsRendere = new List<SpriteRenderer>();
 
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        //sr = GetComponent<SpriteRenderer>();
+
+
+    }
+
+    private void Start()
+    {
+        //Background
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            GameObject spawn = Instantiate(backgroundField, gameObject.transform);
+            spawn.transform.position = transform.GetChild(i).position;
+            fieldsRendere.Add(spawn.GetComponent<SpriteRenderer>());
+        }
     }
 
 
     public void GoalComplete()
     {
-        sr.color = winColor;
+        foreach (SpriteRenderer item in fieldsRendere)
+            item.color = winColor;
+
         completet = true;
     }
 
     public void GoalUncomleted()
     {
-        sr.color = norColor;
+        foreach (SpriteRenderer item in fieldsRendere)
+            item.color = norColor;
 
         foreach (DotTable item in subsubscribers)
         {
@@ -46,17 +62,4 @@ public  class GoalTable : InspectorGrid, GameGoal
     {
         return completet;
     }
-
-
-    [FoldoutGroup("Pattorn")]
-    [Button("Place dots")]
-    public override void SpawnDots()
-    {
-        base.SpawnDots();
-
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        sr.size = new Vector2(currentGridSize.x, currentGridSize.y);
-    }
-
-
 }

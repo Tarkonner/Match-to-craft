@@ -336,7 +336,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8799763078083459534}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -431,6 +431,7 @@ MonoBehaviour:
   gridSize: 3
   gridSizeX: 1
   gridSizeY: 3
+  backgroundField: {fileID: 5272236092158299179, guid: dda96fdf401764244b4ef311d7a0e5cf, type: 3}
   subsubscribers: []
   winColor: {r: 0.019607844, g: 0.972549, b: 0.4862745, a: 255}
-  norColor: {r: 255, g: 247, b: 248, a: 255}
+  norColor: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 255}

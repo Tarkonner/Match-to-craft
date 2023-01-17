@@ -24,7 +24,7 @@ public class InspectorGrid : SerializedMonoBehaviour
                 return new Vector2Int(gridSizeX, gridSizeY);
         }
     }
-
+    public Vector2Int CurrentGridSize => currentGridSize;
 
     [FoldoutGroup("Pattorn")][SerializeField] protected GameObject[,] pattern;
     public GameObject[,] Pattern { get { return pattern; }}
