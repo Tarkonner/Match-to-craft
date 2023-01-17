@@ -15,12 +15,6 @@ public  class GoalTable : InspectorGrid, GameGoal
 
     private List<SpriteRenderer> fieldsRendere = new List<SpriteRenderer>();
 
-    private void Awake()
-    {
-        //sr = GetComponent<SpriteRenderer>();
-
-
-    }
 
     private void Start()
     {

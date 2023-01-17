@@ -911,13 +911,13 @@ MonoBehaviour:
   grid: {fileID: 5292456297280965449}
   piecesHolder: {fileID: 5124586717033084890}
   goalHolder: {fileID: 5124586717584393897}
-  goalsOffest: {x: 1, y: 3.2}
   xSize: 5
   ySize: 7
   piecesHolderOffset: 0.5
   piecesSize: 2
   backgroundField: {fileID: 5272236092158299179, guid: dda96fdf401764244b4ef311d7a0e5cf, type: 3}
   backgroundScale: 1.5
+  goalsHolderOffset: 0.5
   goalsScale: 0.7
   levels:
   - {fileID: 11400000, guid: 6509c4ac297589c448155d6d88898cc3, type: 2}

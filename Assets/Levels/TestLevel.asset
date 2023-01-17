@@ -159,6 +159,7 @@ MonoBehaviour:
   - {fileID: 8084410594771267848, guid: f8029618bbdd7fd4e91aee0f352bd29e, type: 3}
   - {fileID: 1693747106828672202, guid: 08ffcb0d7acdff9498aeae2e256b6910, type: 3}
   - {fileID: 4450787915010478882, guid: 5a84000b725b0234399350c971f817d6, type: 3}
+  - {fileID: 1146118369773501922, guid: 4ca00174389d8594598ef9278312fa35, type: 3}
   sameLength: 1
   gridSize: 6
   gridSizeX: 2
