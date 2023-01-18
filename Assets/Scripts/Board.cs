@@ -2,6 +2,8 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
 
 public class Board : SerializedMonoBehaviour
 {
@@ -35,8 +37,6 @@ public class Board : SerializedMonoBehaviour
     [HideInInspector] public List<GameObject> currentLevelsPieces = new List<GameObject>();
     [HideInInspector] public List<GameObject> currentLevelsGoals = new List<GameObject>();
     public Vector2Int CurrentLevelGridSize { get; private set; }
-
-
 
     public void Start()
     {
@@ -79,6 +79,9 @@ public class Board : SerializedMonoBehaviour
         //Add new
         for (int i = 0; i < levels[targetLevel].Pieces.Count; i++)
         {
+            //Animation
+            List<Transform> ani = new List<Transform>();
+
             //Calculate position
             Vector2 targetPosition;
             if (levels[targetLevel].Pieces.Count <= maxVerticalPieces)
@@ -96,11 +99,16 @@ public class Board : SerializedMonoBehaviour
             GameObject spawn = Instantiate(levels[targetLevel].Pieces[i], piecesHolder.transform);
             spawn.transform.localPosition = targetPosition;
             currentLevelsPieces.Add(spawn);
+            ani.Add(spawn.transform);
 
             //Background
             spawn = Instantiate(backgroundField, piecesHolder.transform);
             spawn.transform.localScale = new Vector3(backgroundScale, backgroundScale, backgroundScale);
             spawn.transform.localPosition = targetPosition;
+            ani.Add(spawn.transform);
+
+            //Start animation
+            TweeningAnimations.Instance.EasingAnimation(ani, true);
         }
 
         //Goals
@@ -115,7 +123,6 @@ public class Board : SerializedMonoBehaviour
         for (int i = 0; i < levels[targetLevel].Goals.Count; i++)
         {
             GameObject spawn = Instantiate(levels[targetLevel].Goals[i], goalHolder.transform);
-            //new Vector2(0, goalsHolderTop.y - i * goalsOffest.y)
             Vector2 calPos;
             if(spawn.TryGetComponent(out GoalTable gt))
             {
@@ -134,6 +141,7 @@ public class Board : SerializedMonoBehaviour
         //Grid
         grid.SetupPattorn(levels[targetLevel]);
     }
+
 
     private void OnDrawGizmos()
     {

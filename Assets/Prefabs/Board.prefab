@@ -861,6 +861,7 @@ GameObject:
   - component: {fileID: 5124586716892376845}
   - component: {fileID: 5124586716892376844}
   - component: {fileID: 5124586716892376835}
+  - component: {fileID: 305152763140928644}
   - component: {fileID: 5124586716892376834}
   m_Layer: 0
   m_Name: Board
@@ -944,6 +945,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ad58627de60a44247b4ecc4ec6d02441, type: 3}
   - {fileID: 8300000, guid: 308fd9b36270fd14f8d8a071c280f072, type: 3}
   - {fileID: 8300000, guid: 31ce31948c63e0e4dba4d729461152a2, type: 3}
+--- !u!114 &305152763140928644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124586716892376847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1fe579b7b0b1447bed2a91be239d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transistenTime: 0.2
+  easingIn: 0.2
+  randomTime: 0.05
 --- !u!82 &5124586716892376834
 AudioSource:
   m_ObjectHideFlags: 0

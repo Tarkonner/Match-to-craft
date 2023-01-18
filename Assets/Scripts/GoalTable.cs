@@ -25,6 +25,8 @@ public  class GoalTable : InspectorGrid, GameGoal
             spawn.transform.position = transform.GetChild(i).position;
             fieldsRendere.Add(spawn.GetComponent<SpriteRenderer>());
         }
+
+        TweeningAnimations.Instance.EasingAnimation(transform, true);
     }
 
 

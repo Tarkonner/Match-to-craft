@@ -28,6 +28,8 @@ public class PlacementGoal : MonoBehaviour, GameGoal
     private void Start()
     {
         scoreText.text = 0 + "/" + boardGoals.Count;
+
+        TweeningAnimations.Instance.EasingAnimation(transform, true);
     }
 
     public void GoalComplete()

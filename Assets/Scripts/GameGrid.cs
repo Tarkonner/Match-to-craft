@@ -17,7 +17,6 @@ public class GameGrid : SerializedMonoBehaviour
     [SerializeField] private GameObject gridField;
 
     public bool nextLevel { get; private set; } = false;
-    private float sceneTransistenTime = 1;
     private float sceneClock;
 
 
@@ -30,7 +29,7 @@ public class GameGrid : SerializedMonoBehaviour
         if (nextLevel)
         {
             sceneClock += Time.deltaTime;
-            if (sceneClock >= sceneTransistenTime)
+            if (sceneClock >= TweeningAnimations.Instance.TransistenTime)
             {
                 nextLevel = false;
                 board.NextLevel();
@@ -75,6 +74,8 @@ public class GameGrid : SerializedMonoBehaviour
         }
 
         //Make grid
+        //Animation
+        List<Transform> toTween = new List<Transform>();
         //Remove old
         for (int i = transform.childCount - 1; i >= 0; i--)
             Destroy(transform.GetChild(i).gameObject);
@@ -85,6 +86,9 @@ public class GameGrid : SerializedMonoBehaviour
             {
                 GameObject spawn = Instantiate(gridField, transform);
                 spawn.transform.position = cornorPos + new Vector2(x, -y) * sizeOfGrid;
+
+                //Add to animation
+                toTween.Add(spawn.transform);
             }
         }
 
@@ -117,9 +121,15 @@ public class GameGrid : SerializedMonoBehaviour
                     {
                         gpg.Setup(board, new Vector2Int(x, li.Pattern.GetLength(1) - 1 - y));
                     }
+
+                    //Add to animation
+                    toTween.Add(spawn.transform);
                 }
             }
         }
+        //Start animation
+        TweeningAnimations.Instance.EasingAnimation(toTween, true);
+
         //Special goals
         foreach (Transform item in board.goalHolder.transform)
         {
@@ -202,11 +212,14 @@ public class GameGrid : SerializedMonoBehaviour
             }
         }
         //Is goal maked or level complete?
-        if (allGoalsDone)
+        if (allGoalsDone && !nextLevel)
         {
             BoardsSounds.Instance.CompletLevel();
             nextLevel = true;
             Mouse.Instance.CantTakePieces = false;
+
+            //Out animation
+            TweeningAnimations.Instance.EaseOut();
         }
         else if (makedGoal)
             BoardsSounds.Instance.GoalComplete();
