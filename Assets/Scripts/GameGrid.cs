@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ public class GameGrid : SerializedMonoBehaviour
         if (nextLevel)
         {
             sceneClock += Time.deltaTime;
-            if (sceneClock >= TweeningAnimations.Instance.TransistenTime)
+            if (sceneClock >= TweeningAnimations.Instance.TransistenTime + TweeningAnimations.Instance.WaitBeforeTransition)
             {
                 nextLevel = false;
                 board.NextLevel();
@@ -219,7 +220,7 @@ public class GameGrid : SerializedMonoBehaviour
             Mouse.Instance.CantTakePieces = false;
 
             //Out animation
-            TweeningAnimations.Instance.EaseOut();
+            StartCoroutine(EndAnimations());
         }
         else if (makedGoal)
             BoardsSounds.Instance.GoalComplete();
@@ -374,5 +375,11 @@ public class GameGrid : SerializedMonoBehaviour
         {
             placementGoal.GoalUncomleted();
         }
+    }
+
+    IEnumerator EndAnimations()
+    {
+        yield return new WaitForSeconds(TweeningAnimations.Instance.WaitBeforeTransition);
+        TweeningAnimations.Instance.EaseOut();
     }
 }

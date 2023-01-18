@@ -10,6 +10,8 @@ public class TweeningAnimations : MonoBehaviour
 
 
     [Header("Transition")]
+    [SerializeField] private float waitBeforeTransition = .5f;
+    public float WaitBeforeTransition => waitBeforeTransition;
     [SerializeField] private float transistenTime = .2f;
     public float TransistenTime => transistenTime;
     [SerializeField] private float easingIn = 0.2f;
@@ -39,7 +41,7 @@ public class TweeningAnimations : MonoBehaviour
         if(easIn)
             gotIn.Add(new List<Transform> { target});
 
-        float targetTime = easIn ? easingIn + Random.Range(0, randomTime) : transistenTime - Random.Range(0, randomTime);
+        float targetTime = easIn ? easingIn + Random.Range(0, randomTime) : transistenTime - Random.Range(0, randomTime) - .01f;
         float targetScale = easIn ? target.localScale.x : 0;
         if (easIn)
             target.localScale = Vector3.zero;
@@ -52,7 +54,7 @@ public class TweeningAnimations : MonoBehaviour
         if(easIn)
             gotIn.Add(target);
 
-        float targetTime = easIn ? easingIn + Random.Range(0, randomTime) : transistenTime - Random.Range(0, randomTime);
+        float targetTime = easIn ? easingIn + Random.Range(0, randomTime) : transistenTime - Random.Range(0, randomTime) - .01f;
         List<float> targetScale = new List<float>();
 
         foreach (Transform item in target)
