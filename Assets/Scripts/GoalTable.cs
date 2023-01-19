@@ -24,6 +24,11 @@ public  class GoalTable : InspectorGrid, GameGoal
             for (int y = 0; y < CurrentGridSize.y; y++)
             {
                 Vector2 offset = CurrentGridSize / 2;
+                if (CurrentGridSize.x % 2 == 0)
+                    offset.x -= .5f;
+                if (CurrentGridSize.y % 2 == 0)
+                    offset.y -= .5f;
+
                 GameObject spawn = Instantiate(backgroundField, gameObject.transform);
                 spawn.transform.localPosition = offset - new Vector2(x, y);
                 fieldsRendere.Add(spawn.GetComponent<SpriteRenderer>());
