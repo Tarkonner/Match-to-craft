@@ -19,11 +19,15 @@ public  class GoalTable : InspectorGrid, GameGoal
     private void Start()
     {
         //Background
-        for (int i = transform.childCount - 1; i >= 0; i--)
+        for (int x = 0; x < CurrentGridSize.x; x++)
         {
-            GameObject spawn = Instantiate(backgroundField, gameObject.transform);
-            spawn.transform.position = transform.GetChild(i).position;
-            fieldsRendere.Add(spawn.GetComponent<SpriteRenderer>());
+            for (int y = 0; y < CurrentGridSize.y; y++)
+            {
+                Vector2 offset = CurrentGridSize / 2;
+                GameObject spawn = Instantiate(backgroundField, gameObject.transform);
+                spawn.transform.localPosition = offset - new Vector2(x, y);
+                fieldsRendere.Add(spawn.GetComponent<SpriteRenderer>());
+            }
         }
 
         TweeningAnimations.Instance.EasingAnimation(transform, true);

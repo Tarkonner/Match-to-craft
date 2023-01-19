@@ -25,7 +25,7 @@ public class Board : SerializedMonoBehaviour
     private Vector2 goalsHolderTop;
     [SerializeField] private float goalsHolderOffset = 2;
     [SerializeField] private float goalsScale = .7f;
-
+    [SerializeField] private float distanceBetweenGoals = 2;
 
     [Header("Levels")]
     [SerializeField] private LevelInfo[] levels;
@@ -126,7 +126,7 @@ public class Board : SerializedMonoBehaviour
             Vector2 calPos;
             if(spawn.TryGetComponent(out GoalTable gt))
             {
-                calPos = new Vector2(0, goalsHolderTop.y - 1.8f * i - goalsHolderOffset);
+                calPos = new Vector2(0, goalsHolderTop.y - distanceBetweenGoals * i - goalsHolderOffset);
             }
             else
             {

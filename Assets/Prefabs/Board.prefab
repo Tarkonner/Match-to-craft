@@ -918,8 +918,9 @@ MonoBehaviour:
   piecesSize: 2
   backgroundField: {fileID: 5272236092158299179, guid: dda96fdf401764244b4ef311d7a0e5cf, type: 3}
   backgroundScale: 1.5
-  goalsHolderOffset: 0.5
-  goalsScale: 0.7
+  goalsHolderOffset: 0.7
+  goalsScale: 0.65
+  distanceBetweenGoals: 2.35
   levels:
   - {fileID: 11400000, guid: 6509c4ac297589c448155d6d88898cc3, type: 2}
   levelInfo: {fileID: 248045068946281241}
@@ -957,6 +958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1fe579b7b0b1447bed2a91be239d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitBeforeTransition: 0.5
   transistenTime: 0.2
   easingIn: 0.2
   randomTime: 0.05
