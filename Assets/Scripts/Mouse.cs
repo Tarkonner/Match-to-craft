@@ -31,14 +31,23 @@ public class Mouse : MonoBehaviour
     [SerializeField] AudioClip dropSound;
     [SerializeField] AudioClip canNotRotateSound;
 
-    public bool CantTakePieces = true;
+    [Header("Custom curser")]
+    [SerializeField] Texture2D cursorTexture;
+    [SerializeField] Texture2D leftClick;
+    [SerializeField] Texture2D rightClick;
+    private bool mouseTutorial = false;
+
+    [HideInInspector] public bool CantTakePieces = true;
 
     private void Awake()
     {
         Instance = this;
 
-        audioSource = GetComponent<AudioSource>();
+        //Set curser
+        NormalCursor();
 
+        //Audio
+        audioSource = GetComponent<AudioSource>();
         acPickUp += UIPickup;
         acDrop += UIDrop;
         acDrop?.Invoke();
@@ -101,6 +110,10 @@ public class Mouse : MonoBehaviour
                     PlayAudio(pickupSound);
 
                     acPickUp?.Invoke();
+
+                    //Tutorial
+                    if(mouseTutorial)
+                        UnityEngine.Cursor.SetCursor(rightClick, Vector2.zero, CursorMode.Auto);
                 }
                 //Pickup piece in grid
                 else if (hit.collider.TryGetComponent(out GameGrid grid))
@@ -146,6 +159,10 @@ public class Mouse : MonoBehaviour
             {
                 holdingTable.RotateTable();
                 PlayAudio(rotateSounds);
+
+                //Disable Tutoria
+                if (mouseTutorial)
+                    NormalCursor();
             }
             else
                 PlayAudio(canNotRotateSound);
@@ -208,5 +225,16 @@ public class Mouse : MonoBehaviour
         audioSource.clip = clips[Random.Range(0, clips.Length)];
         audioSource.pitch = Random.Range(minPitch, maxPitch);
         audioSource.Play();
+    }
+
+    public void CursorTutorial()
+    {
+        mouseTutorial = true;
+        UnityEngine.Cursor.SetCursor(leftClick, Vector2.zero, CursorMode.Auto);            
+    }
+
+    private void NormalCursor()
+    {
+        UnityEngine.Cursor.SetCursor(cursorTexture, new Vector2(31, 21), CursorMode.Auto);
     }
 }

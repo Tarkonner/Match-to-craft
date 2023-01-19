@@ -15,6 +15,9 @@ public class TableLinkSetup : MonoBehaviour
 
         //Set color
         if (notRotatebul)
+        {
             lr.colorGradient = notRotateColor;
+            lr.sortingOrder = 2;
+        }
     }
 }

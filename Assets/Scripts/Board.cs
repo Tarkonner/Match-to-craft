@@ -45,6 +45,10 @@ public class Board : SerializedMonoBehaviour
 
         targetLevel = SceneLoader.Instance.levelIndex;
         LoadLevel(targetLevel);
+
+        //Tutorial
+        if (targetLevel == 0)
+            Mouse.Instance.CursorTutorial();
     }
 
 

@@ -62,6 +62,10 @@ MonoBehaviour:
   pickupSound: {fileID: 8300000, guid: 6f6d964632115d44098f6e75921acec6, type: 3}
   dropSound: {fileID: 8300000, guid: 935e8bae4d911df41b94f8dd0573a49b, type: 3}
   canNotRotateSound: {fileID: 8300000, guid: 7ae13fd33472bac4cbcc0f05f08c5b2c, type: 3}
+  cursorTexture: {fileID: 2800000, guid: 9fa811e509ee31f428927ff54df20d44, type: 3}
+  leftClick: {fileID: 2800000, guid: 39038ba4d1d77954d8d0524045b0fdf1, type: 3}
+  rightClick: {fileID: 2800000, guid: 362375663a90f8648a66e9a83407c19a, type: 3}
+  CantTakePieces: 1
 --- !u!82 &6909048342254672218
 AudioSource:
   m_ObjectHideFlags: 0
