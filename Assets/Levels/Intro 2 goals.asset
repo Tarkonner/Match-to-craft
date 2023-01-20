@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: 7lvl Tightfit
+  m_Name: Intro 2 goals
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 753699212720471812, guid: 76bae9c8e6bf1da46ae36e7a48e8ca85, type: 3}
+    - {fileID: 6567574717997971157, guid: 477d4256e047df3478f354a76be00c96, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,8 +33,14 @@ MonoBehaviour:
       Entry: 1
       Data: 3|3
     - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
       Entry: 6
       Data: 
+    - Name: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 6
       Data: 
@@ -43,20 +51,14 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: 
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 6
       Data: 
     - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 13
       Data: 
@@ -64,12 +66,11 @@ MonoBehaviour:
       Entry: 8
       Data: 
   pieces:
-  - {fileID: 4002707176675430236, guid: a34941522a2976e4a897f99177500b8d, type: 3}
-  - {fileID: 4984071832989513666, guid: 14a11cfd067dcdb49b2bd695504e95f5, type: 3}
+  - {fileID: 864815926823463313, guid: b00ff27986d241541a267b6faa04c152, type: 3}
   goals:
-  - {fileID: 1693747106828672202, guid: 08ffcb0d7acdff9498aeae2e256b6910, type: 3}
-  - {fileID: 9077768603712964822, guid: 9e9cd8e383bd8fb4381d457ed9b47f84, type: 3}
+  - {fileID: 3368113812682523017, guid: 16394aa6bdf7f404aa5bce9f30bd62e9, type: 3}
+  - {fileID: 3368113812682523017, guid: b57cfccf50943244f9ea36a2e6c267db, type: 3}
   sameLength: 1
   gridSize: 3
   gridSizeX: 3
-  gridSizeY: 5
+  gridSizeY: 3

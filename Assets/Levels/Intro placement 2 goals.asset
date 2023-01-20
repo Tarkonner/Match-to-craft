@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: 5lvl Reinforce
+  m_Name: Intro placement 2 goals
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 2043818089263655887, guid: ac496cf9deb3d5b4195b5993785694af, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,8 +32,8 @@ MonoBehaviour:
       Entry: 1
       Data: 3|3
     - Name: 
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 6
       Data: 
@@ -55,8 +56,8 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: 
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -64,13 +65,11 @@ MonoBehaviour:
       Entry: 8
       Data: 
   pieces:
+  - {fileID: 4344106569551568265, guid: 21f70b4dee56768449322b76a23b863b, type: 3}
   - {fileID: 9177721433298209073, guid: c6cbe7a7837984349ac3e33f660eae75, type: 3}
-  - {fileID: 9177721433298209073, guid: c6cbe7a7837984349ac3e33f660eae75, type: 3}
-  - {fileID: 2591373974146268129, guid: 9057c91f6fb6fdf4eb27c2248ed46a6d, type: 3}
   goals:
-  - {fileID: 1693747106828672202, guid: 08ffcb0d7acdff9498aeae2e256b6910, type: 3}
-  - {fileID: 6336085890135164817, guid: b73d54a7f3edc244a8d0fc17390e53a9, type: 3}
+  - {fileID: 7274913272880914306, guid: 987392cd40a47dc45870cf646d836b66, type: 3}
   sameLength: 1
   gridSize: 3
   gridSizeX: 3
-  gridSizeY: 5
+  gridSizeY: 3

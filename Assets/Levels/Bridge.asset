@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: 15lvl Placement & normal goal same place
+  m_Name: Bridge
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 8124140608007832816, guid: 32b4d6165030381479df2302589e88a4, type: 3}
-    - {fileID: 2043818089263655887, guid: ac496cf9deb3d5b4195b5993785694af, type: 3}
-    - {fileID: 6567574717997971157, guid: 477d4256e047df3478f354a76be00c96, type: 3}
-    - {fileID: 753699212720471812, guid: 76bae9c8e6bf1da46ae36e7a48e8ca85, type: 3}
+    - {fileID: 2043818089263655887, guid: 329f8022d4531774cad3a53b85fab7cf, type: 3}
+    - {fileID: 2043818089263655887, guid: 0319cca8bde934849936962f081d2eef, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -30,16 +28,67 @@ MonoBehaviour:
       Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 12
+      Data: 25
     - Name: ranks
       Entry: 1
-      Data: 3|4
+      Data: 5|5
+    - Name: 
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 6
       Data: 
     - Name: 
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 6
       Data: 
@@ -59,30 +108,20 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
   pieces:
-  - {fileID: 1667413541990792155, guid: 7f6c842d9c4506d4abd2b49966ff8625, type: 3}
-  - {fileID: 4344106569551568265, guid: 21f70b4dee56768449322b76a23b863b, type: 3}
+  - {fileID: 4002707176675430236, guid: a34941522a2976e4a897f99177500b8d, type: 3}
+  - {fileID: 5781227782657283313, guid: 560b2f2c769081c4ab8bcc9cca5c0ed2, type: 3}
+  - {fileID: 5781227782657283313, guid: 560b2f2c769081c4ab8bcc9cca5c0ed2, type: 3}
+  - {fileID: 9188024887269647146, guid: f0e73ca1cf5f8be4bac85c41b8480ba2, type: 3}
   goals:
+  - {fileID: 7011460364669268282, guid: b840300bf0b9b9b4fb7cf611d6b11587, type: 3}
   - {fileID: 7274913272880914306, guid: 987392cd40a47dc45870cf646d836b66, type: 3}
-  - {fileID: 1146118369773501922, guid: 4ca00174389d8594598ef9278312fa35, type: 3}
-  sameLength: 0
-  gridSize: 3
+  sameLength: 1
+  gridSize: 5
   gridSizeX: 3
-  gridSizeY: 4
+  gridSizeY: 3
