@@ -190,7 +190,7 @@ public class Mouse : MonoBehaviour
         if(holdingTable != null && !holdingTable.CanNotRotate)
         {
             rightMouseButton.TurnOn();
-            rightMouseButton.ChangeImageColor(Color.white);
+            rightMouseButton.ChangeImageColor(Color.black);
             rightMouseButton.ChangeText("Rotate");
         }
         else if(holdingTable != null && holdingTable.CanNotRotate)
@@ -202,15 +202,11 @@ public class Mouse : MonoBehaviour
 
         middleMouseButton.TurnOn();
         middleMouseButton.ChangeText("Return piece");
-
-        //leftMouseButton.ChangeText("Drop");
     }
     private void UIDrop()
     {
         rightMouseButton.TurnOff();
         middleMouseButton.TurnOff();
-
-        //leftMouseButton.ChangeText("Pickup");
     }
 
     public void PlayAudio(AudioClip clip)

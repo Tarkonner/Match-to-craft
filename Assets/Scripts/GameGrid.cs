@@ -238,6 +238,9 @@ public class GameGrid : SerializedMonoBehaviour
         {
             table = gridMemori[gridPosition.x, gridPosition.y].GetComponent<Dot>().ownerTable;
 
+            if (table == null)
+                return null;
+
             //See if it was part of complete goal
             if (table.pieceInGoal != null)
                 table.PickupTable();
