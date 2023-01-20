@@ -162,7 +162,10 @@ public class Mouse : MonoBehaviour
 
                 //Disable Tutoria
                 if (mouseTutorial)
+                {
                     NormalCursor();
+                    mouseTutorial= false;
+                }
             }
             else
                 PlayAudio(canNotRotateSound);
