@@ -60,7 +60,7 @@ public class Board : SerializedMonoBehaviour
         //Find next level
         targetLevel++;
         if (targetLevel >= levels.Length)
-            SceneLoader.Instance.LoadScene(0);
+            SceneLoader.Instance.LoadScene(2);
         else
             LoadLevel(targetLevel);
     }

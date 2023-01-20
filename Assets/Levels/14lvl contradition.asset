@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
+  m_Name: 14lvl contradition
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: pattern
+      Entry: 7
+      Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 12
+    - Name: ranks
+      Entry: 1
+      Data: 4|3
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  pieces:
+  - {fileID: 8486615426818879014, guid: 087cd19c81bfb9e45b77b794a8152850, type: 3}
+  - {fileID: 9188024887269647146, guid: f0e73ca1cf5f8be4bac85c41b8480ba2, type: 3}
+  - {fileID: 2656039889873535460, guid: 14ce2ae7bebbb1643b81dae0543faa60, type: 3}
+  - {fileID: 5781227782657283313, guid: 560b2f2c769081c4ab8bcc9cca5c0ed2, type: 3}
+  goals:
+  - {fileID: 8084410594771267848, guid: f8029618bbdd7fd4e91aee0f352bd29e, type: 3}
+  - {fileID: 1693747106828672202, guid: 08ffcb0d7acdff9498aeae2e256b6910, type: 3}
+  sameLength: 0
+  gridSize: 3
+  gridSizeX: 4
+  gridSizeY: 3

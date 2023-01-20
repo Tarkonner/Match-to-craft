@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: DNA
+  m_Name: 12lvl Intro bigger maps
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -27,10 +27,10 @@ MonoBehaviour:
       Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 15
+      Data: 12
     - Name: ranks
       Entry: 1
-      Data: 5|3
+      Data: 4|3
     - Name: 
       Entry: 6
       Data: 
@@ -40,21 +40,6 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 0
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 6
-      Data: 
     - Name: 
       Entry: 6
       Data: 
@@ -76,6 +61,12 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -83,11 +74,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
   pieces:
-  - {fileID: 8890027315183995424, guid: 44d29469e2f6f0141a87ddc5b71c8f9d, type: 3}
-  - {fileID: 4344106569551568265, guid: 21f70b4dee56768449322b76a23b863b, type: 3}
+  - {fileID: 4002707176675430236, guid: a34941522a2976e4a897f99177500b8d, type: 3}
+  - {fileID: 9188024887269647146, guid: f0e73ca1cf5f8be4bac85c41b8480ba2, type: 3}
+  - {fileID: 4296559597376596245, guid: e09ba72bfcb065342a743e5beac3a965, type: 3}
   goals:
-  - {fileID: 4183540653839361138, guid: dbfa95e8e42bfc843847dd5fcf6ab640, type: 3}
+  - {fileID: 5165791777537426245, guid: af75cdeb0ec54ac49a14079c29c03088, type: 3}
   sameLength: 0
-  gridSize: 4
-  gridSizeX: 5
+  gridSize: 3
+  gridSizeX: 4
   gridSizeY: 3

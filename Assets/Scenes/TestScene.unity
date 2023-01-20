@@ -305,7 +305,7 @@ PrefabInstance:
     - target: {fileID: 5124586716892376844, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
       propertyPath: levels.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 68877512aa139fa47910aba011f4d32d, type: 2}
+      objectReference: {fileID: 11400000, guid: c2f1ec20e399d444aa11f609e88b2943, type: 2}
     - target: {fileID: 5124586716892376844, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
       propertyPath: levels.Array.data[1]
       value: 
@@ -333,7 +333,7 @@ PrefabInstance:
     - target: {fileID: 5124586716892376844, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 5124586716892376844, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5124586716892376845, guid: 0587d3c172f95704eaff9f27bc0f4405, type: 3}
       propertyPath: m_RootOrder
       value: 5
