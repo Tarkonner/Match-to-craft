@@ -105,15 +105,10 @@ public class DotTable : InspectorGrid
         foreach (Transform t in gameObject.transform)
         {
             if (t.gameObject.TryGetComponent(out SpriteRenderer targetSR))
-                targetSR.sortingOrder = 5;
+                targetSR.sortingOrder = 6;
 
             if (t.gameObject.TryGetComponent(out LineRenderer line))
-            {
-                //on object
-                line.sortingOrder = 3;
-                //on child
-                //t.gameObject.transform.GetChild(0).GetComponent<LineRenderer>().sortingOrder = 4;
-            }
+                line.sortingOrder = 4;
         }
     }
 
@@ -125,12 +120,7 @@ public class DotTable : InspectorGrid
                 targetSR.sortingOrder = 3;
 
             if (t.gameObject.TryGetComponent(out LineRenderer line))
-            {
-                //on object
                 line.sortingOrder = 1;
-                //on child
-                //t.gameObject.transform.GetChild(0).GetComponent<LineRenderer>().sortingOrder = 2;
-            }
         }
     }
 

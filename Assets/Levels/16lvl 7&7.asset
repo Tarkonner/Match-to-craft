@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: Intro Placement goals & normal goals
+  m_Name: 16lvl 7&7
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 2043818089263655887, guid: ac496cf9deb3d5b4195b5993785694af, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,19 +26,10 @@ MonoBehaviour:
       Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 25
+      Data: 15
     - Name: ranks
       Entry: 1
-      Data: 5|5
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 0
+      Data: 5|3
     - Name: 
       Entry: 6
       Data: 
@@ -62,21 +52,6 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
       Entry: 6
       Data: 
     - Name: 
@@ -94,12 +69,6 @@ MonoBehaviour:
     - Name: 
       Entry: 6
       Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 0
     - Name: 
       Entry: 6
       Data: 
@@ -113,14 +82,13 @@ MonoBehaviour:
       Entry: 8
       Data: 
   pieces:
-  - {fileID: 5318892794795981105, guid: acc00721e24809c49aaad0afd1c60d34, type: 3}
-  - {fileID: 9177721433298209073, guid: c6cbe7a7837984349ac3e33f660eae75, type: 3}
-  - {fileID: 7181915172237584758, guid: 1ba3c5b6db3e88a41aa995f097c10489, type: 3}
-  - {fileID: 4344106569551568265, guid: 21f70b4dee56768449322b76a23b863b, type: 3}
+  - {fileID: 8158402153942394165, guid: f17da56abeb135e418115e3df0c0edea, type: 3}
+  - {fileID: 9188024887269647146, guid: f0e73ca1cf5f8be4bac85c41b8480ba2, type: 3}
+  - {fileID: 3790055097537154065, guid: 06585be2c5dab0342a473f704f707cfa, type: 3}
   goals:
-  - {fileID: 7274913272880914306, guid: 987392cd40a47dc45870cf646d836b66, type: 3}
-  - {fileID: 4450787915010478882, guid: 5a84000b725b0234399350c971f817d6, type: 3}
-  sameLength: 1
-  gridSize: 5
-  gridSizeX: 3
+  - {fileID: 4578223767842683038, guid: d7aca41c3ce120b4b93b6448a039fe2d, type: 3}
+  - {fileID: 253969854824639146, guid: 6653137beb69cc94abd4a3acc6929eac, type: 3}
+  sameLength: 0
+  gridSize: 4
+  gridSizeX: 5
   gridSizeY: 3

@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a1db32bd41bb9a4bb89850086661a67, type: 3}
-  m_Name: Intro placement 2 goals
+  m_Name: 26lvl JJ
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 2043818089263655887, guid: ac496cf9deb3d5b4195b5993785694af, type: 3}
+    - {fileID: 753699212720471812, guid: 76bae9c8e6bf1da46ae36e7a48e8ca85, type: 3}
+    - {fileID: 8124140608007832816, guid: 32b4d6165030381479df2302589e88a4, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,37 +29,46 @@ MonoBehaviour:
       Data: 0|UnityEngine.GameObject[,], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 9
+      Data: 12
     - Name: ranks
       Entry: 1
-      Data: 3|3
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 6
-      Data: 
+      Data: 4|3
     - Name: 
       Entry: 6
       Data: 
     - Name: 
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 13
       Data: 
@@ -65,11 +76,14 @@ MonoBehaviour:
       Entry: 8
       Data: 
   pieces:
-  - {fileID: 4344106569551568265, guid: 21f70b4dee56768449322b76a23b863b, type: 3}
-  - {fileID: 9177721433298209073, guid: c6cbe7a7837984349ac3e33f660eae75, type: 3}
+  - {fileID: 3790055097537154065, guid: 06585be2c5dab0342a473f704f707cfa, type: 3}
+  - {fileID: 965297456181901332, guid: 49917f6343d483441bbabaf30479200c, type: 3}
+  - {fileID: 3813253538135598683, guid: 60c0e914390424e48be1dfd77a0da7c7, type: 3}
   goals:
   - {fileID: 7274913272880914306, guid: 987392cd40a47dc45870cf646d836b66, type: 3}
-  sameLength: 1
-  gridSize: 3
-  gridSizeX: 3
+  - {fileID: 62380566940689263, guid: 0d7d7d7c29d8216409bf26bc58ac1826, type: 3}
+  - {fileID: 3368113812682523017, guid: 16394aa6bdf7f404aa5bce9f30bd62e9, type: 3}
+  sameLength: 0
+  gridSize: 5
+  gridSizeX: 4
   gridSizeY: 3
